@@ -1,0 +1,569 @@
+:root {
+    --primary-color: #2c5f2d;
+    --secondary-color: #97bc62;
+    --accent-color: #ffb347;
+    --text-color: #333;
+    --light-text: #fff;
+    --background-color: #fff;
+    --card-background: #fff;
+    --header-background: #2c5f2d;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #fff;
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: none;
+}
+
+header {
+    background: var(--header-background);
+    padding: 0.5rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 100 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    display: block;
+    margin-right: 0.5rem;
+}
+
+.logo h1 {
+    color: var(--light-text);
+    font-size: 1.75rem;
+    margin: 0;
+}
+
+nav {
+    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+nav li {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    display: block;
+}
+
+nav a:hover {
+    background: var(--primary-color);
+    color: var(--light-text);
+}
+
+.admin-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.admin-buttons button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.sms-admin {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+}
+
+.messaging-admin {
+    background-color: var(--light-text);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color) !important;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.content-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #eee;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.feature-card .card-header {
+    margin-bottom: 1.5rem;
+}
+
+.feature-card .card-header i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.feature-card .card-header h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.feature-card p {
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.feature-link {
+    display: inline-block;
+    width: 80%;
+    margin-top: auto;
+    padding: 0.75rem 1rem;
+    background: var(--primary-color);
+    color: var(--light-text);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-align: center;
+}
+
+.feature-link:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sms-subscription {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+}
+
+.sms-subscription h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.sms-subscription p {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.subscription-form {
+    text-align: center;
+}
+
+.subscription-form h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input, textarea, select {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-color);
+    color: var(--light-text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: var(--secondary-color);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-color);
+    background-color: #fff;
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+}
+
+/* Common container styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+}
+
+/* Button styles */
+.btn {
+    background: var(--primary-color);
+    color: var(--light-text);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+}
+
+.btn-secondary {
+    background: var(--text-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Card styles */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #eee;
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* Grid system */
+.grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Alert styles */
+.alert {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.alert-error {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+/* Loading spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Subscription Section Styles */
+.subscription-section {
+    margin-bottom: 3rem;
+}
+
+.subscription-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+}
+
+/* Admin Panel Styles */
+.admin-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.admin-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+}
+
+.admin-box h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.subscriber-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.subscriber-list li {
+    padding: 0.75rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subscriber-list li:last-child {
+    border-bottom: none;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+    .container {
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .subscription-container {
+        grid-template-columns: 1fr;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.75rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .content-box {
+        padding: 1rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #333;
+        --background-color: #fff;
+        --card-background: #fff;
+        --header-background: rgba(44, 95, 45, 0.95);
+    }
+
+    body {
+        background: #fff;
+        color: #333;
+    }
+
+    .container, .card {
+        background: #fff;
+        color: #333;
+    }
+
+    .form-control {
+        background: #fff;
+        border-color: #ddd;
+        color: #333;
+    }
+
+    .alert-success {
+        background: #e8f5e9;
+        border-color: #c8e6c9;
+        color: #2e7d32;
+    }
+
+    .alert-error {
+        background: #ffebee;
+        border-color: #ffcdd2;
+        color: #c62828;
+    }
+} 

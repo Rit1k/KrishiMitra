@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishimitra - Your Farming Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.svg" alt="Krishimitra Logo" class="logo-img">
+                <h1>KrishiMitra</h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disease-detection.html">Disease Detection</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="sms-admin.html">SMS Admin</a></li>
+                <li><a href="email-admin.html">Email Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="subscription-section">
+            <div class="subscription-container">
+                <div class="subscription-form">
+                    <h2>Subscribe for SMS Updates</h2>
+                    <form id="smsForm" onsubmit="handleSMSSubmit(event)">
+                        <input type="tel" id="phone" placeholder="Enter your phone number" required pattern="[0-9]{10}">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+
+                <div class="subscription-form">
+                    <h2>Subscribe for Email Updates</h2>
+                    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
+                        <input type="email" id="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Disease Detection</h3>
+                </div>
+                <p>Upload plant images to detect diseases and get treatment recommendations.</p>
+                <a href="disease-detection.html" class="feature-link">Try Now</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-cloud-sun"></i>
+                    <h3>Weather Monitoring</h3>
+                </div>
+                <p>Get real-time weather updates and forecasts for your location.</p>
+                <a href="weather.html" class="feature-link">Check Weather</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-truck"></i>
+                    <h3>Transport Services</h3>
+                </div>
+                <p>Find and book transport services for your agricultural needs.</p>
+                <a href="transport.html" class="feature-link">Find Transport</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Chatbot</h3>
+                </div>
+                <p>Get instant answers to your farming queries from our AI assistant.</p>
+                <a href="chatbot.html" class="feature-link">Chat Now</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        async function handleSMSSubmit(event) {
+            event.preventDefault();
+            const phone = document.getElementById('phone').value;
+            
+            try {
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone })
+                });
+
+                if (response.ok) {
+                    alert('Successfully subscribed for SMS updates!');
+                    document.getElementById('smsForm').reset();
+                } else {
+                    throw new Error('Failed to subscribe');
+                }
+            } catch (error) {
+                alert('Error subscribing for SMS updates. Please try again.');
+                console.error('Error:', error);
+            }
+        }
+
+        async function handleEmailSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            
+            try {
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                if (response.ok) {
+                    alert('Successfully subscribed for email updates!');
+                    document.getElementById('emailForm').reset();
+                } else {
+                    throw new Error('Failed to subscribe');
+                }
+            } catch (error) {
+                alert('Error subscribing for email updates. Please try again.');
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html> 
