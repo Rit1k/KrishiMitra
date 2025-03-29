@@ -1,0 +1,36 @@
+2025-03-29 22:00:01,380 - __main__ - INFO - MongoDB connection successful
+2025-03-29 22:00:01,381 - __main__ - INFO - OpenAI API key available: True
+2025-03-29 22:00:01,382 - __main__ - INFO - Gemini API key available: True
+2025-03-29 22:00:01,383 - __main__ - INFO - OpenWeather API key available: True
+2025-03-29 22:00:01,383 - __main__ - INFO - Twilio account SID available: True
+2025-03-29 22:00:01,384 - __main__ - INFO - Twilio auth token available: True
+2025-03-29 22:00:01,384 - __main__ - INFO - Google Maps API key available: True
+2025-03-29 22:00:01,385 - __main__ - INFO - Gemini API initialized
+2025-03-29 22:00:01,385 - __main__ - INFO - OpenAI API initialized
+2025-03-29 22:00:01,385 - __main__ - INFO - Twilio client initialized
+2025-03-29 22:00:01,398 - __main__ - INFO - System info: {'platform': 'Windows-10-10.0.26100-SP0', 'python_version': '3.10.11', 'cpu_count': 8, 'hostname': 'Ritik'}
+2025-03-29 22:00:01,400 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-29 22:00:01,404 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-29 22:00:03,999 - __main__ - INFO - Model loaded successfully
+2025-03-29 22:00:04,007 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-29 22:00:04,030 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-29 22:00:04,030 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-29 22:00:04,033 - werkzeug - INFO -  * Restarting with stat
+2025-03-29 22:00:10,456 - __main__ - INFO - MongoDB connection successful
+2025-03-29 22:00:10,457 - __main__ - INFO - OpenAI API key available: True
+2025-03-29 22:00:10,457 - __main__ - INFO - Gemini API key available: True
+2025-03-29 22:00:10,458 - __main__ - INFO - OpenWeather API key available: True
+2025-03-29 22:00:10,458 - __main__ - INFO - Twilio account SID available: True
+2025-03-29 22:00:10,458 - __main__ - INFO - Twilio auth token available: True
+2025-03-29 22:00:10,459 - __main__ - INFO - Google Maps API key available: True
+2025-03-29 22:00:10,459 - __main__ - INFO - Gemini API initialized
+2025-03-29 22:00:10,459 - __main__ - INFO - OpenAI API initialized
+2025-03-29 22:00:10,460 - __main__ - INFO - Twilio client initialized
+2025-03-29 22:00:10,473 - __main__ - INFO - System info: {'platform': 'Windows-10-10.0.26100-SP0', 'python_version': '3.10.11', 'cpu_count': 8, 'hostname': 'Ritik'}
+2025-03-29 22:00:10,473 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-29 22:00:10,479 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-29 22:00:14,090 - __main__ - INFO - Model loaded successfully
+2025-03-29 22:00:14,101 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-29 22:00:14,124 - werkzeug - WARNING -  * Debugger is active!
+2025-03-29 22:00:14,138 - werkzeug - INFO -  * Debugger PIN: 787-190-930

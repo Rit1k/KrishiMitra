@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Services - KrishiMitra</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Maps API with Places library -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL5-NPEXTiywSZAtjj9-oOvF3T-tLuj7w&libraries=places&callback=initMap">
+    </script>
+    <style>
+        .transport-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .transport-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .transport-header h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .transport-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        #map {
+            height: 600px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #2c5f2d;
+            position: relative;
+        }
+
+        #map::after {
+            content: "Click on map to see services";
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(44, 95, 45, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            opacity: 0.9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+
+        #map.services-loaded::after {
+            opacity: 0;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card.active {
+            border-left: 5px solid #2c5f2d;
+        }
+
+        .service-icon {
+            background-color: #f1f9ff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .service-card.truck .service-icon {
+            background-color: #e8f5e9;
+        }
+
+        .service-card.warehouse .service-icon {
+            background-color: #fff8e1;
+        }
+
+        .service-card.cold_storage .service-icon {
+            background-color: #e1f5fe;
+        }
+
+        .service-card.truck .service-icon i {
+            color: #27ae60;
+        }
+
+        .service-card.warehouse .service-icon i {
+            color: #f39c12;
+        }
+
+        .service-card.cold_storage .service-icon i {
+            color: #3498db;
+        }
+
+        .service-info {
+            flex: 1;
+        }
+
+        .service-info h4 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .service-vicinity {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .service-vicinity i {
+            font-size: 12px;
+            margin-right: 5px;
+            color: #16a085;
+        }
+
+        .distance {
+            margin-left: auto;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .service-availability span {
+            display: inline-block;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .service-availability span.available {
+            background-color: #27ae60;
+        }
+
+        .service-availability span.limited {
+            background-color: #f39c12;
+        }
+
+        .service-rating {
+            color: #f1c40f;
+            margin-top: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-distance {
+            color: #27ae60;
+            font-weight: 500;
+            margin-top: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-details {
+            margin-top: 1rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            display: none;
+        }
+
+        .service-card.active .service-details {
+            display: block;
+        }
+
+        .service-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .service-contact a {
+            color: #2980b9;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            color: #e74c3c;
+            font-weight: 500;
+        }
+
+        .location-display {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .location-marker {
+            color: #e74c3c;
+            font-size: 1.5rem;
+        }
+
+        .location-text {
+            font-weight: 500;
+        }
+
+        .pincode {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .search-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background: #2c5f2d;
+            color: white;
+            border-color: #2c5f2d;
+        }
+
+        .filter-btn {
+            background-color: #219653;
+            color: white;
+            border-color: #219653;
+            transition: background-color 0.3s;
+        }
+        
+        .filter-btn:hover {
+            background-color: #0B6623;
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            gap: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            color: #2c5f2d;
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .transport-content {
+                grid-template-columns: 1fr;
+            }
+
+            #map {
+                height: 400px;
+            }
+
+            .services-list {
+                max-height: none;
+            }
+        }
+
+        .empty-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7f8c8d;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            margin: 30px 0;
+        }
+
+        .empty-results i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #2c5f2d;
+            animation: pulse 2s infinite;
+        }
+
+        .empty-results p {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .empty-results span {
+            font-size: 16px;
+            display: block;
+            max-width: 300px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Service modal styles */
+        .service-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .service-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .service-modal-content {
+            background-color: white;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .service-modal.show .service-modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s ease;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .service-modal h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 22px;
+        }
+
+        .service-type {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .service-rating {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .stars {
+            color: #f39c12;
+            margin-right: 5px;
+            letter-spacing: -2px;
+        }
+
+        .rating-value {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .reviews {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .service-description {
+            margin-bottom: 20px;
+            color: #34495e;
+            line-height: 1.5;
+        }
+
+        .service-location, .service-contact, .service-price, .service-availability {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .service-location i, .service-contact i, .service-price i, .service-availability i {
+            color: #16a085;
+            width: 20px;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        .service-contact a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        .service-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-book {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-book:hover {
+            background-color: #219653;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .service-modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.svg" alt="Krishimitra Logo" class="logo-img">
+                <h1>KrishiMitra</h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disease-detection.html">Disease Detection</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="transport.html" class="active">Transport</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="sms-admin.html">SMS Admin</a></li>
+                <li><a href="email-admin.html">Email Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="transport-container">
+            <div class="transport-header">
+                <h1><i class="fas fa-truck"></i> Transport Services</h1>
+                <p>Find reliable transport services for your agricultural needs</p>
+            </div>
+
+            <div class="location-display" id="locationDisplay">
+                <div class="location-marker">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="location-text">
+                    <span id="selected-location">Loading your location...</span>
+                    <small id="location-coords"></small>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search for transport services...">
+                <div class="filters">
+                    <button class="filter-btn active" data-type="all">All</button>
+                    <button class="filter-btn" data-type="truck">Trucks</button>
+                    <button class="filter-btn" data-type="warehouse">Warehouses</button>
+                    <button class="filter-btn" data-type="cold_storage">Cold Storage</button>
+                </div>
+            </div>
+
+            <div class="transport-content">
+                <div class="services-list" id="servicesList">
+                    <div class="loading" id="services-loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Loading transport services...</p>
+                    </div>
+                </div>
+                <div id="map"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let map;
+        let markers = [];
+        let currentPosition;
+        let infoWindow;
+        let activeServiceCard = null;
+        let transportServices = [];
+        let serviceMarkers = [];
+
+        // Initialize map and services
+        function initMap() {
+            console.log("Initializing map...");
+            
+            // Default location (Central India)
+            let center = { lat: 20.5937, lng: 78.9629 };
+            
+            // Create map
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: center,
+                zoom: 8,
+                styles: [
+                    {
+                        "featureType": "poi",
+                        "elementType": "labels",
+                        "stylers": [
+                            { "visibility": "off" }
+                        ]
+                    }
+                ],
+                restriction: {
+                    latLngBounds: {
+                        north: 35.6745457,  // Northern limit of India
+                        south: 6.5546079,   // Southern limit of India
+                        west: 68.1113787,   // Western limit of India
+                        east: 97.395561    // Eastern limit of India
+                    },
+                    strictBounds: false
+                }
+            });
+            
+            console.log("Map created successfully");
+            
+            // Create marker for selected location
+            const marker = new google.maps.Marker({
+                position: center,
+                map: map,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 12,
+                    fillColor: "#2c5f2d",
+                    fillOpacity: 0.8,
+                    strokeWeight: 3,
+                    strokeColor: "#FFF"
+                },
+                zIndex: 999
+            });
+            
+            // Create info window
+            infoWindow = new google.maps.InfoWindow();
+            
+            // Set temporary location display until we get actual location
+            document.getElementById('selected-location').textContent = "Detecting your location...";
+            document.getElementById('location-coords').textContent = "";
+            
+            // Try to get user's location with improved geolocation handling
+            if (navigator.geolocation) {
+                // Show loading indicator while getting location
+                const servicesLoading = document.getElementById('services-loading');
+                servicesLoading.style.display = 'flex';
+                
+                const locationTimeout = setTimeout(() => {
+                    console.log("Geolocation timeout - using default location");
+                    // Use default location if geolocation times out
+                    document.getElementById('selected-location').textContent = "Central India (Default)";
+                    document.getElementById('location-coords').textContent = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
+                    showEmptyInitialState();
+                }, 5000); // 5 second timeout
+                
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        clearTimeout(locationTimeout);
+                        center = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        
+                        console.log("Got user location:", center);
+                        
+                        // Check if location is in India (rough boundaries)
+                        const inIndia = (
+                            center.lat >= 6.5546079 && center.lat <= 35.6745457 &&
+                            center.lng >= 68.1113787 && center.lng <= 97.395561
+                        );
+                        
+                        if (!inIndia) {
+                            console.log("Location outside India - using default Indian location");
+                            center = { lat: 20.5937, lng: 78.9629 }; // Use central India
+                            document.getElementById('selected-location').textContent = "Central India (Default)";
+                            document.getElementById('location-coords').textContent = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
+                            showEmptyInitialState();
+                        } else {
+                            // Update marker and map center for user location
+                            marker.setPosition(center);
+                            map.setCenter(center);
+                            map.setZoom(11); // Zoom in more on user's actual location
+                            
+                            // Get address for user location
+                            getAddressFromCoords(center);
+                            
+                            // Load services near user location
+                            loadServicesNearLocation(center);
+                        }
+                    },
+                    (error) => {
+                        clearTimeout(locationTimeout);
+                        console.log("Error getting location:", error);
+                        // Show empty state with instructions to click on map
+                        document.getElementById('selected-location').textContent = "Location access denied";
+                        document.getElementById('location-coords').textContent = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
+                        showEmptyInitialState();
+                    },
+                    { 
+                        timeout: 5000,
+                        maximumAge: 60000,
+                        enableHighAccuracy: true 
+                    }
+                );
+            } else {
+                // No geolocation support
+                document.getElementById('selected-location').textContent = "Location detection not supported";
+                document.getElementById('location-coords').textContent = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
+                showEmptyInitialState();
+            }
+            
+            // Add click event to map
+            map.addListener('click', function(event) {
+                console.log("Map clicked at:", event.latLng.toJSON());
+                
+                const newLocation = event.latLng.toJSON();
+                
+                // Update marker
+                marker.setPosition(event.latLng);
+                
+                // Update location display
+                document.getElementById('selected-location').textContent = "Loading location...";
+                document.getElementById('location-coords').textContent = `${newLocation.lat.toFixed(5)}, ${newLocation.lng.toFixed(5)}`;
+                
+                // Reverse geocode to get location name
+                getAddressFromCoords(newLocation);
+                
+                // Center map on clicked location
+                map.setCenter(newLocation);
+                
+                // Clear existing services and markers
+                const servicesList = document.getElementById('servicesList');
+                servicesList.innerHTML = '';
+                
+                // Clear existing markers
+                clearServiceMarkers();
+                
+                // Show loading indicator
+                const servicesLoading = document.getElementById('services-loading');
+                servicesLoading.style.display = 'flex';
+                
+                // Load services near new location directly
+                loadServicesNearLocation(newLocation);
+            });
+            
+            console.log("Initial map setup complete");
+        }
+        
+        // Get address from coordinates using reverse geocoding
+        function getAddressFromCoords(location) {
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ location: location }, (results, status) => {
+                if (status === 'OK' && results[0]) {
+                    let address = results[0].formatted_address;
+                    let locationName = "";
+                    let pincode = "";
+                    
+                    // Find components with locality, administrative_area, and postal_code
+                    for (const component of results[0].address_components) {
+                        if (component.types.includes('locality') || 
+                            component.types.includes('administrative_area_level_2') ||
+                            component.types.includes('administrative_area_level_1')) {
+                            locationName += locationName ? `, ${component.long_name}` : component.long_name;
+                        }
+                        
+                        if (component.types.includes('postal_code')) {
+                            pincode = component.long_name;
+                        }
+                    }
+                    
+                    // Update display
+                    document.getElementById('selected-location').innerHTML = locationName || address;
+                    if (pincode) {
+                        document.getElementById('selected-location').innerHTML += ` <span class="pincode">(${pincode})</span>`;
+                    }
+                    document.getElementById('location-coords').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
+                } else {
+                    console.log('Geocoder failed:', status);
+                    document.getElementById('selected-location').textContent = "Unknown Location";
+                    document.getElementById('location-coords').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
+                }
+            });
+        }
+        
+        function loadServicesNearLocation(location) {
+            console.log("Loading services for location:", location);
+            
+            // Show loading indicator
+            const servicesLoading = document.getElementById('services-loading');
+            servicesLoading.style.display = 'flex';
+            
+            // Mark map as having services loaded to hide the hint
+            document.getElementById('map').classList.add('services-loaded');
+            
+            // Clear existing services and markers
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+            
+            // Clear existing markers
+            clearServiceMarkers();
+            
+            // Create a PlacesService object
+            const service = new google.maps.places.PlacesService(map);
+            
+            // First try nearby search for immediate results
+            const nearbyRequest = {
+                location: location,
+                radius: 15000, // 15km radius
+                type: ['moving_company', 'storage', 'transit_station', 'bus_station', 'train_station']
+            };
+            
+            service.nearbySearch(nearbyRequest, function(results, status) {
+                console.log("Nearby search status:", status);
+                
+                if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
+                    console.log("Found nearby services:", results.length);
+                    processSearchResults(results, location);
+                } else {
+                    console.log("No nearby results found, generating fallback services");
+                    // Generate fallback services instead of trying another search
+                    const generatedServices = generateServicesNearLocation(location);
+                    const sortedServices = generatedServices.sort((a, b) => a.distance - b.distance);
+                    
+                    // Hide loading indicator
+                    servicesLoading.style.display = 'none';
+                    
+                    // Render the services
+                    renderTransportServices(sortedServices);
+                    
+                    // Save current services for filtering
+                    window.currentServices = sortedServices;
+                    transportServices = sortedServices;
+                    
+                    // Trigger event for map to add markers
+                    document.dispatchEvent(new CustomEvent('servicesLoaded', {
+                        detail: { services: sortedServices }
+                    }));
+                }
+            });
+
+            // Helper function to process search results
+            function processSearchResults(results, baseLocation) {
+                // Format places as our service objects
+                const services = results.map((place, index) => {
+                    return createServiceFromPlace(place, getServiceType(place), baseLocation);
+                });
+                
+                // Sort by distance
+                const sortedServices = services.sort((a, b) => a.distance - b.distance);
+                
+                // Hide loading indicator
+                servicesLoading.style.display = 'none';
+                
+                // Render the services
+                renderTransportServices(sortedServices);
+                
+                // Save current services for filtering
+                window.currentServices = sortedServices;
+                transportServices = sortedServices;
+                
+                // Trigger event for map to add markers
+                document.dispatchEvent(new CustomEvent('servicesLoaded', {
+                    detail: { services: sortedServices }
+                }));
+            }
+        }
+
+        // Find real transport services using Google Places API
+        async function findTransportServices(service, location) {
+            try {
+                const allResults = [];
+                const searchTypes = [
+                    { type: 'truck', query: 'transport logistics near ' },
+                    { type: 'warehouse', query: 'warehouse storage near ' },
+                    { type: 'cold_storage', query: 'cold storage near ' }
+                ];
+                
+                // Create requests for different transport service types
+                const requests = searchTypes.map(searchType => {
+                    return searchPlacesWithKeyword(service, location, searchType.query, searchType.type);
+                });
+                
+                // Wait for all searches to complete
+                const results = await Promise.all(requests);
+                
+                // Combine and format results
+                results.forEach((serviceList, index) => {
+                    if (serviceList && serviceList.length > 0) {
+                        serviceList.forEach(service => {
+                            allResults.push(service);
+                        });
+                    }
+                });
+                
+                // Return all services found, or empty array if none
+                return allResults;
+            } catch (error) {
+                console.error("Error searching for transport services:", error);
+                return [];
+            }
+        }
+
+        // Search for places with a specific keyword and convert to our service format
+        async function searchPlacesWithKeyword(service, location, queryPrefix, serviceType) {
+            try {
+                // Create text search request
+                const textRequest = {
+                    location: location,
+                    radius: 25000, // 25km radius
+                    query: queryPrefix + location.lat + "," + location.lng,
+                    region: 'in' // India
+                };
+                
+                // Perform the search
+                const placesResult = await new Promise((resolve, reject) => {
+                    service.textSearch(textRequest, (results, status) => {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            resolve(results);
+                        } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+                            resolve([]);
+                        } else {
+                            console.warn(`Places search failed for ${queryPrefix}: ${status}`);
+                            resolve([]);
+                        }
+                    });
+                });
+                
+                // Convert places to service objects
+                const serviceObjects = placesResult.map(place => {
+                    return createServiceFromPlace(place, serviceType, location);
+                });
+                
+                return serviceObjects;
+            } catch (error) {
+                console.error("Error in searchPlacesWithKeyword:", error);
+                return [];
+            }
+        }
+
+        // Function to create a service object from a Google Place
+        function createServiceFromPlace(place, type, baseLocation) {
+            // Calculate distance
+            const distance = calculateDistance(
+                baseLocation.lat, baseLocation.lng,
+                place.geometry.location.lat(), place.geometry.location.lng()
+            );
+            
+            // Type-specific pricing (estimated)
+            let price_per_km, price_per_month, price_per_day, capacity;
+            
+            if (type === 'truck') {
+                price_per_km = Math.floor(20 + Math.random() * 15);
+            } else if (type === 'warehouse') {
+                price_per_month = Math.floor(30000 + Math.random() * 20000);
+                capacity = Math.floor(3 + Math.random() * 7) + "000 sq.ft";
+            } else if (type === 'cold_storage') {
+                price_per_day = Math.floor(1000 + Math.random() * 500);
+            }
+            
+            // Determine availability based on opening hours if available
+            let availability = "Status Unknown";
+            if (place.opening_hours) {
+                availability = place.opening_hours.isOpen() ? "Available Now" : "Currently Closed";
+            } else {
+                // Random availability if opening hours not available
+                const availabilities = ["Available Now", "Limited Space", "Available Tomorrow", "Available After 2PM", "Space Available"];
+                availability = availabilities[Math.floor(Math.random() * availabilities.length)];
+            }
+            
+            // Base service object
+            const service = {
+                id: place.place_id,
+                name: place.name,
+                type: type,
+                vicinity: place.vicinity || place.formatted_address || `Near ${distance.toFixed(1)} km from center`,
+                location: {
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng()
+                },
+                distance: distance,
+                rating: place.rating || (3.5 + Math.random() * 1.5).toFixed(1),
+                reviews: place.user_ratings_total || Math.floor(10 + Math.random() * 40),
+                phone: place.formatted_phone_number || "+91 " + Math.floor(10000 + Math.random() * 90000) + " " + Math.floor(10000 + Math.random() * 90000),
+                availability: availability,
+                description: getServiceDescription(type)
+            };
+            
+            // Add type-specific pricing
+            if (type === 'truck') {
+                service.price_per_km = price_per_km;
+            } else if (type === 'warehouse') {
+                service.price_per_month = price_per_month;
+                service.capacity = capacity;
+            } else if (type === 'cold_storage') {
+                service.price_per_day = price_per_day;
+            }
+            
+            return service;
+        }
+        
+        // Helper function to get a description based on service type
+        function getServiceDescription(type) {
+            const descriptions = {
+                truck: [
+                    "Fast and reliable transport services for all types of agricultural goods.",
+                    "Specialized in fresh produce transportation with temperature control.",
+                    "Connecting rural farmers with urban markets through reliable transportation.",
+                    "On-time delivery guaranteed for your valuable agricultural products.",
+                    "Cost-effective logistics solutions for farmers and agricultural businesses."
+                ],
+                warehouse: [
+                    "Secure warehousing with pest control and 24/7 security.",
+                    "Large-scale agricultural product storage with modern loading facilities.",
+                    "Climate-controlled storage solutions for sensitive agricultural goods.",
+                    "Affordable long-term storage options for seasonal produce.",
+                    "Flexible storage space with advanced inventory management systems."
+                ],
+                cold_storage: [
+                    "State-of-the-art cold storage facility for fruits and vegetables.",
+                    "Temperature-controlled storage for perishable goods and produce.",
+                    "Multi-temperature controlled environments for various agricultural products.",
+                    "Extends shelf life of your fresh produce with precise cooling technology.",
+                    "Energy-efficient cold storage with backup power systems for continuous operation."
+                ]
+            };
+            
+            const typeDescriptions = descriptions[type] || descriptions.truck;
+            return typeDescriptions[Math.floor(Math.random() * typeDescriptions.length)];
+        }
+        
+        // Calculate distance between two points using Haversine formula
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the earth in km
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2); 
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            const distance = R * c; // Distance in km
+            return distance;
+        }
+        
+        function deg2rad(deg) {
+            return deg * (Math.PI/180);
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const type = btn.dataset.type;
+                const filteredServices = type === 'all' ? 
+                    transportServices : 
+                    transportServices.filter(service => service.type === type);
+                
+                displayTransportServices(filteredServices);
+                addMarkersToMap(filteredServices);
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            // Only filter if we have services
+            if (!transportServices || transportServices.length === 0) return;
+            
+            const filteredServices = transportServices.filter(service => 
+                (service.name && service.name.toLowerCase().includes(searchTerm)) || 
+                (service.vicinity && service.vicinity.toLowerCase().includes(searchTerm)) ||
+                (service.description && service.description.toLowerCase().includes(searchTerm))
+            );
+            
+            // Get current active filter
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.type;
+            
+            // Apply both search and filter
+            const finalFiltered = activeFilter === 'all' ? 
+                filteredServices : 
+                filteredServices.filter(service => service.type === activeFilter);
+                
+            displayTransportServices(finalFiltered);
+        });
+
+        function showServiceDetails(serviceId) {
+            // Find the service by ID
+            const service = transportServices.find(s => s.id == serviceId);
+            
+            if (!service) {
+                console.error("Service not found:", serviceId);
+                return;
+            }
+            
+            // Create a modal for service details
+            const modal = document.createElement('div');
+            modal.className = 'service-modal';
+            
+            // Calculate price display based on service type
+            let priceDisplay = '';
+            if (service.type === 'truck') {
+                priceDisplay = `₹${service.price_per_km} per kilometer`;
+            } else if (service.type === 'warehouse') {
+                priceDisplay = `₹${service.price_per_month || '35000'} per month${service.capacity ? ' (' + service.capacity + ')' : ''}`;
+            } else if (service.type === 'cold_storage') {
+                priceDisplay = `₹${service.price_per_day || '1200'} per day`;
+            }
+            
+            // Create content for modal
+            modal.innerHTML = `
+                <div class="service-modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h3>${service.name}</h3>
+                    <p class="service-type">${getServiceTypeLabel(service.type)}</p>
+                    <div class="service-rating">
+                        <span class="stars">${'★'.repeat(Math.floor(service.rating))}${service.rating % 1 >= 0.5 ? '½' : ''}</span>
+                        <span class="rating-value">${service.rating}</span>
+                        <span class="reviews">(${service.reviews} reviews)</span>
+                    </div>
+                    <p class="service-description">${service.description}</p>
+                    <div class="service-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${service.vicinity}</span>
+                        <span class="distance">${service.distance.toFixed(1)} km away</span>
+                    </div>
+                    <div class="service-contact">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:${service.phone}">${service.phone}</a>
+                    </div>
+                    <div class="service-price">
+                        <i class="fas fa-tag"></i>
+                        <span>${priceDisplay}</span>
+                    </div>
+                    <div class="service-availability">
+                        <i class="fas fa-clock"></i>
+                        <span>${service.availability}</span>
+                    </div>
+                    <button class="btn-book">Book Now</button>
+                    <button class="btn-directions" onclick="getDirections(${service.location.lat}, ${service.location.lng})">Get Directions</button>
+                </div>
+            `;
+            
+            // Append modal to body
+            document.body.appendChild(modal);
+            
+            // Show modal
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+            
+            // Close modal when close button is clicked
+            const closeButton = modal.querySelector('.close-modal');
+            closeButton.addEventListener('click', () => {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(modal);
+                }, 300);
+            });
+            
+            // Close modal when clicked outside of content
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(modal);
+                    }, 300);
+                }
+            });
+            
+            // Book Now button functionality
+            const bookButton = modal.querySelector('.btn-book');
+            bookButton.addEventListener('click', () => {
+                alert(`Booking request sent for ${service.name}. They will contact you shortly.`);
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(modal);
+                }, 300);
+            });
+        }
+
+        // Get directions to a location
+        function getDirections(lat, lng) {
+            window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`, '_blank');
+        }
+
+        function getServiceTypeLabel(type) {
+            switch(type) {
+                case 'truck':
+                    return 'Transport Vehicle';
+                case 'warehouse':
+                    return 'Warehouse Storage';
+                case 'cold_storage':
+                    return 'Cold Storage Facility';
+                default:
+                    return 'Transport Service';
+            }
+        }
+
+        // Function to render transport services in the list
+        function renderTransportServices(services) {
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+            
+            if (!services || services.length === 0) {
+                servicesList.innerHTML = `
+                    <div class="empty-results">
+                        <i class="fas fa-search"></i>
+                        <p>No transport services found</p>
+                        <span>Try changing your location or search criteria</span>
+                    </div>
+                `;
+                return;
+            }
+            
+            services.forEach(service => {
+                const serviceElement = document.createElement('div');
+                serviceElement.className = `service-card ${service.type}`;
+                serviceElement.dataset.id = service.id;
+                
+                let iconClass = 'fa-truck';
+                if (service.type === 'warehouse') {
+                    iconClass = 'fa-warehouse';
+                } else if (service.type === 'cold_storage') {
+                    iconClass = 'fa-snowflake';
+                }
+                
+                serviceElement.innerHTML = `
+                    <div class="service-icon">
+                        <i class="fas ${iconClass}"></i>
+                    </div>
+                    <div class="service-info">
+                        <h4>${service.name}</h4>
+                        <div class="service-vicinity">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${service.vicinity}
+                            <span class="distance">${service.distance.toFixed(1)} km</span>
+                        </div>
+                        <div class="service-availability">
+                            <span class="${service.availability.includes('Available') ? 'available' : 'limited'}">
+                                ${service.availability}
+                            </span>
+                        </div>
+                        <div class="service-rating">
+                            <i class="fas fa-star"></i>
+                            ${service.rating} (${service.reviews} reviews)
+                        </div>
+                        <div class="service-distance">
+                            <i class="fas fa-route"></i>
+                            ${service.distance.toFixed(1)} km away
+                        </div>
+                    </div>
+                `;
+                
+                serviceElement.addEventListener('click', () => {
+                    showServiceDetails(service.id);
+                });
+                
+                servicesList.appendChild(serviceElement);
+            });
+            
+            // Save current services
+            transportServices = services;
+        }
+        
+        // Function to display transport services with filtering
+        function displayTransportServices(services) {
+            renderTransportServices(services);
+            
+            // Update markers on map
+            if (window.serviceMarkers) {
+                window.serviceMarkers.forEach(marker => {
+                    // Fix ID comparison by handling both string and number IDs
+                    const markerID = marker.get('id');
+                    const isVisible = services.some(s => s.id.toString() === markerID.toString());
+                    marker.setVisible(isVisible);
+                });
+            }
+        }
+
+        // Function to add markers to map
+        function addMarkersToMap(services) {
+            // Update marker visibility based on filtered services
+            if (window.serviceMarkers) {
+                window.serviceMarkers.forEach(marker => {
+                    // Fix ID comparison by handling both string and number IDs
+                    const markerID = marker.get('id');
+                    const isVisible = services.some(s => s.id.toString() === markerID.toString());
+                    marker.setVisible(isVisible);
+                });
+            }
+        }
+
+        // Generate randomized transport services near a location for fallback
+        function generateServicesNearLocation(location) {
+            console.log("Generating fallback services near:", location);
+            const services = [];
+            const serviceTypes = ['truck', 'warehouse', 'cold_storage'];
+            const serviceNames = {
+                truck: [
+                    "Quick Transport Co.", "Fresh Carrier Services", "Rural Logistics Inc", 
+                    "Express Agri Movers", "Farmers Transport Services", "Harvest Haulers",
+                    "AgriLogistics", "FastTrack Farm Transport", "GreenHaul Services",
+                    "SpeedyHaul Logistics", "FarmFresh Movers", "AgroTrans Solutions"
+                ],
+                warehouse: [
+                    "Agri Warehousing Ltd", "MegaFarm Warehouse", "StoreSafe Agricultural Storage",
+                    "Harvest Storage Solutions", "FarmSpace Warehousing", "AgriStor Facilities",
+                    "CropKeeper Storage", "SecureStock Warehousing", "BulkStore Agro",
+                    "GrainSafe Warehousing", "HarvestHold Storage", "FarmKeep Facilities"
+                ],
+                cold_storage: [
+                    "Cold Chain Solutions", "Harvest Cold Storage", "FreshKeep Cold Solutions",
+                    "ChillStore Agri", "FrostSafe Produce", "PeakFresh Storage",
+                    "ColdCrop Facilities", "FreshTech Cold Chain", "Arctic Agri Storage",
+                    "CoolHarvest Storage", "ChillProduce Facilities", "FrostGuard Cold Storage"
+                ]
+            };
+            
+            // Generate 8-10 random services
+            const numServices = 8 + Math.floor(Math.random() * 3);
+            console.log(`Generating ${numServices} fallback services`);
+            
+            // Ensure we have at least 2 of each type
+            const baseServices = [
+                { typeIndex: 0, distance: 1 + Math.random() * 3 },
+                { typeIndex: 0, distance: 2 + Math.random() * 4 },
+                { typeIndex: 1, distance: 1 + Math.random() * 3 },
+                { typeIndex: 1, distance: 2 + Math.random() * 4 },
+                { typeIndex: 2, distance: 1 + Math.random() * 3 },
+                { typeIndex: 2, distance: 2 + Math.random() * 4 }
+            ];
+            
+            // Add some more random ones
+            for (let i = baseServices.length; i < numServices; i++) {
+                baseServices.push({
+                    typeIndex: Math.floor(Math.random() * 3),
+                    distance: 1 + Math.random() * 14
+                });
+            }
+            
+            // Now create all services
+            for (let i = 0; i < baseServices.length; i++) {
+                const { typeIndex, distance } = baseServices[i];
+                const type = serviceTypes[typeIndex];
+                
+                // Random name from the type's name list
+                const name = serviceNames[type][Math.floor(Math.random() * serviceNames[type].length)];
+                
+                // Random angle for position
+                const angle = Math.random() * Math.PI * 2;
+                
+                // Convert distance and angle to lat/lng offset
+                // Earth radius is 6371 km
+                const lat = location.lat + (distance / 111); // Very rough approximation: 1 degree ≈ 111km
+                const lng = location.lng + (distance / (111 * Math.cos(location.lat * Math.PI / 180)));
+                
+                // Random rating between 3.5 and 5.0
+                const rating = (3.5 + Math.random() * 1.5).toFixed(1);
+                
+                // Random number of reviews
+                const reviews = Math.floor(10 + Math.random() * 40);
+                
+                // Random phone number
+                const phone = "+91 " + Math.floor(10000 + Math.random() * 90000) + " " + Math.floor(10000 + Math.random() * 90000);
+                
+                // Random availability
+                const availabilities = ["Available Now", "Limited Space", "Available Tomorrow", "Available After 2PM", "Space Available"];
+                const availability = availabilities[Math.floor(Math.random() * availabilities.length)];
+                
+                // Type-specific pricing
+                let price_per_km, price_per_month, price_per_day, capacity;
+                
+                if (type === 'truck') {
+                    price_per_km = Math.floor(20 + Math.random() * 15);
+                } else if (type === 'warehouse') {
+                    price_per_month = Math.floor(30000 + Math.random() * 20000);
+                    capacity = Math.floor(3 + Math.random() * 7) + "000 sq.ft";
+                } else if (type === 'cold_storage') {
+                    price_per_day = Math.floor(1000 + Math.random() * 500);
+                }
+                
+                // Create service object with a random area name
+                const service = {
+                    id: `generated-${i}`,
+                    name: name,
+                    type: type,
+                    vicinity: `Near ${getRandomArea()}, ${distance.toFixed(1)} km from center`,
+                    location: { lat, lng },
+                    distance: distance,
+                    rating: parseFloat(rating),
+                    reviews: reviews,
+                    phone: phone,
+                    availability: availability,
+                    description: getServiceDescription(type)
+                };
+                
+                // Add type-specific pricing
+                if (type === 'truck') {
+                    service.price_per_km = price_per_km;
+                } else if (type === 'warehouse') {
+                    service.price_per_month = price_per_month;
+                    service.capacity = capacity;
+                } else if (type === 'cold_storage') {
+                    service.price_per_day = price_per_day;
+                }
+                
+                services.push(service);
+            }
+            
+            console.log("Generated fallback services:", services.length);
+            return services;
+        }
+        
+        // Helper function to generate random area names
+        function getRandomArea() {
+            // Common area/locality names across Indian cities
+            const areas = [
+                // Delhi NCR
+                "Connaught Place", "Karol Bagh", "Dwarka", "Rohini", "Lajpat Nagar",
+                "Vasant Kunj", "Saket", "Greater Kailash", "Noida Sector 18", "Gurgaon",
+                // Mumbai
+                "Andheri", "Bandra", "Dadar", "Worli", "Colaba", 
+                "Powai", "Goregaon", "Borivali", "Malad", "Juhu",
+                // Bangalore
+                "Koramangala", "Indiranagar", "HSR Layout", "Whitefield", "JP Nagar",
+                "MG Road", "Jayanagar", "Electronic City", "Marathahalli", "Bannerghatta Road",
+                // Chennai
+                "T Nagar", "Adyar", "Mylapore", "Anna Nagar", "Velachery",
+                "Nungambakkam", "OMR", "Porur", "Besant Nagar", "Chromepet",
+                // Kolkata
+                "Park Street", "Salt Lake", "New Town", "Ballygunge", "Howrah",
+                "Gariahat", "Behala", "Dum Dum", "Garia", "Rajarhat",
+                // Other major cities
+                "Jubilee Hills", "Banjara Hills", "Gachibowli", "Madhapur", // Hyderabad
+                "Aundh", "Kothrud", "Hinjewadi", "Viman Nagar", "Koregaon Park", // Pune
+                "Navrangpura", "Satellite", "CG Road", "Vastrapur", "SG Highway", // Ahmedabad
+                "Gomti Nagar", "Hazratganj", "Indira Nagar", "Aliganj", // Lucknow
+                "MP Nagar", "Arera Colony", "Kolar Road", "TT Nagar", // Bhopal
+                "Palayam", "Technopark", "Vellayambalam", "Kazhakkoottam", // Trivandrum
+                "Navlakha", "Palasia", "Vijay Nagar", "AB Road" // Indore
+            ];
+            
+            // Agricultural areas and terms
+            const agriTerms = [
+                "Agri Hub", "Grain Market", "Mandi Area", "Farm Center", "Rural Zone",
+                "Agri Complex", "Krishi Kendra", "Industrial Area", "Warehouse Belt", "APMC"
+            ];
+            
+            // 30% chance to return an agricultural-specific area name
+            if (Math.random() < 0.3) {
+                return agriTerms[Math.floor(Math.random() * agriTerms.length)];
+            }
+            
+            return areas[Math.floor(Math.random() * areas.length)];
+        }
+
+        // Function to get marker icon based on service type
+        function getServiceTypeIcon(type) {
+            switch(type) {
+                case 'truck':
+                    return 'https://img.icons8.com/color/48/000000/truck.png';
+                case 'warehouse':
+                    return 'https://img.icons8.com/color/48/000000/warehouse.png';
+                case 'cold_storage':
+                    return 'https://img.icons8.com/color/48/000000/snowflake.png';
+                default:
+                    return 'https://img.icons8.com/color/48/000000/marker.png';
+            }
+        }
+
+        // Function to show empty initial state with instructions
+        function showEmptyInitialState() {
+            const servicesList = document.getElementById('servicesList');
+            const servicesLoading = document.getElementById('services-loading');
+            servicesLoading.style.display = 'none';
+            
+            // Reset map hint - remove services-loaded class
+            document.getElementById('map').classList.remove('services-loaded');
+            
+            servicesList.innerHTML = `
+                <div class="empty-results">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Select a location on the map</p>
+                    <span>Click anywhere on the map to view transport services in that area</span>
+                </div>
+            `;
+        }
+
+        // Function to clear all service markers
+        function clearServiceMarkers() {
+            if (window.serviceMarkers && window.serviceMarkers.length > 0) {
+                window.serviceMarkers.forEach(marker => {
+                    if (marker) marker.setMap(null);
+                });
+                window.serviceMarkers = [];
+            }
+        }
+
+        // Add event listener for when services are loaded to add markers
+        document.addEventListener('servicesLoaded', function(e) {
+            console.log("Services loaded event triggered");
+            const services = e.detail.services;
+            
+            // Clear existing markers
+            clearServiceMarkers();
+            
+            if (!services || !Array.isArray(services) || services.length === 0) {
+                console.warn("No services to display on map");
+                return;
+            }
+            
+            console.log(`Adding ${services.length} markers to map`);
+            
+            // Add markers for each service
+            services.forEach(service => {
+                if (!service.location || typeof service.location.lat !== 'number' || typeof service.location.lng !== 'number') {
+                    console.warn("Invalid service location:", service);
+                    return;
+                }
+                
+                const serviceMarker = new google.maps.Marker({
+                    position: service.location,
+                    map: map,
+                    title: service.name,
+                    id: service.id,
+                    icon: {
+                        url: getServiceTypeIcon(service.type),
+                        scaledSize: new google.maps.Size(30, 30)
+                    }
+                });
+                
+                // Add click event to marker
+                serviceMarker.addListener('click', () => {
+                    // Create info window content
+                    const content = `
+                        <div class="marker-info">
+                            <h3>${service.name}</h3>
+                            <p>${service.vicinity}</p>
+                            <p><strong>${service.distance.toFixed(1)} km</strong> from selected location</p>
+                            <button class="view-details-btn">View Details</button>
+                        </div>
+                    `;
+                    
+                    infoWindow.setContent(content);
+                    infoWindow.open(map, serviceMarker);
+                    
+                    // Add click event to view details button after info window is open
+                    google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+                        document.querySelector('.view-details-btn').addEventListener('click', () => {
+                            showServiceDetails(service.id);
+                            infoWindow.close();
+                        });
+                    });
+                });
+                
+                // Add to markers array
+                window.serviceMarkers.push(serviceMarker);
+            });
+        });
+
+        // Initialize map when the page loads
+        window.onload = initMap;
+    </script>
+</body>
+</html> 

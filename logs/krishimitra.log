@@ -1,0 +1,33 @@
+2025-03-29 22:07:52,177 - app - INFO - MongoDB connection successful
+2025-03-29 22:07:52,179 - app - INFO - OpenAI API key available: True
+2025-03-29 22:07:52,182 - app - INFO - Gemini API key available: True
+2025-03-29 22:07:52,184 - app - INFO - OpenWeather API key available: True
+2025-03-29 22:07:52,185 - app - INFO - Twilio account SID available: True
+2025-03-29 22:07:52,188 - app - INFO - Twilio auth token available: True
+2025-03-29 22:07:52,190 - app - INFO - Google Maps API key available: True
+2025-03-29 22:07:52,191 - app - INFO - Gemini API initialized
+2025-03-29 22:07:52,192 - app - INFO - OpenAI API initialized
+2025-03-29 22:07:52,194 - app - INFO - Twilio client initialized
+2025-03-29 22:07:52,212 - app - INFO - System info: {'platform': 'Windows-10-10.0.26100-SP0', 'python_version': '3.10.11', 'cpu_count': 8, 'hostname': 'Ritik'}
+2025-03-29 22:07:52,213 - app - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-29 22:07:52,217 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-29 22:07:54,832 - app - INFO - Model loaded successfully
+2025-03-29 22:07:54,956 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-29 22:07:54,956 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 00:30:02,462 - app - INFO - MongoDB connection successful
+2025-03-30 00:30:02,462 - app - INFO - OpenAI API key available: True
+2025-03-30 00:30:02,463 - app - INFO - Gemini API key available: True
+2025-03-30 00:30:02,463 - app - INFO - OpenWeather API key available: True
+2025-03-30 00:30:02,463 - app - INFO - Twilio account SID available: True
+2025-03-30 00:30:02,464 - app - INFO - Twilio auth token available: True
+2025-03-30 00:30:02,464 - app - INFO - Google Maps API key available: True
+2025-03-30 00:30:02,464 - app - INFO - Gemini API initialized
+2025-03-30 00:30:02,466 - app - INFO - OpenAI API initialized
+2025-03-30 00:30:02,466 - app - INFO - Twilio client initialized
+2025-03-30 00:30:02,467 - app - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 00:30:02,472 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 00:30:05,667 - app - INFO - Model loaded successfully
+2025-03-30 00:30:05,680 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-30 00:30:05,680 - werkzeug - INFO - [33mPress CTRL+C to quit[0m

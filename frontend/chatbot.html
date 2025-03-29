@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot - Farmer's Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .chat-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-box {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-header i {
+            font-size: 1.5rem;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .user-message {
+            background: #e3f2fd;
+            align-self: flex-end;
+            margin-left: 20%;
+        }
+
+        .bot-message {
+            background: #f5f5f5;
+            align-self: flex-start;
+            margin-right: 20%;
+        }
+
+        .message-time {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .message-input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            resize: none;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
+        .send-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .send-btn:hover {
+            background: #45a049;
+        }
+
+        .send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            color: #666;
+            align-items: center;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typing 1s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .subscription-banner {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .subscription-info {
+            flex-grow: 1;
+        }
+
+        .subscribe-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .subscribe-btn:hover {
+            background: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                padding: 0.5rem;
+                height: calc(100vh - 60px);
+            }
+
+            .message {
+                max-width: 90%;
+            }
+
+            .subscription-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .subscribe-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-header {
+                padding: 0.75rem;
+            }
+
+            .chat-messages {
+                padding: 0.75rem;
+            }
+
+            .message {
+                max-width: 95%;
+                padding: 0.75rem;
+            }
+
+            .chat-input {
+                padding: 0.75rem;
+            }
+
+            .message-input {
+                padding: 0.5rem;
+            }
+
+            .send-btn {
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.svg" alt="Krishimitra Logo" class="logo-img">
+                <h1>KrishiMitra</h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disease-detection.html">Disease Detection</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="sms-admin.html">SMS Admin</a></li>
+                <li><a href="email-admin.html">Email Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="chat-container">
+            <div id="subscriptionBanner" class="subscription-banner">
+                <div class="subscription-info">
+                    <h3>Get Unlimited Access</h3>
+                    <p>Subscribe to unlock unlimited chat messages and get daily farming tips via SMS!</p>
+                </div>
+                <button class="subscribe-btn" onclick="showSubscribeModal()">
+                    <i class="fas fa-star"></i> Subscribe Now
+                </button>
+            </div>
+
+            <div class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i>
+                    <h2>AI Farming Assistant</h2>
+                </div>
+
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message bot-message">
+                        Hello! I'm your AI farming assistant. How can I help you today?
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+
+                <div id="typingIndicator" class="typing-indicator" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    AI is typing...
+                </div>
+
+                <div class="chat-input">
+                    <textarea
+                        id="messageInput"
+                        class="message-input"
+                        placeholder="Type your message here..."
+                        rows="1"
+                        onkeydown="if(event.keyCode === 13 && !event.shiftKey) { event.preventDefault(); sendMessage(); }">
+                    </textarea>
+                    <button onclick="sendMessage()" class="send-btn" id="sendButton">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let messageCount = 0;
+        const MAX_FREE_MESSAGES = 5;
+        let isSubscribed = false;
+
+        function formatTime(date) {
+            return new Intl.DateTimeFormat('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            }).format(date);
+        }
+
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            messageInput.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.style.display = 'flex';
+            
+            // Disable send button while processing
+            document.getElementById('sendButton').disabled = true;
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        user_id: getUserId() // Get or create user ID
+                    })
+                });
+
+                const data = await response.json();
+                
+                // Hide typing indicator
+                typingIndicator.style.display = 'none';
+                
+                // Re-enable send button
+                document.getElementById('sendButton').disabled = false;
+
+                if (data.error && data.error === 'Message limit reached') {
+                    // Show subscription prompt if message limit reached
+                    showSubscriptionPrompt();
+                    
+                    // Still show the response if provided
+                    if (data.response) {
+                        addMessage(data.response, 'bot');
+                    }
+                    return;
+                }
+
+                if (data.warning) {
+                    console.warn("AI Warning:", data.warning);
+                }
+
+                // Add bot response
+                addMessage(data.response, 'bot');
+                
+                // Increment message count for free tier tracking
+                if (!isSubscribed) {
+                    messageCount++;
+                    updateMessageCounter();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                typingIndicator.style.display = 'none';
+                document.getElementById('sendButton').disabled = false;
+                
+                // Add error message
+                addMessage("I'm having trouble connecting right now. Please try again later.", 'bot');
+            }
+        }
+
+        function addMessage(text, type) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+            
+            // Format links in messages
+            const formattedText = formatText(text);
+            
+            messageDiv.innerHTML = `
+                ${formattedText}
+                <div class="message-time">${formatTime(new Date())}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Format message text to make links clickable and improve presentation
+        function formatText(text) {
+            // Convert URLs to clickable links
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            text = text.replace(urlRegex, url => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`);
+            
+            // Convert line breaks to HTML line breaks
+            text = text.replace(/\n/g, '<br>');
+            
+            return text;
+        }
+
+        function showSubscriptionPrompt() {
+            // Update subscription banner to be more prominent
+            const banner = document.getElementById('subscriptionBanner');
+            banner.style.backgroundColor = '#ffeb3b';
+            banner.style.padding = '1.5rem';
+            banner.style.animation = 'pulse 2s infinite';
+            
+            // Add style for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse {
+                    0% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.4); }
+                    70% { box-shadow: 0 0 0 10px rgba(255, 235, 59, 0); }
+                    100% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Update subscription text
+            banner.querySelector('.subscription-info').innerHTML = `
+                <h3>Message Limit Reached</h3>
+                <p>You've used ${messageCount}/${MAX_FREE_MESSAGES} free messages. Subscribe now to continue chatting with KrishiMitra AI!</p>
+            `;
+            
+            // Scroll to top to ensure banner visibility
+            window.scrollTo(0, 0);
+        }
+        
+        function getUserId() {
+            // Get user ID from local storage or create a new one
+            let userId = localStorage.getItem('krishimitra_user_id');
+            if (!userId) {
+                userId = 'user_' + Math.random().toString(36).substring(2, 15);
+                localStorage.setItem('krishimitra_user_id', userId);
+            }
+            return userId;
+        }
+        
+        function updateMessageCounter() {
+            // Update the subscription banner with message count
+            if (messageCount > 0 && !isSubscribed) {
+                const banner = document.getElementById('subscriptionBanner');
+                banner.querySelector('.subscription-info').innerHTML = `
+                    <h3>Free Trial: ${messageCount}/${MAX_FREE_MESSAGES} Messages Used</h3>
+                    <p>Subscribe to unlock unlimited chat messages and get daily farming tips via SMS!</p>
+                `;
+            }
+        }
+
+        function showSubscribeModal() {
+            // Show a more sophisticated subscription modal
+            const modal = document.createElement('div');
+            modal.className = 'subscription-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Subscribe to KrishiMitra</h2>
+                    <p>Get unlimited access to AI farming assistance and daily tips!</p>
+                    <form id="subscription-form">
+                        <div class="input-group">
+                            <label for="phone-input">Phone Number</label>
+                            <input type="tel" id="phone-input" placeholder="+91 98765 43210" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email-input">Email (Optional)</label>
+                            <input type="email" id="email-input" placeholder="you@example.com">
+                        </div>
+                        <button type="submit" class="subscribe-btn">
+                            <i class="fas fa-star"></i> Subscribe Now
+                        </button>
+                    </form>
+                </div>
+            `;
+            
+            // Add modal styles
+            const style = document.createElement('style');
+            style.textContent = `
+                .subscription-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                }
+                .modal-content {
+                    background-color: white;
+                    padding: 2rem;
+                    border-radius: 8px;
+                    max-width: 500px;
+                    width: 90%;
+                }
+                .close-modal {
+                    float: right;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+                .input-group {
+                    margin-bottom: 1rem;
+                }
+                .input-group label {
+                    display: block;
+                    margin-bottom: 0.5rem;
+                }
+                .input-group input {
+                    width: 100%;
+                    padding: 0.75rem;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Add to body
+            document.body.appendChild(modal);
+            
+            // Handle form submission
+            const form = modal.querySelector('#subscription-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const phone = document.getElementById('phone-input').value;
+                const email = document.getElementById('email-input').value;
+                subscribe(phone, email);
+                document.body.removeChild(modal);
+            });
+            
+            // Close modal when X is clicked
+            const closeButton = modal.querySelector('.close-modal');
+            closeButton.addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+
+        async function subscribe(phone, email) {
+            try {
+                const subscriptionData = {};
+                if (phone) subscriptionData.phone = phone;
+                if (email) subscriptionData.email = email;
+                
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(subscriptionData)
+                });
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                isSubscribed = true;
+                document.getElementById('subscriptionBanner').style.display = 'none';
+                
+                // Add a confirmation message to the chat
+                addMessage("🎉 You've successfully subscribed! You now have unlimited access to KrishiMitra AI.", 'bot');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error subscribing. Please try again.');
+            }
+        }
+
+        // Auto-resize textarea
+        const messageInput = document.getElementById('messageInput');
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+        
+        // Initialize the chat with some helpful suggestions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Clear any whitespace from the textarea on load
+            messageInput.value = messageInput.value.trim();
+            
+            // Show some suggestion buttons
+            const chatMessages = document.getElementById('chatMessages');
+            const suggestionsDiv = document.createElement('div');
+            suggestionsDiv.className = 'suggestions';
+            suggestionsDiv.innerHTML = `
+                <p>Try asking about:</p>
+                <div class="suggestion-buttons">
+                    <button onclick="useSuggestion('What crops are best for clay soil?')">Crops for clay soil</button>
+                    <button onclick="useSuggestion('How to prevent fungal diseases in tomatoes?')">Tomato diseases</button>
+                    <button onclick="useSuggestion('Best time to sow wheat in North India?')">Wheat sowing time</button>
+                    <button onclick="useSuggestion('Organic pest control methods')">Organic pest control</button>
+                </div>
+            `;
+            chatMessages.appendChild(suggestionsDiv);
+            
+            // Add styles for suggestions
+            const style = document.createElement('style');
+            style.textContent = `
+                .suggestions {
+                    margin-top: 1rem;
+                    text-align: center;
+                }
+                .suggestion-buttons {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    justify-content: center;
+                    margin-top: 0.5rem;
+                }
+                .suggestion-buttons button {
+                    background: #e3f2fd;
+                    border: 1px solid #2196f3;
+                    border-radius: 16px;
+                    padding: 0.5rem 1rem;
+                    font-size: 0.9rem;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+                .suggestion-buttons button:hover {
+                    background: #bbdefb;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+        
+        function useSuggestion(text) {
+            document.getElementById('messageInput').value = text;
+            sendMessage();
+        }
+    </script>
+</body>
+</html> 
