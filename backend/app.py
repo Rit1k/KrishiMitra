@@ -11,8 +11,14 @@ import requests
 import json
 from datetime import datetime
 import numpy as np
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
+# Conditionally import TensorFlow related libraries
+try:
+    from tensorflow.keras.models import load_model
+    from tensorflow.keras.preprocessing import image
+    TF_AVAILABLE = True
+except ImportError:
+    TF_AVAILABLE = False
+    logger.warning("TensorFlow imports failed - disease detection will be unavailable")
 from PIL import Image
 import io
 import logging
@@ -109,15 +115,23 @@ if TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN:
 else:
     twilio_client = None
 
-# Load the disease detection model
-try:
-    model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'plant_disease_model.h5')
-    logger.info(f"Loading model from: {model_path}")
-    model = load_model(model_path)
-    logger.info("Model loaded successfully")
-except Exception as e:
-    logger.error(f"Error loading model: {str(e)}")
+# Load the disease detection model if TensorFlow is available
+if TF_AVAILABLE:
+    try:
+        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'plant_disease_model.h5')
+        if os.path.exists(model_path):
+            logger.info(f"Loading model from: {model_path}")
+            model = load_model(model_path)
+            logger.info("Model loaded successfully")
+        else:
+            logger.warning(f"Model file not found at: {model_path}")
+            model = None
+    except Exception as e:
+        logger.error(f"Error loading model: {str(e)}")
+        model = None
+else:
     model = None
+    logger.warning("TensorFlow not available - disease detection service will be disabled")
 
 # Disease classes (update these according to your model's classes)
 DISEASE_CLASSES = [
@@ -221,19 +235,28 @@ def preprocess_image(img):
 @app.route('/api/detect-disease', methods=['POST'])
 def detect_disease():
     if 'image' not in request.files:
-        logger.error("No image file in request")
         return jsonify({'error': 'No image provided'}), 400
     
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'error': 'No image selected'}), 400
+    
+    if model is None:
+        # Return a fallback response if model is not available
+        logger.warning("Disease detection model not available, returning fallback response")
+        return jsonify({
+            'status': 'service_unavailable',
+            'prediction': 'Unable to detect at this time',
+            'confidence': 0,
+            'treatment': 'The disease detection service is temporarily unavailable. Please try again later.'
+        }), 503
+    
     try:
+        # Process the image and make prediction with the model
         logger.debug("Processing incoming image")
         # Read and preprocess the image
-        file = request.files['image']
         img = Image.open(io.BytesIO(file.read()))
         processed_image = preprocess_image(img)
-        
-        if model is None:
-            logger.error("Model not loaded")
-            return jsonify({'error': 'Model not loaded properly'}), 500
         
         # Make prediction
         logger.debug("Making prediction")

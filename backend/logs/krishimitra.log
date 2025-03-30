@@ -34,3 +34,209 @@
 2025-03-29 22:00:14,101 - __main__ - INFO - Starting KrishiMitra backend server
 2025-03-29 22:00:14,124 - werkzeug - WARNING -  * Debugger is active!
 2025-03-29 22:00:14,138 - werkzeug - INFO -  * Debugger PIN: 787-190-930
+2025-03-30 14:11:10,533 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:11:10,536 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:11:10,537 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:11:10,540 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:11:10,542 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:11:10,543 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:11:10,545 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:11:10,547 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:11:10,549 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:11:10,551 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:11:10,553 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:11:10,600 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:11:10,710 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:11:10,758 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:11:10,830 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 14:11:22,766 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:11:22,767 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:11:22,769 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:11:22,770 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:11:22,770 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:11:22,772 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:11:22,773 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:11:22,774 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:11:22,775 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:11:22,777 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:11:22,778 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:11:22,785 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:11:22,840 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:11:22,867 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:11:22,888 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 14:11:22,901 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-30 14:11:23,766 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-30 14:11:23,768 - werkzeug - INFO -  * Running on http://172.20.10.6:5000/ (Press CTRL+C to quit)
+2025-03-30 14:15:39,292 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-30 14:15:40,104 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 14:15:52,131 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:15:52,132 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:15:52,134 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:15:52,135 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:15:52,135 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:15:52,136 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:15:52,137 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:15:52,138 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:15:52,139 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:15:52,141 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:15:52,141 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:15:52,146 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:15:52,189 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:15:52,203 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:15:52,220 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 14:15:52,235 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-30 14:15:53,286 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-30 14:15:53,288 - werkzeug - INFO -  * Running on http://172.20.10.6:5000/ (Press CTRL+C to quit)
+2025-03-30 14:15:53,619 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-30 14:15:54,529 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 14:16:04,528 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:16:04,533 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:16:04,540 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:16:04,541 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:16:04,541 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:16:04,543 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:16:04,544 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:16:04,545 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:16:04,546 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:16:04,547 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:16:04,548 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:16:04,553 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:16:04,616 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:16:04,652 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:16:04,700 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 14:16:04,709 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-30 14:16:05,508 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-30 14:16:05,509 - werkzeug - INFO -  * Running on http://172.20.10.6:5000/ (Press CTRL+C to quit)
+2025-03-30 14:16:33,324 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:16:33,324 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:16:33,325 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:16:33,326 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:16:33,327 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:16:33,329 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:16:33,329 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:16:33,331 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:16:33,332 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:16:33,333 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:16:33,335 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:16:33,342 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:16:33,400 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:16:33,429 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:16:33,472 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 14:16:47,077 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:16:47,078 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:16:47,079 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:16:47,080 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:16:47,081 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:16:47,081 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:16:47,082 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:16:47,083 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:16:47,084 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:16:47,085 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:16:47,085 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:16:47,091 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:16:47,125 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:16:47,137 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:16:47,154 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 14:16:47,167 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-30 14:16:47,929 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-30 14:16:47,931 - werkzeug - INFO -  * Running on http://172.20.10.6:5000/ (Press CTRL+C to quit)
+2025-03-30 14:20:51,937 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-30 14:20:53,640 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 14:21:06,722 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:21:06,723 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:21:06,724 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:21:06,724 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:21:06,725 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:21:06,726 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:21:06,727 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:21:06,728 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:21:06,728 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:21:06,729 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:21:06,730 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:21:06,736 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:21:06,773 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:21:06,784 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:21:06,799 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 14:21:06,811 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-30 14:21:07,498 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-30 14:21:07,499 - werkzeug - INFO -  * Running on http://172.20.10.6:5000/ (Press CTRL+C to quit)
+2025-03-30 14:21:19,394 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-30 14:21:21,060 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 14:21:31,907 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:21:31,908 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:21:31,908 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:21:31,909 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:21:31,910 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:21:31,910 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:21:31,911 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:21:31,911 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:21:31,912 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:21:31,913 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:21:31,914 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:21:31,918 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:21:31,950 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:21:31,966 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:21:31,985 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 14:21:31,999 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-30 14:21:32,805 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-30 14:21:32,807 - werkzeug - INFO -  * Running on http://172.20.10.6:5000/ (Press CTRL+C to quit)
+2025-03-30 14:22:11,949 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:22:11,951 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:22:11,953 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:22:11,954 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:22:11,957 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:22:11,958 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:22:11,960 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:22:11,963 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:22:11,965 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:22:11,967 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:22:11,970 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:22:11,982 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:22:12,085 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:22:12,118 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:22:12,170 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 14:22:26,896 - __main__ - INFO - MongoDB connection successful
+2025-03-30 14:22:26,898 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 14:22:26,899 - __main__ - INFO - Gemini API key available: True
+2025-03-30 14:22:26,900 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 14:22:26,901 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 14:22:26,902 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 14:22:26,903 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 14:22:26,904 - __main__ - INFO - Gemini API initialized
+2025-03-30 14:22:26,905 - __main__ - INFO - OpenAI API initialized
+2025-03-30 14:22:26,906 - __main__ - INFO - Twilio client initialized
+2025-03-30 14:22:26,907 - __main__ - INFO - Loading model from: C:\Users\ritik\Krishimitra\backend\plant_disease_model.h5
+2025-03-30 14:22:26,912 - h5py._conv - DEBUG - Creating converter from 3 to 5
+2025-03-30 14:22:26,958 - __main__ - ERROR - Error loading model: Error when deserializing class 'SeparableConv2D' using config={'name': 'block2_sepconv1', 'trainable': True, 'dtype': 'float32', 'filters': 128, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'same', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'linear', 'use_bias': False, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}, 'shared_object_id': 21}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None, 'depth_multiplier': 1, 'depthwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'pointwise_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'depthwise_regularizer': None, 'pointwise_regularizer': None, 'depthwise_constraint': None, 'pointwise_constraint': None}.
+
+Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D: {'groups': 1, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'kernel_regularizer': None, 'kernel_constraint': None}
+2025-03-30 14:22:26,976 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 14:22:26,997 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 14:22:27,015 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-30 14:22:27,966 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-30 14:22:27,968 - werkzeug - INFO -  * Running on http://172.20.10.6:5000/ (Press CTRL+C to quit)
