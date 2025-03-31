@@ -8,6 +8,11 @@
     <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        body{
+         background-image: url('./assets/weather.jpg');   
+         background-size: cover;
+         background-position: center;
+        }
         .weather-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -501,7 +506,7 @@
         <ul class="debug-log" id="debugLog"></ul>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key={YOUR_API_KEY}&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo&callback=initMap" async defer></script>
     <script>
         // Debug functionality
         const DEBUG = {
@@ -768,7 +773,7 @@
         
         // OpenWeather API key - You need to replace this with a valid API key
         // Visit https://openweathermap.org/appid to sign up for a free API key
-        const apiKey = 'YOUR_API_KEY'; // Your API key
+        const apiKey = 'bee375b554d991283c9f4c6b235ee40f'; // Your API key
         
         // Check if API key is set
         function isApiKeyConfigured() {

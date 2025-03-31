@@ -1,266 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crop Disease Detection</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="icon"
+      href="./assets/mainlogo.svg"
+      type="image/svg+xml"
+      style="
+        filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg)
+          brightness(92%) contrast(86%);
+      "
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        .detection-container {
-            max-width: 800px;
-            height: 80vh;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-image: url('./assets/cropdiseasedetection.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            color: black;
-        }
+      body {
+        background-image: url("./assets/cropdiseasedetection.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+      .detection-container {
+        max-width: 800px;
+        height: 80vh;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: black;
+      }
 
-        .input-methods {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
+      .input-methods {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
 
-        .input-method {
-            flex: 1;
-            padding: 2rem;
-            border: 2px dashed #4CAF50;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+      .input-method {
+        flex: 1;
+        padding: 2rem;
+        border: 2px dashed #4caf50;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-        .input-method:hover {
-            background: #f0f9f0;
-        }
+      .input-method:hover {
+        background: #f0f9f0;
+      }
 
-        .preview-container {
-            margin: 2rem 0;
-            text-align: center;
-        }
+      .preview-container {
+        margin: 2rem 0;
+        text-align: center;
+      }
 
-        #imagePreview {
-            max-width: 100%;
-            max-height: 400px;
-            display: none;
-            margin: 0 auto;
-        }
+      #imagePreview {
+        max-width: 100%;
+        max-height: 400px;
+        display: none;
+        margin: 0 auto;
+      }
 
-        #video {
-            max-width: 100%;
-            max-height: 400px;
-            display: none;
-            margin: 0 auto;
-        }
+      #video {
+        max-width: 100%;
+        max-height: 400px;
+        display: none;
+        margin: 0 auto;
+      }
 
-        .result-container {
-            margin-top: 2rem;
-            padding: 1rem;
-            border-radius: 8px;
-            background: #f5f5f5;
-            display: none;
-        }
+      .result-container {
+        margin-top: 2rem;
+        padding: 1rem;
+        border-radius: 8px;
+        background: #f5f5f5;
+        display: none;
+      }
 
-        .disease-name {
-            color: #d32f2f;
-            font-weight: bold;
-        }
+      .disease-name {
+        color: #d32f2f;
+        font-weight: bold;
+      }
 
-        .confidence {
-            color: #388e3c;
-        }
+      .confidence {
+        color: #388e3c;
+      }
 
-        .treatment {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 4px;
-        }
+      .treatment {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: white;
+        border-radius: 4px;
+      }
 
-        .capture-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            display: none;
-        }
+      .capture-btn {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        display: none;
+      }
 
-        .capture-btn:hover {
-            background: #45a049;
-        }
-
+      .capture-btn:hover {
+        background: #45a049;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <div class="logo">
-                <img src="logo.svg" alt="Krishimitra Logo" class="logo-img">
-                <h1>KrishiMitra</h1>
-            </div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="disease-detection.html">Disease Detection</a></li>
-                <li><a href="weather.html">Weather</a></li>
-                <li><a href="transport.html">Transport</a></li>
-                <li><a href="chatbot.html">AI Chat</a></li>
-                <li><a href="sms-admin.html">SMS Admin</a></li>
-                <li><a href="email-admin.html">Email Admin</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <div class="logo">
+          <img src="logo.svg" alt="Krishimitra Logo" class="logo-img" />
+          <h1>KrishiMitra</h1>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="disease-detection.html">Disease Detection</a></li>
+          <li><a href="weather.html">Weather</a></li>
+          <li><a href="transport.html">Transport</a></li>
+          <li><a href="chatbot.html">AI Chat</a></li>
+          <li><a href="sms-admin.html">SMS Admin</a></li>
+          <li><a href="email-admin.html">Email Admin</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
-        <div class="detection-container">
-            <h2>Crop Disease Detection</h2>
-            <p>Upload an image or use your camera to detect crop diseases</p>
+      <div class="detection-container">
+        <h2>Crop Disease Detection</h2>
+        <p>Upload an image or use your camera to detect crop diseases</p>
 
-            <div class="input-methods">
-                <div class="input-method" id="uploadMethod">
-                    <i class="fas fa-upload"></i>
-                    <h3>Upload Image</h3>
-                    <p>Click to upload an image from your device</p>
-                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
-                </div>
+        <div class="input-methods">
+          <div class="input-method" id="uploadMethod">
+            <i class="fas fa-upload"></i>
+            <h3>Upload Image</h3>
+            <p>Click to upload an image from your device</p>
+            <input
+              type="file"
+              id="imageInput"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
 
-                <div class="input-method" id="cameraMethod">
-                    <i class="fas fa-camera"></i>
-                    <h3>Use Camera</h3>
-                    <p>Take a photo using your device's camera</p>
-                </div>
-            </div>
-
-            <div class="preview-container">
-                <video id="video" autoplay playsinline></video>
-                <img id="imagePreview" alt="Preview">
-                <button id="captureBtn" class="capture-btn">Capture Photo</button>
-            </div>
-
-            <div class="result-container" id="resultContainer">
-                <h3>Detection Result</h3>
-                <p>Disease: <span class="disease-name" id="diseaseName">-</span></p>
-                <p>Confidence: <span class="confidence" id="confidence">-</span></p>
-                <div class="treatment" id="treatment">
-                    <h4>Recommended Treatment:</h4>
-                    <p id="treatmentText">-</p>
-                </div>
-            </div>
+          <div class="input-method" id="cameraMethod">
+            <i class="fas fa-camera"></i>
+            <h3>Use Camera</h3>
+            <p>Take a photo using your device's camera</p>
+          </div>
         </div>
+
+        <div class="preview-container">
+          <video id="video" autoplay playsinline></video>
+          <img id="imagePreview" alt="Preview" />
+          <button id="captureBtn" class="capture-btn">Capture Photo</button>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+          <h3>Detection Result</h3>
+          <p>
+            Disease: <span class="disease-name" id="diseaseName">-</span>
+            <button
+              id="toggleFormat"
+              style="
+                font-size: 10px;
+                background: #e0e0e0;
+                border: none;
+                padding: 2px 5px;
+                border-radius: 3px;
+                cursor: pointer;
+                margin-left: 5px;
+              "
+            >
+              Show Original
+            </button>
+          </p>
+          <p>Confidence: <span class="confidence" id="confidence">-</span></p>
+          <div class="treatment" id="treatment">
+            <h4>Recommended Treatment:</h4>
+            <p id="treatmentText">-</p>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
-        const uploadMethod = document.getElementById('uploadMethod');
-        const cameraMethod = document.getElementById('cameraMethod');
-        const imageInput = document.getElementById('imageInput');
-        const video = document.getElementById('video');
-        const imagePreview = document.getElementById('imagePreview');
-        const captureBtn = document.getElementById('captureBtn');
-        const resultContainer = document.getElementById('resultContainer');
-        const diseaseName = document.getElementById('diseaseName');
-        const confidence = document.getElementById('confidence');
-        const treatmentText = document.getElementById('treatmentText');
+      const uploadMethod = document.getElementById("uploadMethod");
+      const cameraMethod = document.getElementById("cameraMethod");
+      const imageInput = document.getElementById("imageInput");
+      const video = document.getElementById("video");
+      const imagePreview = document.getElementById("imagePreview");
+      const captureBtn = document.getElementById("captureBtn");
+      const resultContainer = document.getElementById("resultContainer");
+      const diseaseName = document.getElementById("diseaseName");
+      const confidence = document.getElementById("confidence");
+      const treatmentText = document.getElementById("treatmentText");
+      const toggleFormat = document.getElementById("toggleFormat");
 
-        let stream = null;
+      let stream = null;
+      let originalDiseaseName = ""; // Store the original disease name
+      let formattedDiseaseName = ""; // Store the formatted disease name
+      let showingOriginal = false; // Track which format is currently displayed
 
-        // Upload image handling
-        uploadMethod.addEventListener('click', () => {
-            imageInput.click();
-        });
-
-        imageInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                    video.style.display = 'none';
-                    captureBtn.style.display = 'none';
-                    detectDisease(file);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Camera handling
-        cameraMethod.addEventListener('click', async () => {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                video.srcObject = stream;
-                video.style.display = 'block';
-                imagePreview.style.display = 'none';
-                captureBtn.style.display = 'block';
-            } catch (err) {
-                console.error('Error accessing camera:', err);
-                alert('Could not access camera. Please make sure you have granted camera permissions.');
-            }
-        });
-
-        captureBtn.addEventListener('click', () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0);
-            
-            canvas.toBlob((blob) => {
-                const file = new File([blob], "capture.jpg", { type: "image/jpeg" });
-                imagePreview.src = canvas.toDataURL('image/jpeg');
-                imagePreview.style.display = 'block';
-                video.style.display = 'none';
-                captureBtn.style.display = 'none';
-                
-                if (stream) {
-                    stream.getTracks().forEach(track => track.stop());
-                }
-                
-                detectDisease(file);
-            }, 'image/jpeg');
-        });
-
-        async function detectDisease(file) {
-            const formData = new FormData();
-            formData.append('image', file);
-
-            try {
-                console.log('Sending request to detect disease...');
-                const response = await fetch('http://localhost:5000/api/detect-disease', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                console.log('Raw response:', response);
-                const result = await response.json();
-                console.log('Parsed response:', result);
-                
-                if (result.error) {
-                    console.error('Error from server:', result.error);
-                    alert(result.error);
-                    return;
-                }
-
-                resultContainer.style.display = 'block';
-                if (result.disease === 'Sample Disease') {
-                    console.error('Received sample disease instead of actual prediction');
-                }
-                diseaseName.textContent = result.disease || 'Unknown Disease';
-                confidence.textContent = result.confidence ? `${(result.confidence * 100).toFixed(2)}%` : 'N/A';
-                treatmentText.textContent = result.treatment || 'No specific treatment information available.';
-            } catch (error) {
-                console.error('Error detecting disease:', error);
-                alert('An error occurred while detecting the disease. Please try again.');
-            }
+      // Toggle between original and formatted disease names
+      toggleFormat.addEventListener("click", () => {
+        if (showingOriginal) {
+          diseaseName.textContent = formattedDiseaseName;
+          toggleFormat.textContent = "Show Original";
+        } else {
+          diseaseName.textContent = originalDiseaseName;
+          toggleFormat.textContent = "Show Formatted";
         }
+        showingOriginal = !showingOriginal;
+      });
+
+      // Upload image handling
+      uploadMethod.addEventListener("click", () => {
+        imageInput.click();
+      });
+
+      imageInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = "block";
+            video.style.display = "none";
+            captureBtn.style.display = "none";
+            detectDisease(file);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Camera handling
+      cameraMethod.addEventListener("click", async () => {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ video: true });
+          video.srcObject = stream;
+          video.style.display = "block";
+          imagePreview.style.display = "none";
+          captureBtn.style.display = "block";
+        } catch (err) {
+          console.error("Error accessing camera:", err);
+          alert(
+            "Could not access camera. Please make sure you have granted camera permissions."
+          );
+        }
+      });
+
+      captureBtn.addEventListener("click", () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+
+        canvas.toBlob((blob) => {
+          const file = new File([blob], "capture.jpg", { type: "image/jpeg" });
+          imagePreview.src = canvas.toDataURL("image/jpeg");
+          imagePreview.style.display = "block";
+          video.style.display = "none";
+          captureBtn.style.display = "none";
+
+          if (stream) {
+            stream.getTracks().forEach((track) => track.stop());
+          }
+
+          detectDisease(file);
+        }, "image/jpeg");
+      });
+
+      function formatDiseaseName(rawName) {
+        if (!rawName || typeof rawName !== 'string') {
+          return 'Unknown Disease';
+        }
+        
+        // Split by the triple underscore separator
+        const parts = rawName.split('___');
+        
+        // Format each part
+        let plantType = parts[0].replace(/_/g, ' ');
+        const condition = parts.length > 1 ? parts[1].replace(/_/g, ' ') : '';
+        
+        // Capitalize first letter of each word
+        plantType = plantType.split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+        
+        // Return formatted name
+        if (condition.toLowerCase() === 'healthy') {
+          return `${plantType}: Healthy`;
+        } else {
+          return `${plantType}: ${condition}`;
+        }
+      }
+
+      async function detectDisease(file) {
+        const formData = new FormData();
+        formData.append("image", file);
+
+        try {
+          console.log("Sending request to detect disease...");
+          const response = await fetch(
+            "http://localhost:5000/api/detect-disease",
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+
+          console.log("Raw response:", response);
+          const result = await response.json();
+          console.log("Parsed response:", result);
+
+          if (result.error) {
+            console.error("Error from server:", result.error);
+            alert(result.error);
+            return;
+          }
+
+          resultContainer.style.display = "block";
+
+          // Check if we're running in fallback mode
+          if (result.fallback_mode) {
+            // Add a warning message if we're in fallback mode
+            const warningElem = document.createElement("div");
+            warningElem.style.backgroundColor = "#fff3cd";
+            warningElem.style.color = "#856404";
+            warningElem.style.padding = "10px";
+            warningElem.style.borderRadius = "4px";
+            warningElem.style.marginBottom = "10px";
+            warningElem.textContent =
+              "Note: Running in limited diagnostic mode. For best results, try again when server model is available.";
+
+            // Insert at the top of the result container
+            resultContainer.insertBefore(
+              warningElem,
+              resultContainer.firstChild
+            );
+          }
+
+          if (result.disease === "Sample Disease") {
+            console.error(
+              "Received sample disease instead of actual prediction"
+            );
+          }
+
+          // Display the exact disease name from the model's dataset
+          if (result.disease) {
+            // Store the original disease name
+            originalDiseaseName = result.disease;
+
+            // Create a user-friendly formatted version
+            formattedDiseaseName = formatDiseaseName(originalDiseaseName);
+            
+            // Set toggle state to show ORIGINAL by default
+            showingOriginal = true;
+            toggleFormat.textContent = "Show Formatted";
+            
+            // Display the original dataset name by default
+            diseaseName.textContent = originalDiseaseName;
+          } else {
+            diseaseName.textContent = "Unknown Disease";
+            originalDiseaseName = "Unknown";
+            formattedDiseaseName = "Unknown Disease";
+          }
+
+          confidence.textContent = result.confidence
+            ? `${(result.confidence * 100).toFixed(2)}%`
+            : "N/A";
+          treatmentText.textContent =
+            result.treatment || "No specific treatment information available.";
+        } catch (error) {
+          console.error("Error detecting disease:", error);
+          alert(
+            "An error occurred while detecting the disease. Please try again."
+          );
+        }
+      }
     </script>
-</body>
-</html> 
+  </body>
+</html>

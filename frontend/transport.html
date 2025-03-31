@@ -10,9 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google Maps API with Places library -->
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key={YOUR_API_KEY}&libraries=places&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo&libraries=places&callback=initMap">
     </script>
     <style>
+        body{
+         background-image: url('./assets/transport.jpg');   
+         background-size: cover;
+         background-position: center;
+        }
         .transport-container {
             max-width: 1100px;
             margin: 0 auto;
@@ -20,6 +25,7 @@
         }
 
         .transport-header {
+            color: black;
             margin-bottom: 2rem;
             text-align: center;
         }
@@ -561,8 +567,8 @@
     <main>
         <div class="transport-container">
             <div class="transport-header">
-                <h1><i class="fas fa-truck"></i> Transport Services</h1>
-                <p>Find reliable transport services for your agricultural needs</p>
+                <h1 style="color: black;"><i class="fas fa-truck"></i> Transport Services</h1>
+                <p style="color: black;">Find reliable transport services for your agricultural needs</p>
             </div>
 
             <div class="location-display" id="locationDisplay">
@@ -639,8 +645,8 @@
             
             console.log("Map created successfully");
             
-            // Create marker for selected location
-            const marker = new google.maps.Marker({
+            // Create marker for selected location and store it globally for access in click handlers
+            window.locationMarker = new google.maps.Marker({
                 position: center,
                 map: map,
                 icon: {
@@ -656,6 +662,9 @@
             
             // Create info window
             infoWindow = new google.maps.InfoWindow();
+            
+            // Store initial position
+            currentPosition = center;
             
             // Set temporary location display until we get actual location
             document.getElementById('selected-location').textContent = "Detecting your location...";
@@ -699,15 +708,16 @@
                             showEmptyInitialState();
                         } else {
                             // Update marker and map center for user location
-                            marker.setPosition(center);
+                            window.locationMarker.setPosition(center);
                             map.setCenter(center);
                             map.setZoom(11); // Zoom in more on user's actual location
                             
-                            // Get address for user location
-                            getAddressFromCoords(center);
+                            // Store current position
+                            currentPosition = center;
                             
-                            // Load services near user location
-                            loadServicesNearLocation(center);
+                            // Use our new function that ensures proper order
+                            console.log("Using user's location in India, geocoding and loading services");
+                            geocodeAndLoadServices(center);
                         }
                     },
                     (error) => {
@@ -731,38 +741,53 @@
                 showEmptyInitialState();
             }
             
-            // Add click event to map
+            // Improve the map click handler
             map.addListener('click', function(event) {
                 console.log("Map clicked at:", event.latLng.toJSON());
                 
-                const newLocation = event.latLng.toJSON();
+                // Get exact coordinates from the click event
+                const newLocation = {
+                    lat: event.latLng.lat(),
+                    lng: event.latLng.lng()
+                };
                 
-                // Update marker
-                marker.setPosition(event.latLng);
+                // Update marker position to clicked location
+                if (window.locationMarker) {
+                    window.locationMarker.setPosition(event.latLng);
+                }
                 
-                // Update location display
+                // Update location display with loading state
                 document.getElementById('selected-location').textContent = "Loading location...";
                 document.getElementById('location-coords').textContent = `${newLocation.lat.toFixed(5)}, ${newLocation.lng.toFixed(5)}`;
                 
-                // Reverse geocode to get location name
-                getAddressFromCoords(newLocation);
+                // Store current position for distance calculations
+                currentPosition = newLocation;
                 
-                // Center map on clicked location
-                map.setCenter(newLocation);
-                
-                // Clear existing services and markers
+                // Clear existing services and markers first
                 const servicesList = document.getElementById('servicesList');
                 servicesList.innerHTML = '';
-                
-                // Clear existing markers
-                clearServiceMarkers();
                 
                 // Show loading indicator
                 const servicesLoading = document.getElementById('services-loading');
                 servicesLoading.style.display = 'flex';
                 
-                // Load services near new location directly
-                loadServicesNearLocation(newLocation);
+                // Reset active filters
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    if (btn.dataset.type === 'all') {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                
+                // Clear search input
+                document.getElementById('searchInput').value = '';
+                
+                // Clear existing markers before adding new ones
+                clearServiceMarkers();
+                
+                // Reverse geocode to get location name before getting services
+                geocodeAndLoadServices(newLocation);
             });
             
             console.log("Initial map setup complete");
@@ -804,87 +829,123 @@
             });
         }
         
+        // Function to load services near a location
         function loadServicesNearLocation(location) {
-            console.log("Loading services for location:", location);
+            console.log("Loading services near location:", location);
             
-            // Show loading indicator
+            // Validate location
+            if (!location || typeof location.lat !== 'number' || typeof location.lng !== 'number') {
+                console.error("Invalid location provided to loadServicesNearLocation");
+                showEmptyServicesState();
+                return;
+            }
+            
+            // Display loading state if not already shown
             const servicesLoading = document.getElementById('services-loading');
             servicesLoading.style.display = 'flex';
             
-            // Mark map as having services loaded to hide the hint
-            document.getElementById('map').classList.add('services-loaded');
+            console.log("Attempting to load transport services from API");
             
-            // Clear existing services and markers
-            const servicesList = document.getElementById('servicesList');
-            servicesList.innerHTML = '';
-            
-            // Clear existing markers
-            clearServiceMarkers();
-            
-            // Create a PlacesService object
-            const service = new google.maps.places.PlacesService(map);
-            
-            // First try nearby search for immediate results
-            const nearbyRequest = {
-                location: location,
-                radius: 15000, // 15km radius
-                type: ['moving_company', 'storage', 'transit_station', 'bus_station', 'train_station']
-            };
-            
-            service.nearbySearch(nearbyRequest, function(results, status) {
-                console.log("Nearby search status:", status);
-                
-                if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
-                    console.log("Found nearby services:", results.length);
-                    processSearchResults(results, location);
-                } else {
-                    console.log("No nearby results found, generating fallback services");
-                    // Generate fallback services instead of trying another search
-                    const generatedServices = generateServicesNearLocation(location);
-                    const sortedServices = generatedServices.sort((a, b) => a.distance - b.distance);
+            // First try to call the API
+            fetch(`http://localhost:5000/api/transporters?lat=${location.lat}&lng=${location.lng}`)
+                .then(response => {
+                    console.log("API response received, status:", response.status);
                     
+                    if (!response.ok) {
+                        throw new Error(`API returned status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("API data received:", data);
+                    
+                    if (data && data.results && data.results.length > 0) {
+                        processApiServicesData(data.results, location);
+                    } else {
+                        console.log("No API results, generating mock data");
+                        generateLocationSpecificMockServices(location);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error with transport API:", error);
+                    console.log("Falling back to mock data generation");
+                    // Generate mock data on API error
+                    generateLocationSpecificMockServices(location);
+                })
+                .finally(() => {
                     // Hide loading indicator
                     servicesLoading.style.display = 'none';
-                    
-                    // Render the services
-                    renderTransportServices(sortedServices);
-                    
-                    // Save current services for filtering
-                    window.currentServices = sortedServices;
-                    transportServices = sortedServices;
-                    
-                    // Trigger event for map to add markers
-                    document.dispatchEvent(new CustomEvent('servicesLoaded', {
-                        detail: { services: sortedServices }
-                    }));
-                }
-            });
-
-            // Helper function to process search results
-            function processSearchResults(results, baseLocation) {
-                // Format places as our service objects
-                const services = results.map((place, index) => {
-                    return createServiceFromPlace(place, getServiceType(place), baseLocation);
                 });
+        }
+
+        // Add a function to process API data 
+        function processApiServicesData(results, location) {
+            console.log(`Processing ${results.length} API results for location`, location);
+            
+            // Clear existing markers first
+            clearServiceMarkers();
+            
+            // Convert API results to our service format
+            transportServices = results.map(place => {
+                // Calculate distance from selected location
+                const distance = calculateDistance(
+                    location.lat, 
+                    location.lng, 
+                    place.geometry.location.lat, 
+                    place.geometry.location.lng
+                );
                 
-                // Sort by distance
-                const sortedServices = services.sort((a, b) => a.distance - b.distance);
+                // Determine service type based on types array
+                let type = 'truck'; // default
+                if (place.types) {
+                    if (place.types.includes('storage') || place.types.includes('warehouse')) {
+                        type = 'warehouse';
+                    } else if (place.types.includes('moving_company') || place.types.includes('truck_rental')) {
+                        type = 'truck';
+                    } else if (place.types.includes('transit_station')) {
+                        type = Math.random() > 0.5 ? 'cold_storage' : 'warehouse';
+                    }
+                }
                 
-                // Hide loading indicator
-                servicesLoading.style.display = 'none';
+                // Get rating or generate a random one
+                const rating = place.rating || (3.5 + Math.random() * 1.5).toFixed(1);
                 
-                // Render the services
-                renderTransportServices(sortedServices);
-                
-                // Save current services for filtering
-                window.currentServices = sortedServices;
-                transportServices = sortedServices;
-                
-                // Trigger event for map to add markers
-                document.dispatchEvent(new CustomEvent('servicesLoaded', {
-                    detail: { services: sortedServices }
-                }));
-            }
+                // Create service object with consistent data format
+                return {
+                    id: place.place_id || 'api-' + Math.random().toString(36).substr(2, 9),
+                    name: place.name,
+                    type: type,
+                    vicinity: place.vicinity || place.formatted_address || `Near ${distance.toFixed(1)} km from center`,
+                    location: {
+                        lat: place.geometry.location.lat,
+                        lng: place.geometry.location.lng
+                    },
+                    distance: distance,
+                    rating: rating,
+                    reviews: place.user_ratings_total || Math.floor(10 + Math.random() * 40),
+                    phone: place.formatted_phone_number || "+91 " + Math.floor(10000 + Math.random() * 90000) + " " + Math.floor(10000 + Math.random() * 90000),
+                    availability: getRandomAvailability(),
+                    description: getServiceDescription(type),
+                    price_per_km: type === 'truck' ? Math.floor(15 + Math.random() * 10) : null,
+                    price_per_month: type === 'warehouse' ? Math.floor(30000 + Math.random() * 20000) : null,
+                    price_per_day: type === 'cold_storage' ? Math.floor(1000 + Math.random() * 500) : null,
+                    capacity: type === 'warehouse' ? `${Math.floor(500 + Math.random() * 1500)} sq.ft.` : null
+                };
+            });
+            
+            console.log(`Found ${transportServices.length} transport services in ${document.getElementById('selected-location').textContent}`);
+            
+            // Sort services by distance from location
+            transportServices.sort((a, b) => a.distance - b.distance);
+            
+            // Display services in the list
+            displayTransportServicesForLocation(transportServices, location);
+            
+            // Add services to map
+            addMarkersToMap(transportServices);
+            
+            // Show success state
+            map.classList.add('services-loaded');
         }
 
         // Find real transport services using Google Places API
@@ -1123,15 +1184,18 @@
             
             // Calculate price display based on service type
             let priceDisplay = '';
+            let capacityDisplay = '';
+            
             if (service.type === 'truck') {
                 priceDisplay = `₹${service.price_per_km} per kilometer`;
             } else if (service.type === 'warehouse') {
-                priceDisplay = `₹${service.price_per_month || '35000'} per month${service.capacity ? ' (' + service.capacity + ')' : ''}`;
+                priceDisplay = `₹${service.price_per_month || '35000'} per month`;
+                capacityDisplay = service.capacity ? `<div class="service-capacity"><i class="fas fa-warehouse"></i> Capacity: ${service.capacity}</div>` : '';
             } else if (service.type === 'cold_storage') {
                 priceDisplay = `₹${service.price_per_day || '1200'} per day`;
             }
             
-            // Create content for modal
+            // Create content for modal with map preview
             modal.innerHTML = `
                 <div class="service-modal-content">
                     <span class="close-modal">&times;</span>
@@ -1143,6 +1207,10 @@
                         <span class="reviews">(${service.reviews} reviews)</span>
                     </div>
                     <p class="service-description">${service.description}</p>
+                    <div class="service-map-preview" style="height: 150px; margin-bottom: 15px; border-radius: 8px; overflow: hidden;">
+                        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${service.location.lat},${service.location.lng}&zoom=15&size=470x150&maptype=roadmap&markers=color:red%7C${service.location.lat},${service.location.lng}&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo" 
+                             alt="Location Map" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="service-location">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>${service.vicinity}</span>
@@ -1156,12 +1224,15 @@
                         <i class="fas fa-tag"></i>
                         <span>${priceDisplay}</span>
                     </div>
+                    ${capacityDisplay}
                     <div class="service-availability">
                         <i class="fas fa-clock"></i>
                         <span>${service.availability}</span>
                     </div>
-                    <button class="btn-book">Book Now</button>
-                    <button class="btn-directions" onclick="getDirections(${service.location.lat}, ${service.location.lng})">Get Directions</button>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="btn-book" style="flex: 1;">Book Now</button>
+                        <button class="btn-directions" style="flex: 1; background-color: #3498db;" onclick="getDirections(${service.location.lat}, ${service.location.lng})">Get Directions</button>
+                    </div>
                 </div>
             `;
             
@@ -1302,194 +1373,131 @@
             }
         }
 
-        // Function to add markers to map
+        // Function to add service markers to the map
         function addMarkersToMap(services) {
-            // Update marker visibility based on filtered services
-            if (window.serviceMarkers) {
-                window.serviceMarkers.forEach(marker => {
-                    // Fix ID comparison by handling both string and number IDs
-                    const markerID = marker.get('id');
-                    const isVisible = services.some(s => s.id.toString() === markerID.toString());
-                    marker.setVisible(isVisible);
-                });
-            }
-        }
-
-        // Generate randomized transport services near a location for fallback
-        function generateServicesNearLocation(location) {
-            console.log("Generating fallback services near:", location);
-            const services = [];
-            const serviceTypes = ['truck', 'warehouse', 'cold_storage'];
-            const serviceNames = {
-                truck: [
-                    "Quick Transport Co.", "Fresh Carrier Services", "Rural Logistics Inc", 
-                    "Express Agri Movers", "Farmers Transport Services", "Harvest Haulers",
-                    "AgriLogistics", "FastTrack Farm Transport", "GreenHaul Services",
-                    "SpeedyHaul Logistics", "FarmFresh Movers", "AgroTrans Solutions"
-                ],
-                warehouse: [
-                    "Agri Warehousing Ltd", "MegaFarm Warehouse", "StoreSafe Agricultural Storage",
-                    "Harvest Storage Solutions", "FarmSpace Warehousing", "AgriStor Facilities",
-                    "CropKeeper Storage", "SecureStock Warehousing", "BulkStore Agro",
-                    "GrainSafe Warehousing", "HarvestHold Storage", "FarmKeep Facilities"
-                ],
-                cold_storage: [
-                    "Cold Chain Solutions", "Harvest Cold Storage", "FreshKeep Cold Solutions",
-                    "ChillStore Agri", "FrostSafe Produce", "PeakFresh Storage",
-                    "ColdCrop Facilities", "FreshTech Cold Chain", "Arctic Agri Storage",
-                    "CoolHarvest Storage", "ChillProduce Facilities", "FrostGuard Cold Storage"
-                ]
-            };
+            console.log(`Adding ${services.length} markers to map`);
             
-            // Generate 8-10 random services
-            const numServices = 8 + Math.floor(Math.random() * 3);
-            console.log(`Generating ${numServices} fallback services`);
+            // Clear existing markers first
+            clearServiceMarkers();
             
-            // Ensure we have at least 2 of each type
-            const baseServices = [
-                { typeIndex: 0, distance: 1 + Math.random() * 3 },
-                { typeIndex: 0, distance: 2 + Math.random() * 4 },
-                { typeIndex: 1, distance: 1 + Math.random() * 3 },
-                { typeIndex: 1, distance: 2 + Math.random() * 4 },
-                { typeIndex: 2, distance: 1 + Math.random() * 3 },
-                { typeIndex: 2, distance: 2 + Math.random() * 4 }
-            ];
-            
-            // Add some more random ones
-            for (let i = baseServices.length; i < numServices; i++) {
-                baseServices.push({
-                    typeIndex: Math.floor(Math.random() * 3),
-                    distance: 1 + Math.random() * 14
-                });
+            // Initialize serviceMarkers array if not exists
+            if (!window.serviceMarkers) {
+                window.serviceMarkers = [];
             }
             
-            // Now create all services
-            for (let i = 0; i < baseServices.length; i++) {
-                const { typeIndex, distance } = baseServices[i];
-                const type = serviceTypes[typeIndex];
-                
-                // Random name from the type's name list
-                const name = serviceNames[type][Math.floor(Math.random() * serviceNames[type].length)];
-                
-                // Random angle for position
-                const angle = Math.random() * Math.PI * 2;
-                
-                // Convert distance and angle to lat/lng offset
-                // Earth radius is 6371 km
-                const lat = location.lat + (distance / 111); // Very rough approximation: 1 degree ≈ 111km
-                const lng = location.lng + (distance / (111 * Math.cos(location.lat * Math.PI / 180)));
-                
-                // Random rating between 3.5 and 5.0
-                const rating = (3.5 + Math.random() * 1.5).toFixed(1);
-                
-                // Random number of reviews
-                const reviews = Math.floor(10 + Math.random() * 40);
-                
-                // Random phone number
-                const phone = "+91 " + Math.floor(10000 + Math.random() * 90000) + " " + Math.floor(10000 + Math.random() * 90000);
-                
-                // Random availability
-                const availabilities = ["Available Now", "Limited Space", "Available Tomorrow", "Available After 2PM", "Space Available"];
-                const availability = availabilities[Math.floor(Math.random() * availabilities.length)];
-                
-                // Type-specific pricing
-                let price_per_km, price_per_month, price_per_day, capacity;
-                
-                if (type === 'truck') {
-                    price_per_km = Math.floor(20 + Math.random() * 15);
-                } else if (type === 'warehouse') {
-                    price_per_month = Math.floor(30000 + Math.random() * 20000);
-                    capacity = Math.floor(3 + Math.random() * 7) + "000 sq.ft";
-                } else if (type === 'cold_storage') {
-                    price_per_day = Math.floor(1000 + Math.random() * 500);
+            // Create marker for each service
+            services.forEach(service => {
+                if (!service.location || typeof service.location.lat !== 'number' || typeof service.location.lng !== 'number') {
+                    console.warn("Invalid service location:", service);
+                    return;
                 }
                 
-                // Create service object with a random area name
-                const service = {
-                    id: `generated-${i}`,
-                    name: name,
-                    type: type,
-                    vicinity: `Near ${getRandomArea()}, ${distance.toFixed(1)} km from center`,
-                    location: { lat, lng },
-                    distance: distance,
-                    rating: parseFloat(rating),
-                    reviews: reviews,
-                    phone: phone,
-                    availability: availability,
-                    description: getServiceDescription(type)
+                // Define marker icon based on service type
+                const markerIcon = {
+                    url: getServiceTypeIcon(service.type),
+                    scaledSize: new google.maps.Size(32, 32)
                 };
                 
-                // Add type-specific pricing
-                if (type === 'truck') {
-                    service.price_per_km = price_per_km;
-                } else if (type === 'warehouse') {
-                    service.price_per_month = price_per_month;
-                    service.capacity = capacity;
-                } else if (type === 'cold_storage') {
-                    service.price_per_day = price_per_day;
+                // Create marker
+                const marker = new google.maps.Marker({
+                    position: service.location,
+                    map: map,
+                    title: service.name,
+                    icon: markerIcon,
+                    animation: google.maps.Animation.DROP
+                });
+                
+                // Store the service ID in the marker
+                marker.set('id', service.id);
+                
+                // Create info window content
+                const infoWindowContent = `
+                    <div style="width: 250px; padding: 10px;">
+                        <h3 style="margin: 0 0 5px; color: #2c3e50; font-size: 16px;">${service.name}</h3>
+                        <p style="margin: 0 0 5px; color: #7f8c8d; font-size: 13px;">${service.vicinity}</p>
+                        <p style="margin: 0 0 5px; color: #27ae60; font-size: 13px;">${service.distance.toFixed(1)} km away</p>
+                        <p style="margin: 0; color: #f39c12;">
+                            ${'★'.repeat(Math.floor(service.rating))}${service.rating % 1 >= 0.5 ? '½' : ''}
+                            <span style="color: #34495e;">(${service.rating})</span>
+                        </p>
+                        <button onclick="showServiceDetails('${service.id}')" 
+                                style="background: #2c5f2d; border: none; color: white; padding: 5px 10px; margin-top: 5px; border-radius: 3px; cursor: pointer;">
+                            View Details
+                        </button>
+                        <button onclick="getDirections(${service.location.lat}, ${service.location.lng})" 
+                                style="background: #3498db; border: none; color: white; padding: 5px 10px; margin-top: 5px; margin-left: 5px; border-radius: 3px; cursor: pointer;">
+                            Get Directions
+                        </button>
+                    </div>
+                `;
+                
+                // Add click event to marker
+                marker.addListener('click', () => {
+                    // Close any open info windows
+                    if (infoWindow) {
+                        infoWindow.close();
+                    }
+                    
+                    // Open info window for this marker
+                    infoWindow = new google.maps.InfoWindow({
+                        content: infoWindowContent
+                    });
+                    infoWindow.open(map, marker);
+                    
+                    // Highlight corresponding service card in list
+                    highlightServiceCard(service.id);
+                    
+                    // Center map on marker
+                    map.panTo(marker.getPosition());
+                });
+                
+                // Add marker to array for later reference
+                window.serviceMarkers.push(marker);
+            });
+            
+            // If we have services, fit bounds to show all markers
+            if (services.length > 0) {
+                const bounds = new google.maps.LatLngBounds();
+                
+                // Add current position to bounds
+                if (currentPosition) {
+                    bounds.extend(currentPosition);
                 }
                 
-                services.push(service);
+                // Add all service markers to bounds
+                services.forEach(service => {
+                    bounds.extend(service.location);
+                });
+                
+                // Fit map to bounds with padding
+                map.fitBounds(bounds, 50);
+                
+                // Limit maximum zoom level when fitting bounds
+                google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+                    if (map.getZoom() > 15) {
+                        map.setZoom(15);
+                    }
+                });
             }
-            
-            console.log("Generated fallback services:", services.length);
-            return services;
-        }
-        
-        // Helper function to generate random area names
-        function getRandomArea() {
-            // Common area/locality names across Indian cities
-            const areas = [
-                // Delhi NCR
-                "Connaught Place", "Karol Bagh", "Dwarka", "Rohini", "Lajpat Nagar",
-                "Vasant Kunj", "Saket", "Greater Kailash", "Noida Sector 18", "Gurgaon",
-                // Mumbai
-                "Andheri", "Bandra", "Dadar", "Worli", "Colaba", 
-                "Powai", "Goregaon", "Borivali", "Malad", "Juhu",
-                // Bangalore
-                "Koramangala", "Indiranagar", "HSR Layout", "Whitefield", "JP Nagar",
-                "MG Road", "Jayanagar", "Electronic City", "Marathahalli", "Bannerghatta Road",
-                // Chennai
-                "T Nagar", "Adyar", "Mylapore", "Anna Nagar", "Velachery",
-                "Nungambakkam", "OMR", "Porur", "Besant Nagar", "Chromepet",
-                // Kolkata
-                "Park Street", "Salt Lake", "New Town", "Ballygunge", "Howrah",
-                "Gariahat", "Behala", "Dum Dum", "Garia", "Rajarhat",
-                // Other major cities
-                "Jubilee Hills", "Banjara Hills", "Gachibowli", "Madhapur", // Hyderabad
-                "Aundh", "Kothrud", "Hinjewadi", "Viman Nagar", "Koregaon Park", // Pune
-                "Navrangpura", "Satellite", "CG Road", "Vastrapur", "SG Highway", // Ahmedabad
-                "Gomti Nagar", "Hazratganj", "Indira Nagar", "Aliganj", // Lucknow
-                "MP Nagar", "Arera Colony", "Kolar Road", "TT Nagar", // Bhopal
-                "Palayam", "Technopark", "Vellayambalam", "Kazhakkoottam", // Trivandrum
-                "Navlakha", "Palasia", "Vijay Nagar", "AB Road" // Indore
-            ];
-            
-            // Agricultural areas and terms
-            const agriTerms = [
-                "Agri Hub", "Grain Market", "Mandi Area", "Farm Center", "Rural Zone",
-                "Agri Complex", "Krishi Kendra", "Industrial Area", "Warehouse Belt", "APMC"
-            ];
-            
-            // 30% chance to return an agricultural-specific area name
-            if (Math.random() < 0.3) {
-                return agriTerms[Math.floor(Math.random() * agriTerms.length)];
-            }
-            
-            return areas[Math.floor(Math.random() * areas.length)];
         }
 
-        // Function to get marker icon based on service type
-        function getServiceTypeIcon(type) {
-            switch(type) {
-                case 'truck':
-                    return 'https://img.icons8.com/color/48/000000/truck.png';
-                case 'warehouse':
-                    return 'https://img.icons8.com/color/48/000000/warehouse.png';
-                case 'cold_storage':
-                    return 'https://img.icons8.com/color/48/000000/snowflake.png';
-                default:
-                    return 'https://img.icons8.com/color/48/000000/marker.png';
+        // Function to highlight a service card in the list
+        function highlightServiceCard(serviceId) {
+            // Remove highlight from previous active card
+            if (activeServiceCard) {
+                activeServiceCard.classList.remove('active');
+            }
+            
+            // Find and highlight new active card
+            const serviceCard = document.querySelector(`.service-card[data-id="${serviceId}"]`);
+            if (serviceCard) {
+                serviceCard.classList.add('active');
+                
+                // Scroll to the card
+                serviceCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Store reference to active card
+                activeServiceCard = serviceCard;
             }
         }
 
@@ -1513,11 +1521,26 @@
 
         // Function to clear all service markers
         function clearServiceMarkers() {
-            if (window.serviceMarkers && window.serviceMarkers.length > 0) {
-                window.serviceMarkers.forEach(marker => {
-                    if (marker) marker.setMap(null);
-                });
+            console.log("Clearing all service markers from map");
+            
+            // Initialize serviceMarkers array if not exists
+            if (!window.serviceMarkers) {
                 window.serviceMarkers = [];
+            }
+            
+            // Remove all markers from the map
+            window.serviceMarkers.forEach(marker => {
+                if (marker && marker.setMap) {
+                    marker.setMap(null);
+                }
+            });
+            
+            // Reset the array
+            window.serviceMarkers = [];
+            
+            // Clear any open info window
+            if (infoWindow) {
+                infoWindow.close();
             }
         }
 
@@ -1585,6 +1608,371 @@
 
         // Initialize map when the page loads
         window.onload = initMap;
+
+        // Improve the generateLocationSpecificMockServices function
+        function generateLocationSpecificMockServices(location) {
+            console.log("Generating location-specific mock transport services for:", location);
+            
+            // Clear existing markers first to avoid duplicates
+            clearServiceMarkers();
+            
+            // Get location name from the display - fallback to coordinates if empty
+            const locationDisplayText = document.getElementById('selected-location').textContent;
+            const locationName = locationDisplayText && locationDisplayText !== "Loading location..." ? 
+                     locationDisplayText : `Location (${location.lat.toFixed(3)}, ${location.lng.toFixed(3)})`;
+            
+            const types = ['truck', 'warehouse', 'cold_storage'];
+            const mockServices = [];
+            
+            // Generate 8-16 random services with different distribution
+            // More services for cities, fewer for rural areas (estimated by zoom level)
+            const zoomLevel = map.getZoom();
+            const numServices = 8 + Math.floor(Math.random() * (zoomLevel > 10 ? 8 : 4));
+            
+            console.log(`Generating ${numServices} mock services for ${locationName}`);
+            
+            const typeDistribution = {
+                truck: 0.6,      // 60% trucks
+                warehouse: 0.3,  // 30% warehouses
+                cold_storage: 0.1 // 10% cold storage
+            };
+            
+            for (let i = 0; i < numServices; i++) {
+                // Generate random position around the selected location
+                // Closer services for higher zoom levels
+                const maxDistance = zoomLevel > 12 ? 8 : (zoomLevel > 9 ? 15 : 25);
+                const distance = 0.5 + Math.random() * maxDistance;
+                const angle = Math.random() * Math.PI * 2; // random angle in radians
+                
+                // Calculate offset in lat/lng
+                // 0.009 = roughly 1km in latitude
+                // longitude depends on latitude - adjust for Earth's curvature
+                const lat = location.lat + Math.sin(angle) * distance * 0.009;
+                const lng = location.lng + Math.cos(angle) * distance * 0.009 / Math.cos(location.lat * Math.PI / 180);
+                
+                // Select random service type based on distribution
+                const typeRand = Math.random();
+                let type;
+                if (typeRand < typeDistribution.truck) {
+                    type = 'truck';
+                } else if (typeRand < typeDistribution.truck + typeDistribution.warehouse) {
+                    type = 'warehouse';
+                } else {
+                    type = 'cold_storage';
+                }
+                
+                // Create unique ID based on location and service index
+                const serviceId = 'mock-' + 
+                                 location.lat.toFixed(3).replace('.', '') + 
+                                 location.lng.toFixed(3).replace('.', '') + 
+                                 '-' + type.charAt(0) + i;
+                
+                // Extract simple location name for service naming
+                const locationSimple = locationName.split(',')[0].split('(')[0].trim();
+                
+                // Create mock transport service with location-specific naming
+                const service = {
+                    id: serviceId,
+                    name: getLocationBasedServiceName(type, locationSimple),
+                    type: type,
+                    vicinity: locationName.split('(')[0].trim() + ', ' + getRandomVicinity(),
+                    location: {
+                        lat: lat,
+                        lng: lng
+                    },
+                    distance: distance,
+                    rating: (3 + Math.random() * 2).toFixed(1),
+                    reviews: Math.floor(5 + Math.random() * 95),
+                    phone: "+91 " + Math.floor(70000 + Math.random() * 30000) + " " + Math.floor(10000 + Math.random() * 90000),
+                    availability: getRandomAvailability(),
+                    description: getLocationSpecificDescription(type, locationSimple)
+                };
+                
+                // Add type-specific pricing and capacity
+                if (type === 'truck') {
+                    service.price_per_km = Math.floor(15 + Math.random() * 10);
+                } else if (type === 'warehouse') {
+                    service.price_per_month = Math.floor(30000 + Math.random() * 20000);
+                    service.capacity = `${Math.floor(500 + Math.random() * 1500)} sq.ft.`;
+                } else if (type === 'cold_storage') {
+                    service.price_per_day = Math.floor(1000 + Math.random() * 500);
+                }
+                
+                mockServices.push(service);
+            }
+            
+            // Sort by distance from clicked location
+            mockServices.sort((a, b) => a.distance - b.distance);
+            
+            // Save and display services
+            transportServices = mockServices;
+            
+            console.log(`Generated ${mockServices.length} mock services for ${locationName}`);
+            
+            // Display the services
+            displayTransportServicesForLocation(mockServices, location);
+            
+            // Add markers to map
+            addMarkersToMap(mockServices);
+            
+            // Show success state
+            map.classList.add('services-loaded');
+            
+            // Hide loading indicator
+            const servicesLoading = document.getElementById('services-loading');
+            servicesLoading.style.display = 'none';
+            
+            return mockServices;
+        }
+
+        // Add a function to display transport services with location context
+        function displayTransportServicesForLocation(services, location) {
+            // Make sure location is valid
+            if (!location || typeof location.lat !== 'number' || typeof location.lng !== 'number') {
+                console.error("Invalid location in displayTransportServicesForLocation:", location);
+                return;
+            }
+            
+            console.log(`Displaying ${services.length} transport services for location:`, location);
+            
+            // Get location name (or use coordinates if name not available)
+            const locationDisplayText = document.getElementById('selected-location').textContent;
+            const locationName = (locationDisplayText && locationDisplayText !== "Loading location...") ? 
+                     locationDisplayText : `Location (${location.lat.toFixed(5)}, ${location.lng.toFixed(5)})`;
+            
+            // Render services with location context
+            renderTransportServices(services);
+            
+            // Update the header to include location info
+            const headerElement = document.querySelector('.transport-header p');
+            if (headerElement) {
+                headerElement.textContent = `Transport services near ${locationName.split('(')[0].trim()}`;
+                headerElement.style.fontWeight = 'bold';
+            }
+            
+            // Update markers on map with visibility
+            updateServiceMarkersVisibility(services);
+            
+            // Make sure the map shows the selected location
+            if (currentPosition && currentPosition.lat === location.lat && currentPosition.lng === location.lng) {
+                // We're already centered on this location
+                console.log("Already centered on selected location");
+            } else {
+                // Update current position and recenter map
+                currentPosition = location;
+                
+                // Ensure the location marker is visible at this position
+                if (window.locationMarker) {
+                    window.locationMarker.setPosition(location);
+                }
+                
+                // Center the map on this location if not already centered
+                map.panTo(location);
+            }
+            
+            // Update the UI state to show results
+            map.classList.add('services-loaded');
+        }
+
+        // Function to update service markers visibility
+        function updateServiceMarkersVisibility(visibleServices) {
+            if (!window.serviceMarkers || !Array.isArray(window.serviceMarkers)) {
+                console.warn("No service markers to update visibility");
+                return;
+            }
+            
+            console.log(`Updating visibility for ${window.serviceMarkers.length} markers to show ${visibleServices.length} services`);
+            
+            // Create a map of visible service IDs for quick lookup
+            const visibleServiceIds = new Set(visibleServices.map(service => service.id.toString()));
+            
+            // Update each marker's visibility
+            window.serviceMarkers.forEach(marker => {
+                if (!marker || !marker.get) return;
+                
+                // Get marker ID
+                const markerId = marker.get('id');
+                if (!markerId) return;
+                
+                // Check if this marker should be visible
+                const shouldBeVisible = visibleServiceIds.has(markerId.toString());
+                
+                // Update marker visibility
+                marker.setVisible(shouldBeVisible);
+            });
+        }
+
+        // Add a function to generate location-specific service names
+        function getLocationBasedServiceName(type, locationName) {
+            // Extract location part without pincode
+            const locationParts = locationName.split('(')[0].trim();
+            const locationSimple = locationParts.split(',')[0].trim();
+            
+            const prefixes = [
+                'Krishna', 'Kisan', 'Bharat', 'Indian', 'Agro', 'Farm', 'Rural', 
+                'Green', 'Swift', 'Quick', 'Express', 'Star', 'Prime', 'Reliable',
+                locationSimple
+            ];
+            
+            const suffixes = {
+                truck: ['Logistics', 'Transport', 'Carriers', 'Movers', 'Freight', 'Express'],
+                warehouse: ['Storage', 'Warehouse', 'Depot', 'Godown', 'Hub', 'StoreHouse'],
+                cold_storage: ['Cold Storage', 'Fresh Chain', 'CoolStore', 'FreshKeep', 'ColdKeep']
+            };
+            
+            const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            const suffix = suffixes[type][Math.floor(Math.random() * suffixes[type].length)];
+            
+            // Make the name location-specific in some cases
+            if (Math.random() > 0.7) {
+                return `${locationSimple} ${suffix}`;
+            } else if (Math.random() > 0.4) {
+                return `${prefix} ${suffix} ${locationSimple}`;
+            } else {
+                return `${prefix} ${suffix}`;
+            }
+        }
+
+        // Add a function to generate location-specific descriptions
+        function getLocationSpecificDescription(type, locationName) {
+            // Extract location part without pincode
+            const locationParts = locationName.split('(')[0].trim();
+            const locationSimple = locationParts.split(',')[0].trim();
+            
+            const descriptions = {
+                truck: [
+                    `Fast and reliable transport services in ${locationSimple} for agricultural goods.`,
+                    `Specialized in fresh produce transportation with temperature control across ${locationSimple}.`,
+                    `Connecting ${locationSimple} farmers with urban markets through reliable transportation.`,
+                    `On-time delivery guaranteed for valuable agricultural products in ${locationSimple} region.`,
+                    `Cost-effective logistics solutions for farmers and agricultural businesses in ${locationSimple}.`
+                ],
+                warehouse: [
+                    `Secure warehousing in ${locationSimple} with pest control and 24/7 security.`,
+                    `Large-scale agricultural product storage in ${locationSimple} with modern loading facilities.`,
+                    `Climate-controlled storage solutions for sensitive agricultural goods in ${locationSimple}.`,
+                    `Affordable long-term storage options for seasonal produce in ${locationSimple} area.`,
+                    `Flexible storage space with advanced inventory management systems in ${locationSimple}.`
+                ],
+                cold_storage: [
+                    `State-of-the-art cold storage facility for fruits and vegetables in ${locationSimple}.`,
+                    `Temperature-controlled storage for perishable goods and produce near ${locationSimple}.`,
+                    `Multi-temperature controlled environments for various agricultural products in ${locationSimple}.`,
+                    `Extends shelf life of your fresh produce with precise cooling technology in ${locationSimple}.`,
+                    `Energy-efficient cold storage with backup power systems for continuous operation in ${locationSimple}.`
+                ]
+            };
+            
+            const typeDescriptions = descriptions[type] || descriptions.truck;
+            return typeDescriptions[Math.floor(Math.random() * typeDescriptions.length)];
+        }
+
+        // Add these helper functions that were accidentally removed
+        function getRandomVicinity() {
+            const localities = [
+                'Gandhi Road', 'Nehru Nagar', 'Patel Market', 'Rajiv Chowk', 'Subhash Marg',
+                'MIDC Area', 'Industrial Area', 'Station Road', 'Highway Junction', 'Agri Complex',
+                'Krishi Bhavan', 'Market Yard', 'Warehouse Zone', 'Transport Nagar', 'Truck Terminal'
+            ];
+            
+            return localities[Math.floor(Math.random() * localities.length)];
+        }
+
+        function getRandomAvailability() {
+            const options = [
+                'Available Now', 'Limited Availability', 'Available 24/7', 
+                'Available Today', 'Booking Required'
+            ];
+            
+            return options[Math.floor(Math.random() * options.length)];
+        }
+
+        // Add this function to show empty services state
+        function showEmptyServicesState() {
+            const servicesList = document.getElementById('servicesList');
+            const servicesLoading = document.getElementById('services-loading');
+            servicesLoading.style.display = 'none';
+            
+            // Add services-loaded class to hide the map hint
+            map.classList.add('services-loaded');
+            
+            // Show empty state message
+            servicesList.innerHTML = `
+                <div class="empty-results">
+                    <i class="fas fa-search"></i>
+                    <p>No transport services found in this area</p>
+                    <span>Try clicking on a different location or adjusting your search criteria</span>
+                </div>
+            `;
+        }
+
+        // Fix the missing getServiceTypeIcon function that causes errors when displaying markers
+        function getServiceTypeIcon(type) {
+            switch(type) {
+                case 'truck':
+                    return 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
+                case 'warehouse':
+                    return 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+                case 'cold_storage':
+                    return 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+                default:
+                    return 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
+            }
+        }
+
+        // Add this function to coordinate geocoding and services loading
+        function geocodeAndLoadServices(location) {
+            console.log("Geocoding and loading services for location:", location);
+            
+            // Update UI to show we're processing
+            const servicesLoading = document.getElementById('services-loading');
+            servicesLoading.style.display = 'flex';
+            
+            // Center map on clicked location with animation
+            map.panTo(location);
+            
+            // First, geocode the location to get the address
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ location: location }, (results, status) => {
+                if (status === 'OK' && results[0]) {
+                    let address = results[0].formatted_address;
+                    let locationName = "";
+                    let pincode = "";
+                    
+                    // Find components with locality, administrative_area, and postal_code
+                    for (const component of results[0].address_components) {
+                        if (component.types.includes('locality') || 
+                            component.types.includes('administrative_area_level_2') ||
+                            component.types.includes('administrative_area_level_1')) {
+                            locationName += locationName ? `, ${component.long_name}` : component.long_name;
+                        }
+                        
+                        if (component.types.includes('postal_code')) {
+                            pincode = component.long_name;
+                        }
+                    }
+                    
+                    // Update display
+                    document.getElementById('selected-location').innerHTML = locationName || address;
+                    if (pincode) {
+                        document.getElementById('selected-location').innerHTML += ` <span class="pincode">(${pincode})</span>`;
+                    }
+                    document.getElementById('location-coords').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
+                    
+                    // Now that geocoding is done, load the services
+                    console.log("Geocoding done, now loading services for this location");
+                    loadServicesNearLocation(location);
+                } else {
+                    console.log('Geocoder failed:', status);
+                    document.getElementById('selected-location').textContent = "Unknown Location";
+                    document.getElementById('location-coords').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
+                    
+                    // Even if geocoding fails, still load services
+                    console.log("Geocoding failed, but still loading services for this location");
+                    loadServicesNearLocation(location);
+                }
+            });
+        }
     </script>
 </body>
 </html> 

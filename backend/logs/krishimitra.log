@@ -240,3 +240,814 @@ Exception encountered: Unrecognized keyword arguments passed to SeparableConv2D:
 2025-03-30 14:22:27,966 - werkzeug - WARNING -  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
 2025-03-30 14:22:27,968 - werkzeug - INFO -  * Running on http://172.20.10.6:5000/ (Press CTRL+C to quit)
+2025-03-30 23:13:33,529 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-30 23:13:34,426 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-30 23:13:34,464 - __main__ - INFO - OpenAI successfully imported
+2025-03-30 23:13:34,561 - __main__ - INFO - Twilio successfully imported
+2025-03-30 23:13:34,562 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 23:13:34,562 - __main__ - INFO - Gemini API key available: True
+2025-03-30 23:13:34,563 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 23:13:34,563 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 23:13:34,564 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 23:13:34,564 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 23:13:34,564 - __main__ - INFO - Gemini API initialized
+2025-03-30 23:13:34,565 - __main__ - INFO - OpenAI API initialized
+2025-03-30 23:13:34,565 - __main__ - INFO - Twilio client initialized
+2025-03-30 23:13:34,589 - __main__ - INFO - MongoDB connection successful
+2025-03-30 23:13:34,590 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 23:13:34,609 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 23:13:37,858 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-30 23:13:38,533 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-30 23:13:38,561 - __main__ - INFO - OpenAI successfully imported
+2025-03-30 23:13:38,568 - __main__ - INFO - Twilio successfully imported
+2025-03-30 23:13:38,569 - __main__ - INFO - OpenAI API key available: True
+2025-03-30 23:13:38,569 - __main__ - INFO - Gemini API key available: True
+2025-03-30 23:13:38,569 - __main__ - INFO - OpenWeather API key available: True
+2025-03-30 23:13:38,569 - __main__ - INFO - Twilio account SID available: True
+2025-03-30 23:13:38,569 - __main__ - INFO - Twilio auth token available: True
+2025-03-30 23:13:38,570 - __main__ - INFO - Google Maps API key available: True
+2025-03-30 23:13:38,570 - __main__ - INFO - Gemini API initialized
+2025-03-30 23:13:38,570 - __main__ - INFO - OpenAI API initialized
+2025-03-30 23:13:38,571 - __main__ - INFO - Twilio client initialized
+2025-03-30 23:13:38,594 - __main__ - INFO - MongoDB connection successful
+2025-03-30 23:13:38,594 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-30 23:13:38,607 - werkzeug - WARNING -  * Debugger is active!
+2025-03-30 23:13:38,650 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-30 23:13:38,801 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-30 23:13:38,802 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 12:35:40,478 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:35:40,479 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:35:43,166 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:35:43,176 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:35:43,180 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:35:43,283 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 12:35:43,299 - __main__ - INFO - Twilio successfully imported
+2025-03-31 12:35:43,300 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 12:35:43,301 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 12:35:43,302 - __main__ - INFO - Gemini API key available: True
+2025-03-31 12:35:43,302 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 12:35:43,303 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 12:35:43,304 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 12:35:43,305 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 12:35:43,308 - __main__ - INFO - Twilio client initialized
+2025-03-31 12:35:43,378 - __main__ - INFO - MongoDB connection successful
+2025-03-31 12:35:43,379 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 12:35:43,399 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:35:44,877 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:35:44,878 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:35:47,038 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:35:47,044 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:35:47,044 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:35:47,075 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 12:35:47,082 - __main__ - INFO - Twilio successfully imported
+2025-03-31 12:35:47,082 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 12:35:47,083 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 12:35:47,083 - __main__ - INFO - Gemini API key available: True
+2025-03-31 12:35:47,083 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 12:35:47,083 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 12:35:47,085 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 12:35:47,085 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 12:35:47,086 - __main__ - INFO - Twilio client initialized
+2025-03-31 12:35:47,106 - __main__ - INFO - MongoDB connection successful
+2025-03-31 12:35:47,106 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 12:35:47,118 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 12:35:47,126 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 12:35:47,288 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 12:35:47,289 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 12:52:04,585 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:52:04,588 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:52:06,848 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:52:06,853 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:52:06,853 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:52:06,873 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 12:52:06,880 - __main__ - INFO - Twilio successfully imported
+2025-03-31 12:52:06,880 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 12:52:06,881 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 12:52:06,881 - __main__ - INFO - Gemini API key available: True
+2025-03-31 12:52:06,882 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 12:52:06,882 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 12:52:06,882 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 12:52:06,883 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 12:52:06,884 - __main__ - INFO - Twilio client initialized
+2025-03-31 12:52:06,903 - __main__ - INFO - MongoDB connection successful
+2025-03-31 12:52:06,904 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 12:52:06,918 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:52:07,918 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:52:07,919 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:52:09,019 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:52:09,023 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:52:09,023 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:52:09,044 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 12:52:09,050 - __main__ - INFO - Twilio successfully imported
+2025-03-31 12:52:09,051 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 12:52:09,052 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 12:52:09,052 - __main__ - INFO - Gemini API key available: True
+2025-03-31 12:52:09,053 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 12:52:09,053 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 12:52:09,054 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 12:52:09,054 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 12:52:09,055 - __main__ - INFO - Twilio client initialized
+2025-03-31 12:52:09,072 - __main__ - INFO - MongoDB connection successful
+2025-03-31 12:52:09,073 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 12:52:09,083 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 12:52:09,090 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 12:52:09,193 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 12:52:09,194 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 12:53:36,567 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:53:36] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 12:53:38,447 - __main__ - ERROR - Error with Gemini AI: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 12:53:38,449 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:53:38] "POST /api/chat HTTP/1.1" 200 -
+2025-03-31 12:54:05,143 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:54:05] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 12:54:05,746 - __main__ - ERROR - Error with Gemini AI: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 12:54:05,748 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:54:05] "POST /api/chat HTTP/1.1" 200 -
+2025-03-31 12:57:11,191 - __main__ - CRITICAL - Uncaught exception
+Traceback (most recent call last):
+  File "C:\Users\ritik\Krishimitra\backend\app.py", line 52, in <module>
+    load_dotenv()
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 328, in load_dotenv
+    return dotenv.set_as_environment_variables()
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 90, in set_as_environment_variables
+    for k, v in self.dict().items():
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 74, in dict
+    self._dict = OrderedDict(resolve_variables(raw_values, override=self.override))
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 218, in resolve_variables
+    for (name, value) in values:
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 82, in parse
+    for mapping in with_warn_for_invalid_lines(parse_stream(stream)):
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 24, in with_warn_for_invalid_lines
+    for mapping in mappings:
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\parser.py", line 180, in parse_stream
+    reader = Reader(stream)
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\parser.py", line 71, in __init__
+    self.string = stream.read()
+  File "C:\Program Files\Python310\lib\codecs.py", line 322, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+2025-03-31 13:03:31,212 - __main__ - CRITICAL - Uncaught exception
+Traceback (most recent call last):
+  File "C:\Users\ritik\Krishimitra\backend\app.py", line 52, in <module>
+    load_dotenv()
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 328, in load_dotenv
+    return dotenv.set_as_environment_variables()
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 90, in set_as_environment_variables
+    for k, v in self.dict().items():
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 74, in dict
+    self._dict = OrderedDict(resolve_variables(raw_values, override=self.override))
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 218, in resolve_variables
+    for (name, value) in values:
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 82, in parse
+    for mapping in with_warn_for_invalid_lines(parse_stream(stream)):
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 24, in with_warn_for_invalid_lines
+    for mapping in mappings:
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\parser.py", line 180, in parse_stream
+    reader = Reader(stream)
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\parser.py", line 71, in __init__
+    self.string = stream.read()
+  File "C:\Program Files\Python310\lib\codecs.py", line 322, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+2025-03-31 13:03:59,069 - __main__ - CRITICAL - Uncaught exception
+Traceback (most recent call last):
+  File "C:\Users\ritik\Krishimitra\backend\app.py", line 52, in <module>
+    load_dotenv()
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 328, in load_dotenv
+    return dotenv.set_as_environment_variables()
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 90, in set_as_environment_variables
+    for k, v in self.dict().items():
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 74, in dict
+    self._dict = OrderedDict(resolve_variables(raw_values, override=self.override))
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 218, in resolve_variables
+    for (name, value) in values:
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 82, in parse
+    for mapping in with_warn_for_invalid_lines(parse_stream(stream)):
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 24, in with_warn_for_invalid_lines
+    for mapping in mappings:
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\parser.py", line 180, in parse_stream
+    reader = Reader(stream)
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\parser.py", line 71, in __init__
+    self.string = stream.read()
+  File "C:\Program Files\Python310\lib\codecs.py", line 322, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+2025-03-31 13:04:18,824 - __main__ - CRITICAL - Uncaught exception
+Traceback (most recent call last):
+  File "C:\Users\ritik\Krishimitra\backend\app.py", line 52, in <module>
+    load_dotenv()
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 328, in load_dotenv
+    return dotenv.set_as_environment_variables()
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 90, in set_as_environment_variables
+    for k, v in self.dict().items():
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 74, in dict
+    self._dict = OrderedDict(resolve_variables(raw_values, override=self.override))
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 218, in resolve_variables
+    for (name, value) in values:
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 82, in parse
+    for mapping in with_warn_for_invalid_lines(parse_stream(stream)):
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\main.py", line 24, in with_warn_for_invalid_lines
+    for mapping in mappings:
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\parser.py", line 180, in parse_stream
+    reader = Reader(stream)
+  File "C:\Users\ritik\Krishimitra\venv\lib\site-packages\dotenv\parser.py", line 71, in __init__
+    self.string = stream.read()
+  File "C:\Program Files\Python310\lib\codecs.py", line 322, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+2025-03-31 15:46:43,444 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:46:43,445 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 15:46:46,206 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 15:46:46,210 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:46:46,210 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 15:46:46,248 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 15:46:46,258 - __main__ - INFO - Twilio successfully imported
+2025-03-31 15:46:46,258 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 15:46:46,259 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 15:46:46,259 - __main__ - INFO - Gemini API key available: True
+2025-03-31 15:46:46,260 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 15:46:46,260 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 15:46:46,260 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 15:46:46,262 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 15:46:46,263 - __main__ - INFO - Twilio client initialized
+2025-03-31 15:46:46,287 - __main__ - INFO - MongoDB connection successful
+2025-03-31 15:46:46,287 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 15:46:46,309 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 15:46:47,393 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:46:47,393 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 15:46:48,645 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 15:46:48,649 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:46:48,650 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 15:46:48,673 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 15:46:48,679 - __main__ - INFO - Twilio successfully imported
+2025-03-31 15:46:48,680 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 15:46:48,680 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 15:46:48,681 - __main__ - INFO - Gemini API key available: True
+2025-03-31 15:46:48,681 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 15:46:48,681 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 15:46:48,682 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 15:46:48,682 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 15:46:48,683 - __main__ - INFO - Twilio client initialized
+2025-03-31 15:46:48,704 - __main__ - INFO - MongoDB connection successful
+2025-03-31 15:46:48,705 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 15:46:48,716 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 15:46:48,725 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 15:46:48,844 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 15:46:48,845 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 15:47:01,391 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:47:01,392 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 15:47:03,627 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 15:47:03,631 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:47:03,632 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 15:47:03,654 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 15:47:03,661 - __main__ - INFO - Twilio successfully imported
+2025-03-31 15:47:03,662 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 15:47:03,662 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 15:47:03,662 - __main__ - INFO - Gemini API key available: True
+2025-03-31 15:47:03,663 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 15:47:03,663 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 15:47:03,663 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 15:47:03,664 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 15:47:03,665 - __main__ - INFO - Twilio client initialized
+2025-03-31 15:47:03,691 - __main__ - INFO - MongoDB connection successful
+2025-03-31 15:47:03,691 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 15:47:03,707 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 15:47:04,726 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:47:04,727 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 15:47:06,095 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 15:47:06,098 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:47:06,099 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 15:47:06,121 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 15:47:06,129 - __main__ - INFO - Twilio successfully imported
+2025-03-31 15:47:06,129 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 15:47:06,130 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 15:47:06,130 - __main__ - INFO - Gemini API key available: True
+2025-03-31 15:47:06,130 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 15:47:06,131 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 15:47:06,131 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 15:47:06,131 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 15:47:06,132 - __main__ - INFO - Twilio client initialized
+2025-03-31 15:47:06,151 - __main__ - INFO - MongoDB connection successful
+2025-03-31 15:47:06,151 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 15:47:06,163 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 15:47:06,169 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 15:47:06,272 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 15:47:06,272 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 15:47:38,232 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 15:47:38] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 15:47:40,261 - __main__ - ERROR - Error with Gemini AI: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 15:47:40,263 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 15:47:40] "POST /api/chat HTTP/1.1" 200 -
+2025-03-31 15:48:53,267 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 15:48:55,925 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 15:48:57,114 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:48:57,116 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 15:48:59,900 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 15:48:59,904 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:48:59,905 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 15:48:59,928 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 15:48:59,937 - __main__ - INFO - Twilio successfully imported
+2025-03-31 15:48:59,937 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-03-31 15:48:59,938 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 15:49:01,819 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 15:49:01,837 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 15:49:01,844 - __main__ - INFO - Gemini API key available: False
+2025-03-31 15:49:01,859 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 15:49:01,861 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 15:49:01,862 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 15:49:01,898 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 15:49:01,900 - __main__ - INFO - Twilio client initialized
+2025-03-31 15:49:02,057 - __main__ - INFO - MongoDB connection successful
+2025-03-31 15:49:02,065 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 15:49:02,088 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 15:49:02,106 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 15:49:03,667 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 15:49:03,670 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 15:49:12,110 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 15:49:14,771 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 15:49:15,984 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:49:15,985 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 15:49:21,289 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 15:49:21,299 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:49:21,300 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 15:49:21,351 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 15:49:21,363 - __main__ - INFO - Twilio successfully imported
+2025-03-31 15:49:21,363 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-03-31 15:49:21,364 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 15:49:22,093 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 15:49:22,094 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 15:49:22,095 - __main__ - INFO - Gemini API key available: False
+2025-03-31 15:49:22,095 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 15:49:22,095 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 15:49:22,096 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 15:49:22,096 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 15:49:22,097 - __main__ - INFO - Twilio client initialized
+2025-03-31 15:49:22,113 - __main__ - INFO - MongoDB connection successful
+2025-03-31 15:49:22,115 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 15:49:22,130 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 15:49:22,137 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 15:49:22,264 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 15:49:22,265 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 15:49:57,979 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 15:50:00,584 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 15:50:01,870 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:50:01,872 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 15:50:07,136 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 15:50:07,140 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 15:50:07,141 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 15:50:07,163 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 15:50:07,169 - __main__ - INFO - Twilio successfully imported
+2025-03-31 15:50:07,170 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-03-31 15:50:07,170 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 15:50:08,748 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 15:50:08,748 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 15:50:08,749 - __main__ - INFO - Gemini API key available: False
+2025-03-31 15:50:08,749 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 15:50:08,750 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 15:50:08,750 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 15:50:08,750 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 15:50:08,751 - __main__ - INFO - Twilio client initialized
+2025-03-31 15:50:08,766 - __main__ - INFO - MongoDB connection successful
+2025-03-31 15:50:08,767 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 15:50:08,779 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 15:50:08,788 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 15:50:08,908 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 15:50:08,909 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 15:59:25,466 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 15:59:25] "[31m[1mGET /api/transporters?lat=12.821737&lng=80.0441299 HTTP/1.1[0m" 400 -
+2025-03-31 15:59:25,711 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 15:59:25] "[31m[1mGET /api/transporters?lat=12.821737&lng=80.0441299 HTTP/1.1[0m" 400 -
+2025-03-31 15:59:50,778 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 15:59:50] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 15:59:51,097 - __main__ - ERROR - Gemini API key not configured
+2025-03-31 15:59:51,098 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 15:59:51] "POST /api/chat HTTP/1.1" 200 -
+2025-03-31 15:59:54,117 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 15:59:54] "[31m[1mPOST /api/chat HTTP/1.1[0m" 403 -
+2025-03-31 16:00:06,472 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 16:00:06] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 16:00:06,739 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 16:00:06] "[31m[1mPOST /api/chat HTTP/1.1[0m" 403 -
+2025-03-31 16:00:15,114 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 16:00:15] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 16:00:15,433 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 16:00:15] "[31m[1mPOST /api/chat HTTP/1.1[0m" 403 -
+2025-03-31 16:00:46,686 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 16:00:46] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 16:00:47,007 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 16:00:47] "[31m[1mPOST /api/chat HTTP/1.1[0m" 403 -
+2025-03-31 16:02:31,872 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 16:02:34,429 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 16:02:35,813 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 16:02:35,814 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 16:02:38,688 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 16:02:38,691 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 16:02:38,692 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 16:02:38,728 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 16:02:38,739 - __main__ - INFO - Twilio successfully imported
+2025-03-31 16:02:38,739 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-03-31 16:02:38,740 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 16:02:40,347 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 16:02:40,348 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 16:02:40,348 - __main__ - INFO - Gemini API key available: False
+2025-03-31 16:02:40,349 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 16:02:40,349 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 16:02:40,350 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 16:02:40,350 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 16:02:40,351 - __main__ - INFO - Twilio client initialized
+2025-03-31 16:02:40,368 - __main__ - INFO - MongoDB connection successful
+2025-03-31 16:02:40,369 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 16:02:40,385 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 16:02:40,393 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 16:02:40,499 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 16:02:40,499 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 17:48:33,517 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 17:48:33,518 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 17:48:36,571 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 17:48:36,576 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 17:48:36,577 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 17:48:36,610 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 17:48:36,618 - __main__ - INFO - Twilio successfully imported
+2025-03-31 17:48:36,618 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-03-31 17:48:36,620 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 17:48:38,204 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 17:48:38,205 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 17:48:38,205 - __main__ - INFO - Gemini API key available: False
+2025-03-31 17:48:38,205 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 17:48:38,206 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 17:48:38,206 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 17:48:38,206 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 17:48:38,206 - __main__ - INFO - Twilio client initialized
+2025-03-31 17:48:38,255 - __main__ - INFO - MongoDB connection successful
+2025-03-31 17:48:38,256 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 17:48:38,279 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 17:48:39,725 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 17:48:39,726 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 17:48:44,127 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 17:48:44,132 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 17:48:44,132 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 17:48:44,163 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 17:48:44,175 - __main__ - INFO - Twilio successfully imported
+2025-03-31 17:48:44,176 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-03-31 17:48:44,176 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 17:48:45,731 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 17:48:45,731 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 17:48:45,732 - __main__ - INFO - Gemini API key available: False
+2025-03-31 17:48:45,732 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 17:48:45,733 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 17:48:45,734 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 17:48:45,735 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 17:48:45,735 - __main__ - INFO - Twilio client initialized
+2025-03-31 17:48:45,754 - __main__ - INFO - MongoDB connection successful
+2025-03-31 17:48:45,754 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 17:48:45,772 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 17:48:45,780 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 17:48:45,897 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 17:48:45,898 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 17:49:43,464 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 17:49:43,464 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 17:49:45,876 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 17:49:45,881 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 17:49:45,881 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 17:49:45,908 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 17:49:45,918 - __main__ - INFO - Twilio successfully imported
+2025-03-31 17:49:45,918 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-03-31 17:49:45,918 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 17:49:47,441 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 17:49:47,442 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 17:49:47,443 - __main__ - INFO - Gemini API key available: False
+2025-03-31 17:49:47,443 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 17:49:47,444 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 17:49:47,444 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 17:49:47,444 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 17:49:47,445 - __main__ - INFO - Twilio client initialized
+2025-03-31 17:49:47,461 - __main__ - INFO - MongoDB connection successful
+2025-03-31 17:49:47,461 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 17:49:47,482 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 17:49:48,521 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 17:49:48,521 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 17:49:50,748 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 17:49:50,752 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 17:49:50,752 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-03-31 17:49:50,784 - __main__ - INFO - OpenAI successfully imported
+2025-03-31 17:49:50,793 - __main__ - INFO - Twilio successfully imported
+2025-03-31 17:49:50,794 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-03-31 17:49:50,795 - __main__ - INFO - Gemini API configured successfully
+2025-03-31 17:49:52,300 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 17:49:52,301 - __main__ - INFO - OpenAI API key available: True
+2025-03-31 17:49:52,302 - __main__ - INFO - Gemini API key available: False
+2025-03-31 17:49:52,302 - __main__ - INFO - OpenWeather API key available: True
+2025-03-31 17:49:52,303 - __main__ - INFO - Twilio account SID available: True
+2025-03-31 17:49:52,303 - __main__ - INFO - Twilio auth token available: True
+2025-03-31 17:49:52,305 - __main__ - INFO - Google Maps API key available: True
+2025-03-31 17:49:52,305 - __main__ - INFO - Twilio client initialized
+2025-03-31 17:49:52,321 - __main__ - INFO - MongoDB connection successful
+2025-03-31 17:49:52,322 - __main__ - INFO - Starting KrishiMitra backend server
+2025-03-31 17:49:52,335 - werkzeug - WARNING -  * Debugger is active!
+2025-03-31 17:49:52,342 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-03-31 17:49:52,444 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-03-31 17:49:52,445 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-03-31 17:50:18,829 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 17:50:18] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 17:50:19,071 - __main__ - INFO - User found: False, User ID: user_37nbfpvdvdh
+2025-03-31 17:50:19,072 - __main__ - INFO - Message count for user user_37nbfpvdvdh: 5
+2025-03-31 17:50:19,073 - __main__ - ERROR - Gemini API key not configured or invalid
+2025-03-31 17:50:19,074 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 17:50:19] "[35m[1mPOST /api/chat HTTP/1.1[0m" 503 -
+2025-04-01 02:24:05,107 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:24:05,109 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 02:24:10,241 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 02:24:10,253 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:24:10,253 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 02:24:10,348 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 02:24:10,369 - __main__ - INFO - Twilio successfully imported
+2025-04-01 02:24:10,370 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 02:24:10,372 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 02:24:12,262 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 02:24:12,264 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 02:24:12,265 - __main__ - INFO - Gemini API key available: False
+2025-04-01 02:24:12,267 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 02:24:12,270 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 02:24:12,271 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 02:24:12,273 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 02:24:12,276 - __main__ - INFO - Twilio client initialized
+2025-04-01 02:24:12,349 - __main__ - INFO - MongoDB connection successful
+2025-04-01 02:24:12,351 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 02:24:12,450 - werkzeug - INFO -  * Restarting with stat
+2025-04-01 02:24:16,099 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:24:16,102 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 02:24:20,559 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 02:24:20,571 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:24:20,573 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 02:24:20,651 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 02:24:20,673 - __main__ - INFO - Twilio successfully imported
+2025-04-01 02:24:20,675 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 02:24:20,676 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 02:24:22,427 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 02:24:22,429 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 02:24:22,431 - __main__ - INFO - Gemini API key available: False
+2025-04-01 02:24:22,432 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 02:24:22,435 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 02:24:22,436 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 02:24:22,438 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 02:24:22,439 - __main__ - INFO - Twilio client initialized
+2025-04-01 02:24:22,494 - __main__ - INFO - MongoDB connection successful
+2025-04-01 02:24:22,495 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 02:24:22,527 - werkzeug - WARNING -  * Debugger is active!
+2025-04-01 02:24:22,546 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-04-01 02:24:22,756 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-01 02:24:22,757 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-04-01 02:25:05,562 - __main__ - DEBUG - Preprocessing image
+2025-04-01 02:25:05,582 - __main__ - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-04-01 02:25:05,585 - __main__ - WARNING - All prediction methods failed, using basic fallback approach
+2025-04-01 02:25:05,597 - __main__ - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-04-01 02:25:05,604 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2025 02:25:05] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-04-01 02:25:29,376 - __main__ - DEBUG - Preprocessing image
+2025-04-01 02:25:29,380 - __main__ - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-04-01 02:25:29,381 - __main__ - WARNING - All prediction methods failed, using basic fallback approach
+2025-04-01 02:25:29,384 - __main__ - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-04-01 02:25:29,386 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2025 02:25:29] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-04-01 02:35:11,280 - __main__ - DEBUG - Preprocessing image
+2025-04-01 02:35:11,287 - __main__ - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-04-01 02:35:11,289 - __main__ - WARNING - All prediction methods failed, using basic fallback approach
+2025-04-01 02:35:11,296 - __main__ - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-04-01 02:35:11,301 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2025 02:35:11] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-04-01 02:35:32,251 - PIL.Image - DEBUG - Importing BlpImagePlugin
+2025-04-01 02:35:32,255 - PIL.Image - DEBUG - Importing BmpImagePlugin
+2025-04-01 02:35:32,257 - PIL.Image - DEBUG - Importing BufrStubImagePlugin
+2025-04-01 02:35:32,260 - PIL.Image - DEBUG - Importing CurImagePlugin
+2025-04-01 02:35:32,268 - PIL.Image - DEBUG - Importing DcxImagePlugin
+2025-04-01 02:35:32,272 - PIL.Image - DEBUG - Importing DdsImagePlugin
+2025-04-01 02:35:32,275 - PIL.Image - DEBUG - Importing EpsImagePlugin
+2025-04-01 02:35:32,492 - PIL.Image - DEBUG - Importing FitsStubImagePlugin
+2025-04-01 02:35:32,498 - PIL.Image - DEBUG - Importing FliImagePlugin
+2025-04-01 02:35:32,503 - PIL.Image - DEBUG - Importing FpxImagePlugin
+2025-04-01 02:35:32,514 - PIL.Image - DEBUG - Image: failed to import FpxImagePlugin: No module named 'olefile'
+2025-04-01 02:35:32,517 - PIL.Image - DEBUG - Importing FtexImagePlugin
+2025-04-01 02:35:32,523 - PIL.Image - DEBUG - Importing GbrImagePlugin
+2025-04-01 02:35:32,530 - PIL.Image - DEBUG - Importing GifImagePlugin
+2025-04-01 02:35:32,531 - PIL.Image - DEBUG - Importing GribStubImagePlugin
+2025-04-01 02:35:32,535 - PIL.Image - DEBUG - Importing Hdf5StubImagePlugin
+2025-04-01 02:35:32,539 - PIL.Image - DEBUG - Importing IcnsImagePlugin
+2025-04-01 02:35:32,548 - PIL.Image - DEBUG - Importing IcoImagePlugin
+2025-04-01 02:35:32,552 - PIL.Image - DEBUG - Importing ImImagePlugin
+2025-04-01 02:35:32,557 - PIL.Image - DEBUG - Importing ImtImagePlugin
+2025-04-01 02:35:32,560 - PIL.Image - DEBUG - Importing IptcImagePlugin
+2025-04-01 02:35:32,563 - PIL.Image - DEBUG - Importing JpegImagePlugin
+2025-04-01 02:35:32,563 - PIL.Image - DEBUG - Importing Jpeg2KImagePlugin
+2025-04-01 02:35:32,564 - PIL.Image - DEBUG - Importing McIdasImagePlugin
+2025-04-01 02:35:32,567 - PIL.Image - DEBUG - Importing MicImagePlugin
+2025-04-01 02:35:32,571 - PIL.Image - DEBUG - Image: failed to import MicImagePlugin: No module named 'olefile'
+2025-04-01 02:35:32,572 - PIL.Image - DEBUG - Importing MpegImagePlugin
+2025-04-01 02:35:32,575 - PIL.Image - DEBUG - Importing MpoImagePlugin
+2025-04-01 02:35:32,577 - PIL.Image - DEBUG - Importing MspImagePlugin
+2025-04-01 02:35:32,581 - PIL.Image - DEBUG - Importing PalmImagePlugin
+2025-04-01 02:35:32,588 - PIL.Image - DEBUG - Importing PcdImagePlugin
+2025-04-01 02:35:32,590 - PIL.Image - DEBUG - Importing PcxImagePlugin
+2025-04-01 02:35:32,591 - PIL.Image - DEBUG - Importing PdfImagePlugin
+2025-04-01 02:35:32,611 - PIL.Image - DEBUG - Importing PixarImagePlugin
+2025-04-01 02:35:32,613 - PIL.Image - DEBUG - Importing PngImagePlugin
+2025-04-01 02:35:32,615 - PIL.Image - DEBUG - Importing PpmImagePlugin
+2025-04-01 02:35:32,615 - PIL.Image - DEBUG - Importing PsdImagePlugin
+2025-04-01 02:35:32,619 - PIL.Image - DEBUG - Importing SgiImagePlugin
+2025-04-01 02:35:32,621 - PIL.Image - DEBUG - Importing SpiderImagePlugin
+2025-04-01 02:35:32,624 - PIL.Image - DEBUG - Importing SunImagePlugin
+2025-04-01 02:35:32,627 - PIL.Image - DEBUG - Importing TgaImagePlugin
+2025-04-01 02:35:32,630 - PIL.Image - DEBUG - Importing TiffImagePlugin
+2025-04-01 02:35:32,630 - PIL.Image - DEBUG - Importing WebPImagePlugin
+2025-04-01 02:35:32,718 - PIL.Image - DEBUG - Importing WmfImagePlugin
+2025-04-01 02:35:32,722 - PIL.Image - DEBUG - Importing XbmImagePlugin
+2025-04-01 02:35:32,728 - PIL.Image - DEBUG - Importing XpmImagePlugin
+2025-04-01 02:35:32,732 - PIL.Image - DEBUG - Importing XVThumbImagePlugin
+2025-04-01 02:35:32,739 - __main__ - DEBUG - Preprocessing image
+2025-04-01 02:35:32,752 - __main__ - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-04-01 02:35:32,753 - __main__ - WARNING - All prediction methods failed, using basic fallback approach
+2025-04-01 02:35:32,765 - __main__ - INFO - Fallback prediction: Corn_(maize)___Northern_Leaf_Blight (confidence: 0.7)
+2025-04-01 02:35:32,770 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2025 02:35:32] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-04-01 02:35:44,777 - __main__ - DEBUG - Preprocessing image
+2025-04-01 02:35:44,782 - __main__ - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-04-01 02:35:44,784 - __main__ - WARNING - All prediction methods failed, using basic fallback approach
+2025-04-01 02:35:44,790 - __main__ - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-04-01 02:35:44,794 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2025 02:35:44] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-04-01 02:35:50,151 - __main__ - DEBUG - Preprocessing image
+2025-04-01 02:35:50,155 - __main__ - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-04-01 02:35:50,156 - __main__ - WARNING - All prediction methods failed, using basic fallback approach
+2025-04-01 02:35:50,160 - __main__ - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-04-01 02:35:50,162 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2025 02:35:50] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-04-01 02:38:16,758 - __main__ - DEBUG - Preprocessing image
+2025-04-01 02:38:16,787 - __main__ - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-04-01 02:38:16,789 - __main__ - WARNING - All prediction methods failed, using basic fallback approach
+2025-04-01 02:38:16,832 - __main__ - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-04-01 02:38:16,836 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2025 02:38:16] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-04-01 02:54:42,258 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-04-01 02:54:44,989 - werkzeug - INFO -  * Restarting with stat
+2025-04-01 02:54:51,630 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:54:51,634 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 02:54:58,362 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 02:54:58,381 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:54:58,382 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 02:54:58,547 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 02:54:58,615 - __main__ - INFO - Twilio successfully imported
+2025-04-01 02:54:58,617 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 02:54:58,620 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 02:55:00,498 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 02:55:00,498 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 02:55:00,500 - __main__ - INFO - Gemini API key available: False
+2025-04-01 02:55:00,501 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 02:55:00,502 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 02:55:00,503 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 02:55:00,504 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 02:55:00,505 - __main__ - INFO - Twilio client initialized
+2025-04-01 02:55:00,556 - __main__ - INFO - MongoDB connection successful
+2025-04-01 02:55:00,557 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 02:55:00,589 - werkzeug - WARNING -  * Debugger is active!
+2025-04-01 02:55:00,604 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-04-01 02:55:00,809 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-01 02:55:00,811 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-04-01 02:55:15,797 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-04-01 02:55:18,502 - werkzeug - INFO -  * Restarting with stat
+2025-04-01 02:55:20,372 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:55:20,372 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 02:55:24,056 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 02:55:24,061 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:55:24,061 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 02:55:24,114 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 02:55:24,125 - __main__ - INFO - Twilio successfully imported
+2025-04-01 02:55:24,125 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 02:55:24,126 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 02:55:24,735 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 02:55:24,736 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 02:55:24,738 - __main__ - INFO - Gemini API key available: False
+2025-04-01 02:55:24,738 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 02:55:24,739 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 02:55:24,740 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 02:55:24,741 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 02:55:24,742 - __main__ - INFO - Twilio client initialized
+2025-04-01 02:55:24,777 - __main__ - INFO - MongoDB connection successful
+2025-04-01 02:55:24,778 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 02:55:24,807 - werkzeug - WARNING -  * Debugger is active!
+2025-04-01 02:55:24,822 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-04-01 02:55:25,000 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-01 02:55:25,001 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-04-01 02:55:32,726 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-04-01 02:55:35,207 - werkzeug - INFO -  * Restarting with stat
+2025-04-01 02:55:37,436 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:55:37,438 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 02:55:42,207 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 02:55:42,218 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:55:42,219 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 02:55:42,312 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 02:55:42,345 - __main__ - INFO - Twilio successfully imported
+2025-04-01 02:55:42,346 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 02:55:42,349 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 02:55:44,128 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 02:55:44,130 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 02:55:44,130 - __main__ - INFO - Gemini API key available: False
+2025-04-01 02:55:44,132 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 02:55:44,132 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 02:55:44,133 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 02:55:44,134 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 02:55:44,136 - __main__ - INFO - Twilio client initialized
+2025-04-01 02:55:44,188 - __main__ - INFO - MongoDB connection successful
+2025-04-01 02:55:44,188 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 02:55:44,220 - werkzeug - WARNING -  * Debugger is active!
+2025-04-01 02:55:44,234 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-04-01 02:55:44,432 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-01 02:55:44,434 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-04-01 02:55:45,841 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-04-01 02:55:48,684 - werkzeug - INFO -  * Restarting with stat
+2025-04-01 02:55:52,814 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:55:52,816 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 02:55:57,961 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 02:55:57,972 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:55:57,973 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 02:55:58,044 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 02:55:58,063 - __main__ - INFO - Twilio successfully imported
+2025-04-01 02:55:58,064 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 02:55:58,065 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 02:55:58,779 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 02:55:58,781 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 02:55:58,782 - __main__ - INFO - Gemini API key available: False
+2025-04-01 02:55:58,787 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 02:55:58,790 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 02:55:58,792 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 02:55:58,794 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 02:55:58,797 - __main__ - INFO - Twilio client initialized
+2025-04-01 02:55:58,866 - __main__ - INFO - MongoDB connection successful
+2025-04-01 02:55:58,867 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 02:55:58,896 - werkzeug - WARNING -  * Debugger is active!
+2025-04-01 02:55:58,913 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-04-01 02:55:59,220 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-01 02:55:59,222 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-04-01 02:57:08,734 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:57:08,737 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 02:57:13,773 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 02:57:13,783 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:57:13,784 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 02:57:13,883 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 02:57:13,914 - __main__ - INFO - Twilio successfully imported
+2025-04-01 02:57:13,916 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 02:57:13,917 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 02:57:15,731 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 02:57:15,732 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 02:57:15,733 - __main__ - INFO - Gemini API key available: False
+2025-04-01 02:57:15,733 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 02:57:15,734 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 02:57:15,736 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 02:57:15,736 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 02:57:15,737 - __main__ - INFO - Twilio client initialized
+2025-04-01 02:57:15,776 - __main__ - INFO - MongoDB connection successful
+2025-04-01 02:57:15,776 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 02:57:15,812 - werkzeug - INFO -  * Restarting with stat
+2025-04-01 02:57:17,696 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:57:17,698 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 02:57:22,864 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 02:57:22,877 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 02:57:22,879 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 02:57:22,975 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 02:57:23,001 - __main__ - INFO - Twilio successfully imported
+2025-04-01 02:57:23,002 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 02:57:23,004 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 02:57:24,787 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 02:57:24,788 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 02:57:24,789 - __main__ - INFO - Gemini API key available: False
+2025-04-01 02:57:24,790 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 02:57:24,791 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 02:57:24,792 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 02:57:24,792 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 02:57:24,793 - __main__ - INFO - Twilio client initialized
+2025-04-01 02:57:24,828 - __main__ - INFO - MongoDB connection successful
+2025-04-01 02:57:24,832 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 02:57:24,859 - werkzeug - WARNING -  * Debugger is active!
+2025-04-01 02:57:24,873 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-04-01 02:57:25,073 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-01 02:57:25,074 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
+2025-04-01 02:58:30,851 - __main__ - DEBUG - Preprocessing image
+2025-04-01 02:58:30,865 - __main__ - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-04-01 02:58:30,868 - __main__ - WARNING - All prediction methods failed, using basic fallback approach
+2025-04-01 02:58:30,880 - __main__ - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-04-01 02:58:30,890 - werkzeug - INFO - 127.0.0.1 - - [01/Apr/2025 02:58:30] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-04-01 03:01:12,262 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-04-01 03:01:14,973 - werkzeug - INFO -  * Restarting with stat
+2025-04-01 03:01:17,317 - __main__ - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 03:01:17,318 - __main__ - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-04-01 03:01:23,173 - __main__ - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-04-01 03:01:23,178 - __main__ - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-04-01 03:01:23,179 - __main__ - INFO - Google GenerativeAI successfully imported
+2025-04-01 03:01:23,252 - __main__ - INFO - OpenAI successfully imported
+2025-04-01 03:01:23,278 - __main__ - INFO - Twilio successfully imported
+2025-04-01 03:01:23,279 - __main__ - INFO - Attempting to configure Gemini API with key: AIzaSyCaXS...
+2025-04-01 03:01:23,281 - __main__ - INFO - Gemini API configured successfully
+2025-04-01 03:01:23,994 - __main__ - ERROR - Gemini API test failed: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-04-01 03:01:23,996 - __main__ - INFO - OpenAI API key available: True
+2025-04-01 03:01:23,998 - __main__ - INFO - Gemini API key available: False
+2025-04-01 03:01:24,001 - __main__ - INFO - OpenWeather API key available: True
+2025-04-01 03:01:24,003 - __main__ - INFO - Twilio account SID available: True
+2025-04-01 03:01:24,006 - __main__ - INFO - Twilio auth token available: True
+2025-04-01 03:01:24,008 - __main__ - INFO - Google Maps API key available: True
+2025-04-01 03:01:24,013 - __main__ - INFO - Twilio client initialized
+2025-04-01 03:01:24,101 - __main__ - INFO - MongoDB connection successful
+2025-04-01 03:01:24,103 - __main__ - INFO - Starting KrishiMitra backend server
+2025-04-01 03:01:24,194 - werkzeug - WARNING -  * Debugger is active!
+2025-04-01 03:01:24,231 - werkzeug - INFO -  * Debugger PIN: 494-391-772
+2025-04-01 03:01:24,473 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-01 03:01:24,474 - werkzeug - INFO -  * Running on http://10.3.191.96:5000/ (Press CTRL+C to quit)
