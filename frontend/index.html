@@ -8,6 +8,13 @@
     <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<style>
+    body{
+        background-image: url('./assets/background.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+</style>
 <body>
     <header>
         <nav>
@@ -88,6 +95,26 @@
     </main>
 
     <script>
+        function uploadImage() {
+            let input = document.getElementById('imageInput').files[0];
+            if (!input) {
+                alert("Please select an image first.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("file", input);
+
+            fetch("http://127.0.0.1:5000/predict", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = "Prediction: " + data.prediction;
+            })
+            .catch(error => console.error("Error:", error));
+        }
         async function handleSMSSubmit(event) {
             event.preventDefault();
             const phone = document.getElementById('phone').value;

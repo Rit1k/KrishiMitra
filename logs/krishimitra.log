@@ -31,3 +31,955 @@
 2025-03-30 00:30:05,680 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 2025-03-30 00:30:05,680 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-30 23:24:10,812 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-30 23:24:11,309 - app - INFO - Google GenerativeAI successfully imported
+2025-03-30 23:24:11,339 - app - INFO - OpenAI successfully imported
+2025-03-30 23:24:11,345 - app - INFO - Twilio successfully imported
+2025-03-30 23:24:11,346 - app - INFO - OpenAI API key available: True
+2025-03-30 23:24:11,346 - app - INFO - Gemini API key available: True
+2025-03-30 23:24:11,348 - app - INFO - OpenWeather API key available: True
+2025-03-30 23:24:11,349 - app - INFO - Twilio account SID available: True
+2025-03-30 23:24:11,349 - app - INFO - Twilio auth token available: True
+2025-03-30 23:24:11,350 - app - INFO - Google Maps API key available: True
+2025-03-30 23:24:11,350 - app - INFO - Gemini API initialized
+2025-03-30 23:24:11,350 - app - INFO - OpenAI API initialized
+2025-03-30 23:24:11,351 - app - INFO - Twilio client initialized
+2025-03-30 23:24:11,491 - app - INFO - MongoDB connection successful
+2025-03-30 23:24:11,510 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 23:24:14,778 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-30 23:24:15,314 - app - INFO - Google GenerativeAI successfully imported
+2025-03-30 23:24:15,343 - app - INFO - OpenAI successfully imported
+2025-03-30 23:24:15,354 - app - INFO - Twilio successfully imported
+2025-03-30 23:24:15,354 - app - INFO - OpenAI API key available: True
+2025-03-30 23:24:15,354 - app - INFO - Gemini API key available: True
+2025-03-30 23:24:15,355 - app - INFO - OpenWeather API key available: True
+2025-03-30 23:24:15,355 - app - INFO - Twilio account SID available: True
+2025-03-30 23:24:15,356 - app - INFO - Twilio auth token available: True
+2025-03-30 23:24:15,356 - app - INFO - Google Maps API key available: True
+2025-03-30 23:24:15,357 - app - INFO - Gemini API initialized
+2025-03-30 23:24:15,357 - app - INFO - OpenAI API initialized
+2025-03-30 23:24:15,357 - app - INFO - Twilio client initialized
+2025-03-30 23:24:15,375 - app - INFO - MongoDB connection successful
+2025-03-30 23:26:30,309 - app - WARNING - TensorFlow model not available, using fallback approach
+2025-03-30 23:26:30,359 - app - INFO - Fallback prediction: Tomato___Early_blight with confidence 0.55
+2025-03-30 23:26:30,362 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 23:26:30] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-30 23:29:48,365 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-30 23:29:48,965 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 23:29:54,049 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-30 23:29:54,695 - app - INFO - Google GenerativeAI successfully imported
+2025-03-30 23:29:54,729 - app - INFO - OpenAI successfully imported
+2025-03-30 23:29:54,742 - app - INFO - Twilio successfully imported
+2025-03-30 23:29:54,743 - app - INFO - OpenAI API key available: True
+2025-03-30 23:29:54,744 - app - INFO - Gemini API key available: True
+2025-03-30 23:29:54,744 - app - INFO - OpenWeather API key available: True
+2025-03-30 23:29:54,745 - app - INFO - Twilio account SID available: True
+2025-03-30 23:29:54,745 - app - INFO - Twilio auth token available: True
+2025-03-30 23:29:54,747 - app - INFO - Google Maps API key available: True
+2025-03-30 23:29:54,747 - app - INFO - Gemini API initialized
+2025-03-30 23:29:54,749 - app - INFO - OpenAI API initialized
+2025-03-30 23:29:54,751 - app - INFO - Twilio client initialized
+2025-03-30 23:29:54,782 - app - INFO - MongoDB connection successful
+2025-03-30 23:30:39,395 - app - WARNING - TensorFlow model not available, using fallback approach
+2025-03-30 23:30:39,429 - app - INFO - Fallback prediction: Tomato___Early_blight with confidence 0.55
+2025-03-30 23:30:39,431 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 23:30:39] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-30 23:31:11,264 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-30 23:31:11,912 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 23:31:16,935 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-30 23:31:17,575 - app - INFO - Google GenerativeAI successfully imported
+2025-03-30 23:31:17,605 - app - INFO - OpenAI successfully imported
+2025-03-30 23:31:17,614 - app - INFO - Twilio successfully imported
+2025-03-30 23:31:17,615 - app - INFO - OpenAI API key available: True
+2025-03-30 23:31:17,615 - app - INFO - Gemini API key available: True
+2025-03-30 23:31:17,615 - app - INFO - OpenWeather API key available: True
+2025-03-30 23:31:17,616 - app - INFO - Twilio account SID available: True
+2025-03-30 23:31:17,617 - app - INFO - Twilio auth token available: True
+2025-03-30 23:31:17,617 - app - INFO - Google Maps API key available: True
+2025-03-30 23:31:17,618 - app - INFO - Gemini API initialized
+2025-03-30 23:31:17,618 - app - INFO - OpenAI API initialized
+2025-03-30 23:31:17,618 - app - INFO - Twilio client initialized
+2025-03-30 23:31:17,637 - app - INFO - MongoDB connection successful
+2025-03-30 23:32:14,597 - app - WARNING - TensorFlow model not available, using fallback approach
+2025-03-30 23:32:14,612 - app - INFO - Fallback prediction: Tomato___Early_blight with confidence 0.55
+2025-03-30 23:32:14,614 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 23:32:14] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-30 23:34:50,918 - app - WARNING - TensorFlow model not available, using fallback approach
+2025-03-30 23:34:50,919 - PIL.Image - DEBUG - Importing BlpImagePlugin
+2025-03-30 23:34:50,928 - PIL.Image - DEBUG - Importing BmpImagePlugin
+2025-03-30 23:34:50,931 - PIL.Image - DEBUG - Importing BufrStubImagePlugin
+2025-03-30 23:34:50,937 - PIL.Image - DEBUG - Importing CurImagePlugin
+2025-03-30 23:34:50,940 - PIL.Image - DEBUG - Importing DcxImagePlugin
+2025-03-30 23:34:50,947 - PIL.Image - DEBUG - Importing DdsImagePlugin
+2025-03-30 23:34:50,949 - PIL.Image - DEBUG - Importing EpsImagePlugin
+2025-03-30 23:34:51,018 - PIL.Image - DEBUG - Importing FitsStubImagePlugin
+2025-03-30 23:34:51,020 - PIL.Image - DEBUG - Importing FliImagePlugin
+2025-03-30 23:34:51,021 - PIL.Image - DEBUG - Importing FpxImagePlugin
+2025-03-30 23:34:51,024 - PIL.Image - DEBUG - Image: failed to import FpxImagePlugin: No module named 'olefile'
+2025-03-30 23:34:51,025 - PIL.Image - DEBUG - Importing FtexImagePlugin
+2025-03-30 23:34:51,026 - PIL.Image - DEBUG - Importing GbrImagePlugin
+2025-03-30 23:34:51,028 - PIL.Image - DEBUG - Importing GifImagePlugin
+2025-03-30 23:34:51,030 - PIL.Image - DEBUG - Importing GribStubImagePlugin
+2025-03-30 23:34:51,031 - PIL.Image - DEBUG - Importing Hdf5StubImagePlugin
+2025-03-30 23:34:51,033 - PIL.Image - DEBUG - Importing IcnsImagePlugin
+2025-03-30 23:34:51,038 - PIL.Image - DEBUG - Importing IcoImagePlugin
+2025-03-30 23:34:51,040 - PIL.Image - DEBUG - Importing ImImagePlugin
+2025-03-30 23:34:51,043 - PIL.Image - DEBUG - Importing ImtImagePlugin
+2025-03-30 23:34:51,046 - PIL.Image - DEBUG - Importing IptcImagePlugin
+2025-03-30 23:34:51,048 - PIL.Image - DEBUG - Importing JpegImagePlugin
+2025-03-30 23:34:51,048 - PIL.Image - DEBUG - Importing Jpeg2KImagePlugin
+2025-03-30 23:34:51,048 - PIL.Image - DEBUG - Importing McIdasImagePlugin
+2025-03-30 23:34:51,051 - PIL.Image - DEBUG - Importing MicImagePlugin
+2025-03-30 23:34:51,054 - PIL.Image - DEBUG - Image: failed to import MicImagePlugin: No module named 'olefile'
+2025-03-30 23:34:51,054 - PIL.Image - DEBUG - Importing MpegImagePlugin
+2025-03-30 23:34:51,056 - PIL.Image - DEBUG - Importing MpoImagePlugin
+2025-03-30 23:34:51,058 - PIL.Image - DEBUG - Importing MspImagePlugin
+2025-03-30 23:34:51,060 - PIL.Image - DEBUG - Importing PalmImagePlugin
+2025-03-30 23:34:51,065 - PIL.Image - DEBUG - Importing PcdImagePlugin
+2025-03-30 23:34:51,067 - PIL.Image - DEBUG - Importing PcxImagePlugin
+2025-03-30 23:34:51,067 - PIL.Image - DEBUG - Importing PdfImagePlugin
+2025-03-30 23:34:51,076 - PIL.Image - DEBUG - Importing PixarImagePlugin
+2025-03-30 23:34:51,078 - PIL.Image - DEBUG - Importing PngImagePlugin
+2025-03-30 23:34:51,080 - PIL.Image - DEBUG - Importing PpmImagePlugin
+2025-03-30 23:34:51,080 - PIL.Image - DEBUG - Importing PsdImagePlugin
+2025-03-30 23:34:51,082 - PIL.Image - DEBUG - Importing SgiImagePlugin
+2025-03-30 23:34:51,084 - PIL.Image - DEBUG - Importing SpiderImagePlugin
+2025-03-30 23:34:51,086 - PIL.Image - DEBUG - Importing SunImagePlugin
+2025-03-30 23:34:51,088 - PIL.Image - DEBUG - Importing TgaImagePlugin
+2025-03-30 23:34:51,090 - PIL.Image - DEBUG - Importing TiffImagePlugin
+2025-03-30 23:34:51,090 - PIL.Image - DEBUG - Importing WebPImagePlugin
+2025-03-30 23:34:51,133 - PIL.Image - DEBUG - Importing WmfImagePlugin
+2025-03-30 23:34:51,134 - PIL.Image - DEBUG - Importing XbmImagePlugin
+2025-03-30 23:34:51,136 - PIL.Image - DEBUG - Importing XpmImagePlugin
+2025-03-30 23:34:51,139 - PIL.Image - DEBUG - Importing XVThumbImagePlugin
+2025-03-30 23:34:51,145 - app - INFO - Fallback prediction: Tomato___Early_blight with confidence 0.55
+2025-03-30 23:34:51,146 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 23:34:51] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-30 23:37:30,050 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-30 23:37:30,626 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 23:37:37,037 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-30 23:37:37,780 - app - INFO - Google GenerativeAI successfully imported
+2025-03-30 23:37:37,821 - app - INFO - OpenAI successfully imported
+2025-03-30 23:37:37,829 - app - INFO - Twilio successfully imported
+2025-03-30 23:37:37,830 - app - INFO - OpenAI API key available: True
+2025-03-30 23:37:37,830 - app - INFO - Gemini API key available: True
+2025-03-30 23:37:37,830 - app - INFO - OpenWeather API key available: True
+2025-03-30 23:37:37,832 - app - INFO - Twilio account SID available: True
+2025-03-30 23:37:37,832 - app - INFO - Twilio auth token available: True
+2025-03-30 23:37:37,833 - app - INFO - Google Maps API key available: True
+2025-03-30 23:37:37,833 - app - INFO - Gemini API initialized
+2025-03-30 23:37:37,833 - app - INFO - OpenAI API initialized
+2025-03-30 23:37:37,834 - app - INFO - Twilio client initialized
+2025-03-30 23:37:37,864 - app - INFO - MongoDB connection successful
+2025-03-30 23:48:39,527 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-30 23:48:40,134 - werkzeug - INFO -  * Restarting with stat
+2025-03-30 23:48:44,438 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-30 23:48:45,320 - app - INFO - Google GenerativeAI successfully imported
+2025-03-30 23:48:45,373 - app - INFO - OpenAI successfully imported
+2025-03-30 23:48:45,387 - app - INFO - Twilio successfully imported
+2025-03-30 23:48:45,388 - app - INFO - OpenAI API key available: True
+2025-03-30 23:48:45,388 - app - INFO - Gemini API key available: True
+2025-03-30 23:48:45,388 - app - INFO - OpenWeather API key available: True
+2025-03-30 23:48:45,388 - app - INFO - Twilio account SID available: True
+2025-03-30 23:48:45,389 - app - INFO - Twilio auth token available: True
+2025-03-30 23:48:45,390 - app - INFO - Google Maps API key available: True
+2025-03-30 23:48:45,391 - app - INFO - Gemini API initialized
+2025-03-30 23:48:45,391 - app - INFO - OpenAI API initialized
+2025-03-30 23:48:45,391 - app - INFO - Twilio client initialized
+2025-03-30 23:48:45,417 - app - INFO - MongoDB connection successful
+2025-03-30 23:49:14,383 - app - INFO - Direct signature-based prediction: Blueberry___healthy (confidence: 0.9299999999999999)
+2025-03-30 23:49:14,384 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 23:49:14] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-30 23:49:36,081 - app - INFO - Direct signature-based prediction: Blueberry___healthy (confidence: 0.9299999999999999)
+2025-03-30 23:49:36,082 - werkzeug - INFO - 127.0.0.1 - - [30/Mar/2025 23:49:36] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:07:45,775 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:07:46,456 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:07:52,683 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:07:53,520 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:07:53,570 - app - INFO - OpenAI successfully imported
+2025-03-31 00:07:53,586 - app - INFO - Twilio successfully imported
+2025-03-31 00:07:53,587 - app - INFO - OpenAI API key available: True
+2025-03-31 00:07:53,588 - app - INFO - Gemini API key available: True
+2025-03-31 00:07:53,588 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:07:53,589 - app - INFO - Twilio account SID available: True
+2025-03-31 00:07:53,589 - app - INFO - Twilio auth token available: True
+2025-03-31 00:07:53,591 - app - INFO - Google Maps API key available: True
+2025-03-31 00:07:53,591 - app - INFO - Gemini API initialized
+2025-03-31 00:07:53,592 - app - INFO - OpenAI API initialized
+2025-03-31 00:07:53,593 - app - INFO - Twilio client initialized
+2025-03-31 00:07:53,617 - app - INFO - MongoDB connection successful
+2025-03-31 00:07:59,111 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:08:00,177 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:08:04,029 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:08:04,718 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:08:04,754 - app - INFO - OpenAI successfully imported
+2025-03-31 00:08:04,766 - app - INFO - Twilio successfully imported
+2025-03-31 00:08:04,766 - app - INFO - OpenAI API key available: True
+2025-03-31 00:08:04,767 - app - INFO - Gemini API key available: True
+2025-03-31 00:08:04,767 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:08:04,767 - app - INFO - Twilio account SID available: True
+2025-03-31 00:08:04,768 - app - INFO - Twilio auth token available: True
+2025-03-31 00:08:04,768 - app - INFO - Google Maps API key available: True
+2025-03-31 00:08:04,768 - app - INFO - Gemini API initialized
+2025-03-31 00:08:04,769 - app - INFO - OpenAI API initialized
+2025-03-31 00:08:04,769 - app - INFO - Twilio client initialized
+2025-03-31 00:08:04,801 - app - INFO - MongoDB connection successful
+2025-03-31 00:08:20,945 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:08:21,591 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:08:27,733 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:08:28,355 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:08:28,388 - app - INFO - OpenAI successfully imported
+2025-03-31 00:08:28,396 - app - INFO - Twilio successfully imported
+2025-03-31 00:08:28,396 - app - INFO - OpenAI API key available: True
+2025-03-31 00:08:28,397 - app - INFO - Gemini API key available: True
+2025-03-31 00:08:28,397 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:08:28,398 - app - INFO - Twilio account SID available: True
+2025-03-31 00:08:28,398 - app - INFO - Twilio auth token available: True
+2025-03-31 00:08:28,399 - app - INFO - Google Maps API key available: True
+2025-03-31 00:08:28,399 - app - INFO - Gemini API initialized
+2025-03-31 00:08:28,401 - app - INFO - OpenAI API initialized
+2025-03-31 00:08:28,401 - app - INFO - Twilio client initialized
+2025-03-31 00:08:28,427 - app - INFO - MongoDB connection successful
+2025-03-31 00:08:51,140 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:08:51,697 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:08:55,448 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:08:56,352 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:08:56,393 - app - INFO - OpenAI successfully imported
+2025-03-31 00:08:56,406 - app - INFO - Twilio successfully imported
+2025-03-31 00:08:56,407 - app - INFO - OpenAI API key available: True
+2025-03-31 00:08:56,407 - app - INFO - Gemini API key available: True
+2025-03-31 00:08:56,408 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:08:56,408 - app - INFO - Twilio account SID available: True
+2025-03-31 00:08:56,411 - app - INFO - Twilio auth token available: True
+2025-03-31 00:08:56,411 - app - INFO - Google Maps API key available: True
+2025-03-31 00:08:56,415 - app - INFO - Gemini API initialized
+2025-03-31 00:08:56,415 - app - INFO - OpenAI API initialized
+2025-03-31 00:08:56,417 - app - INFO - Twilio client initialized
+2025-03-31 00:08:56,472 - app - INFO - MongoDB connection successful
+2025-03-31 00:09:03,880 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:09:04,293 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:09:07,690 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:09:10,587 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:09:11,528 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:09:11,567 - app - INFO - OpenAI successfully imported
+2025-03-31 00:09:11,580 - app - INFO - Twilio successfully imported
+2025-03-31 00:09:11,580 - app - INFO - OpenAI API key available: True
+2025-03-31 00:09:11,580 - app - INFO - Gemini API key available: True
+2025-03-31 00:09:11,581 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:09:11,583 - app - INFO - Twilio account SID available: True
+2025-03-31 00:09:11,584 - app - INFO - Twilio auth token available: True
+2025-03-31 00:09:11,585 - app - INFO - Google Maps API key available: True
+2025-03-31 00:09:11,585 - app - INFO - Gemini API initialized
+2025-03-31 00:09:11,587 - app - INFO - OpenAI API initialized
+2025-03-31 00:09:11,589 - app - INFO - Twilio client initialized
+2025-03-31 00:09:11,638 - app - INFO - MongoDB connection successful
+2025-03-31 00:09:38,138 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\alt_model.py', reloading
+2025-03-31 00:09:38,582 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:09:39,914 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:09:42,578 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:09:42,653 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\alt_model.py', reloading
+2025-03-31 00:09:43,239 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:09:43,276 - app - INFO - OpenAI successfully imported
+2025-03-31 00:09:43,286 - app - INFO - Twilio successfully imported
+2025-03-31 00:09:43,286 - app - INFO - OpenAI API key available: True
+2025-03-31 00:09:43,287 - app - INFO - Gemini API key available: True
+2025-03-31 00:09:43,287 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:09:43,288 - app - INFO - Twilio account SID available: True
+2025-03-31 00:09:43,288 - app - INFO - Twilio auth token available: True
+2025-03-31 00:09:43,288 - app - INFO - Google Maps API key available: True
+2025-03-31 00:09:43,289 - app - INFO - Gemini API initialized
+2025-03-31 00:09:43,290 - app - INFO - OpenAI API initialized
+2025-03-31 00:09:43,291 - app - INFO - Twilio client initialized
+2025-03-31 00:09:43,313 - app - INFO - MongoDB connection successful
+2025-03-31 00:09:44,841 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:09:47,383 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:09:49,916 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:09:50,571 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:09:50,607 - app - INFO - OpenAI successfully imported
+2025-03-31 00:09:50,617 - app - INFO - Twilio successfully imported
+2025-03-31 00:09:50,618 - app - INFO - OpenAI API key available: True
+2025-03-31 00:09:50,618 - app - INFO - Gemini API key available: True
+2025-03-31 00:09:50,620 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:09:50,621 - app - INFO - Twilio account SID available: True
+2025-03-31 00:09:50,621 - app - INFO - Twilio auth token available: True
+2025-03-31 00:09:50,622 - app - INFO - Google Maps API key available: True
+2025-03-31 00:09:50,622 - app - INFO - Gemini API initialized
+2025-03-31 00:09:50,624 - app - INFO - OpenAI API initialized
+2025-03-31 00:09:50,625 - app - INFO - Twilio client initialized
+2025-03-31 00:09:50,646 - app - INFO - MongoDB connection successful
+2025-03-31 00:10:11,062 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:10:12,231 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:10:15,140 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:10:17,631 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:10:18,347 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:10:18,382 - app - INFO - OpenAI successfully imported
+2025-03-31 00:10:18,411 - app - INFO - Twilio successfully imported
+2025-03-31 00:10:18,412 - app - INFO - OpenAI API key available: True
+2025-03-31 00:10:18,413 - app - INFO - Gemini API key available: True
+2025-03-31 00:10:18,413 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:10:18,415 - app - INFO - Twilio account SID available: True
+2025-03-31 00:10:18,416 - app - INFO - Twilio auth token available: True
+2025-03-31 00:10:18,416 - app - INFO - Google Maps API key available: True
+2025-03-31 00:10:18,417 - app - INFO - Gemini API initialized
+2025-03-31 00:10:18,417 - app - INFO - OpenAI API initialized
+2025-03-31 00:10:18,418 - app - INFO - Twilio client initialized
+2025-03-31 00:10:18,448 - app - INFO - MongoDB connection successful
+2025-03-31 00:10:21,108 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:10:21,685 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:10:22,669 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:10:25,324 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:10:25,995 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:10:26,055 - app - INFO - OpenAI successfully imported
+2025-03-31 00:10:26,066 - app - INFO - Twilio successfully imported
+2025-03-31 00:10:26,066 - app - INFO - OpenAI API key available: True
+2025-03-31 00:10:26,066 - app - INFO - Gemini API key available: True
+2025-03-31 00:10:26,067 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:10:26,067 - app - INFO - Twilio account SID available: True
+2025-03-31 00:10:26,067 - app - INFO - Twilio auth token available: True
+2025-03-31 00:10:26,068 - app - INFO - Google Maps API key available: True
+2025-03-31 00:10:26,068 - app - INFO - Gemini API initialized
+2025-03-31 00:10:26,068 - app - INFO - OpenAI API initialized
+2025-03-31 00:10:26,069 - app - INFO - Twilio client initialized
+2025-03-31 00:10:26,778 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:10:26,779 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:10:26,780 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:10:26,781 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:10:26,996 - app - INFO - Alternative model predictor is available
+2025-03-31 00:10:27,122 - app - INFO - MongoDB connection successful
+2025-03-31 00:10:38,407 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:10:39,104 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:10:40,213 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:10:42,763 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:10:43,540 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:10:43,575 - app - INFO - OpenAI successfully imported
+2025-03-31 00:10:43,583 - app - INFO - Twilio successfully imported
+2025-03-31 00:10:43,584 - app - INFO - OpenAI API key available: True
+2025-03-31 00:10:43,585 - app - INFO - Gemini API key available: True
+2025-03-31 00:10:43,586 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:10:43,588 - app - INFO - Twilio account SID available: True
+2025-03-31 00:10:43,590 - app - INFO - Twilio auth token available: True
+2025-03-31 00:10:43,590 - app - INFO - Google Maps API key available: True
+2025-03-31 00:10:43,590 - app - INFO - Gemini API initialized
+2025-03-31 00:10:43,591 - app - INFO - OpenAI API initialized
+2025-03-31 00:10:43,592 - app - INFO - Twilio client initialized
+2025-03-31 00:10:43,673 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:10:43,674 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:10:43,674 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:10:43,675 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:10:43,702 - app - INFO - Alternative model predictor is available
+2025-03-31 00:10:43,716 - app - INFO - MongoDB connection successful
+2025-03-31 00:10:53,045 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:10:53,601 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:10:57,417 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:10:59,815 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:10:59,855 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:10:59,855 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:10:59,856 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:10:59,857 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:10:59,902 - app - INFO - Alternative model predictor is available
+2025-03-31 00:10:59,921 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:11:00,725 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:11:00,774 - app - INFO - OpenAI successfully imported
+2025-03-31 00:11:00,784 - app - INFO - Twilio successfully imported
+2025-03-31 00:11:00,784 - app - INFO - OpenAI API key available: True
+2025-03-31 00:11:00,786 - app - INFO - Gemini API key available: True
+2025-03-31 00:11:00,786 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:11:00,787 - app - INFO - Twilio account SID available: True
+2025-03-31 00:11:00,787 - app - INFO - Twilio auth token available: True
+2025-03-31 00:11:00,787 - app - INFO - Google Maps API key available: True
+2025-03-31 00:11:00,788 - app - INFO - Gemini API initialized
+2025-03-31 00:11:00,788 - app - INFO - OpenAI API initialized
+2025-03-31 00:11:00,789 - app - INFO - Twilio client initialized
+2025-03-31 00:11:00,811 - app - INFO - MongoDB connection successful
+2025-03-31 00:11:01,572 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:11:02,663 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:11:05,026 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:11:05,053 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:11:05,054 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:11:05,055 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:11:05,056 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:11:05,088 - app - INFO - Alternative model predictor is available
+2025-03-31 00:11:05,736 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:11:05,772 - app - INFO - OpenAI successfully imported
+2025-03-31 00:11:05,785 - app - INFO - Twilio successfully imported
+2025-03-31 00:11:05,786 - app - INFO - OpenAI API key available: True
+2025-03-31 00:11:05,786 - app - INFO - Gemini API key available: True
+2025-03-31 00:11:05,786 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:11:05,787 - app - INFO - Twilio account SID available: True
+2025-03-31 00:11:05,787 - app - INFO - Twilio auth token available: True
+2025-03-31 00:11:05,788 - app - INFO - Google Maps API key available: True
+2025-03-31 00:11:05,788 - app - INFO - Gemini API initialized
+2025-03-31 00:11:05,788 - app - INFO - OpenAI API initialized
+2025-03-31 00:11:05,789 - app - INFO - Twilio client initialized
+2025-03-31 00:11:05,816 - app - INFO - MongoDB connection successful
+2025-03-31 00:38:59,070 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:39:01,275 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:39:01,303 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:39:01,303 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:39:01,303 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:39:01,305 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:39:01,333 - app - INFO - Alternative model predictor is available
+2025-03-31 00:39:01,960 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:39:01,990 - app - INFO - OpenAI successfully imported
+2025-03-31 00:39:01,999 - app - INFO - Twilio successfully imported
+2025-03-31 00:39:02,000 - app - INFO - OpenAI API key available: True
+2025-03-31 00:39:02,000 - app - INFO - Gemini API key available: True
+2025-03-31 00:39:02,001 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:39:02,001 - app - INFO - Twilio account SID available: True
+2025-03-31 00:39:02,002 - app - INFO - Twilio auth token available: True
+2025-03-31 00:39:02,003 - app - INFO - Google Maps API key available: True
+2025-03-31 00:39:02,004 - app - INFO - Gemini API initialized
+2025-03-31 00:39:02,005 - app - INFO - OpenAI API initialized
+2025-03-31 00:39:02,005 - app - INFO - Twilio client initialized
+2025-03-31 00:39:02,039 - app - INFO - MongoDB connection successful
+2025-03-31 00:39:02,049 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:39:02,834 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:39:03,894 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:39:03,916 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:39:03,916 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:39:03,918 - h5py._conv - DEBUG - Creating converter from 7 to 5
+2025-03-31 00:39:03,918 - h5py._conv - DEBUG - Creating converter from 5 to 7
+2025-03-31 00:39:03,948 - app - INFO - Alternative model predictor is available
+2025-03-31 00:39:04,485 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:39:04,515 - app - INFO - OpenAI successfully imported
+2025-03-31 00:39:04,523 - app - INFO - Twilio successfully imported
+2025-03-31 00:39:04,523 - app - INFO - OpenAI API key available: True
+2025-03-31 00:39:04,524 - app - INFO - Gemini API key available: True
+2025-03-31 00:39:04,524 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:39:04,525 - app - INFO - Twilio account SID available: True
+2025-03-31 00:39:04,526 - app - INFO - Twilio auth token available: True
+2025-03-31 00:39:04,527 - app - INFO - Google Maps API key available: True
+2025-03-31 00:39:04,527 - app - INFO - Gemini API initialized
+2025-03-31 00:39:04,527 - app - INFO - OpenAI API initialized
+2025-03-31 00:39:04,529 - app - INFO - Twilio client initialized
+2025-03-31 00:39:04,546 - app - INFO - MongoDB connection successful
+2025-03-31 00:39:47,513 - app - INFO - Using alternative model predictor
+2025-03-31 00:39:47,520 - app - INFO - Alternative prediction: Tomato___Spider_mites Two-spotted_spider_mite (confidence: 0.9900)
+2025-03-31 00:39:47,521 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:39:47] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:40:02,820 - app - INFO - Using alternative model predictor
+2025-03-31 00:40:02,832 - app - INFO - Alternative prediction: Apple___Cedar_apple_rust (confidence: 0.9200)
+2025-03-31 00:40:02,833 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:40:02] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:41:01,202 - app - INFO - Using alternative model predictor
+2025-03-31 00:41:01,213 - app - INFO - Alternative prediction: Apple___Cedar_apple_rust (confidence: 0.8800)
+2025-03-31 00:41:01,215 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:41:01] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:41:04,049 - app - INFO - Using alternative model predictor
+2025-03-31 00:41:04,056 - app - INFO - Alternative prediction: Apple___healthy (confidence: 0.9300)
+2025-03-31 00:41:04,057 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:41:04] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:41:07,743 - PIL.Image - DEBUG - Importing BlpImagePlugin
+2025-03-31 00:41:07,745 - PIL.Image - DEBUG - Importing BmpImagePlugin
+2025-03-31 00:41:07,745 - PIL.Image - DEBUG - Importing BufrStubImagePlugin
+2025-03-31 00:41:07,747 - PIL.Image - DEBUG - Importing CurImagePlugin
+2025-03-31 00:41:07,749 - PIL.Image - DEBUG - Importing DcxImagePlugin
+2025-03-31 00:41:07,752 - PIL.Image - DEBUG - Importing DdsImagePlugin
+2025-03-31 00:41:07,754 - PIL.Image - DEBUG - Importing EpsImagePlugin
+2025-03-31 00:41:07,816 - PIL.Image - DEBUG - Importing FitsStubImagePlugin
+2025-03-31 00:41:07,819 - PIL.Image - DEBUG - Importing FliImagePlugin
+2025-03-31 00:41:07,821 - PIL.Image - DEBUG - Importing FpxImagePlugin
+2025-03-31 00:41:07,822 - PIL.Image - DEBUG - Image: failed to import FpxImagePlugin: No module named 'olefile'
+2025-03-31 00:41:07,823 - PIL.Image - DEBUG - Importing FtexImagePlugin
+2025-03-31 00:41:07,825 - PIL.Image - DEBUG - Importing GbrImagePlugin
+2025-03-31 00:41:07,827 - PIL.Image - DEBUG - Importing GifImagePlugin
+2025-03-31 00:41:07,827 - PIL.Image - DEBUG - Importing GribStubImagePlugin
+2025-03-31 00:41:07,828 - PIL.Image - DEBUG - Importing Hdf5StubImagePlugin
+2025-03-31 00:41:07,830 - PIL.Image - DEBUG - Importing IcnsImagePlugin
+2025-03-31 00:41:07,835 - PIL.Image - DEBUG - Importing IcoImagePlugin
+2025-03-31 00:41:07,837 - PIL.Image - DEBUG - Importing ImImagePlugin
+2025-03-31 00:41:07,839 - PIL.Image - DEBUG - Importing ImtImagePlugin
+2025-03-31 00:41:07,841 - PIL.Image - DEBUG - Importing IptcImagePlugin
+2025-03-31 00:41:07,842 - PIL.Image - DEBUG - Importing JpegImagePlugin
+2025-03-31 00:41:07,843 - PIL.Image - DEBUG - Importing Jpeg2KImagePlugin
+2025-03-31 00:41:07,843 - PIL.Image - DEBUG - Importing McIdasImagePlugin
+2025-03-31 00:41:07,845 - PIL.Image - DEBUG - Importing MicImagePlugin
+2025-03-31 00:41:07,847 - PIL.Image - DEBUG - Image: failed to import MicImagePlugin: No module named 'olefile'
+2025-03-31 00:41:07,848 - PIL.Image - DEBUG - Importing MpegImagePlugin
+2025-03-31 00:41:07,850 - PIL.Image - DEBUG - Importing MpoImagePlugin
+2025-03-31 00:41:07,852 - PIL.Image - DEBUG - Importing MspImagePlugin
+2025-03-31 00:41:07,852 - PIL.Image - DEBUG - Importing PalmImagePlugin
+2025-03-31 00:41:07,858 - PIL.Image - DEBUG - Importing PcdImagePlugin
+2025-03-31 00:41:07,860 - PIL.Image - DEBUG - Importing PcxImagePlugin
+2025-03-31 00:41:07,860 - PIL.Image - DEBUG - Importing PdfImagePlugin
+2025-03-31 00:41:07,869 - PIL.Image - DEBUG - Importing PixarImagePlugin
+2025-03-31 00:41:07,871 - PIL.Image - DEBUG - Importing PngImagePlugin
+2025-03-31 00:41:07,871 - PIL.Image - DEBUG - Importing PpmImagePlugin
+2025-03-31 00:41:07,872 - PIL.Image - DEBUG - Importing PsdImagePlugin
+2025-03-31 00:41:07,873 - PIL.Image - DEBUG - Importing SgiImagePlugin
+2025-03-31 00:41:07,876 - PIL.Image - DEBUG - Importing SpiderImagePlugin
+2025-03-31 00:41:07,877 - PIL.Image - DEBUG - Importing SunImagePlugin
+2025-03-31 00:41:07,879 - PIL.Image - DEBUG - Importing TgaImagePlugin
+2025-03-31 00:41:07,880 - PIL.Image - DEBUG - Importing TiffImagePlugin
+2025-03-31 00:41:07,881 - PIL.Image - DEBUG - Importing WebPImagePlugin
+2025-03-31 00:41:07,885 - PIL.Image - DEBUG - Importing WmfImagePlugin
+2025-03-31 00:41:07,887 - PIL.Image - DEBUG - Importing XbmImagePlugin
+2025-03-31 00:41:07,889 - PIL.Image - DEBUG - Importing XpmImagePlugin
+2025-03-31 00:41:07,892 - PIL.Image - DEBUG - Importing XVThumbImagePlugin
+2025-03-31 00:41:07,893 - app - INFO - Using alternative model predictor
+2025-03-31 00:41:07,902 - app - INFO - Alternative prediction: Soybean___healthy (confidence: 0.8800)
+2025-03-31 00:41:07,905 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:41:07] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:41:22,620 - app - INFO - Using alternative model predictor
+2025-03-31 00:41:22,631 - app - INFO - Alternative prediction: Tomato___Spider_mites Two-spotted_spider_mite (confidence: 0.9900)
+2025-03-31 00:41:22,633 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:41:22] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:44:22,308 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\alt_model.py', reloading
+2025-03-31 00:44:22,911 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:44:23,768 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:44:28,666 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:44:28,672 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:44:29,278 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:44:29,309 - app - INFO - OpenAI successfully imported
+2025-03-31 00:44:29,318 - app - INFO - Twilio successfully imported
+2025-03-31 00:44:29,319 - app - INFO - OpenAI API key available: True
+2025-03-31 00:44:29,319 - app - INFO - Gemini API key available: True
+2025-03-31 00:44:29,319 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:44:29,320 - app - INFO - Twilio account SID available: True
+2025-03-31 00:44:29,320 - app - INFO - Twilio auth token available: True
+2025-03-31 00:44:29,320 - app - INFO - Google Maps API key available: True
+2025-03-31 00:44:29,321 - app - INFO - Gemini API initialized
+2025-03-31 00:44:29,321 - app - INFO - OpenAI API initialized
+2025-03-31 00:44:29,322 - app - INFO - Twilio client initialized
+2025-03-31 00:44:29,370 - app - INFO - MongoDB connection successful
+2025-03-31 00:44:51,866 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:44:52,611 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:44:55,110 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:44:55,133 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:44:58,508 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:44:58,512 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:44:59,144 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:44:59,191 - app - INFO - OpenAI successfully imported
+2025-03-31 00:44:59,203 - app - INFO - Twilio successfully imported
+2025-03-31 00:44:59,203 - app - INFO - OpenAI API key available: True
+2025-03-31 00:44:59,207 - app - INFO - Gemini API key available: True
+2025-03-31 00:44:59,208 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:44:59,209 - app - INFO - Twilio account SID available: True
+2025-03-31 00:44:59,210 - app - INFO - Twilio auth token available: True
+2025-03-31 00:44:59,211 - app - INFO - Google Maps API key available: True
+2025-03-31 00:44:59,212 - app - INFO - Gemini API initialized
+2025-03-31 00:44:59,212 - app - INFO - OpenAI API initialized
+2025-03-31 00:44:59,213 - app - INFO - Twilio client initialized
+2025-03-31 00:44:59,249 - app - INFO - MongoDB connection successful
+2025-03-31 00:45:20,914 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:45:21,456 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:45:22,429 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:45:22,431 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:45:24,611 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:45:24,616 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:45:25,192 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:45:25,229 - app - INFO - OpenAI successfully imported
+2025-03-31 00:45:25,239 - app - INFO - Twilio successfully imported
+2025-03-31 00:45:25,240 - app - INFO - OpenAI API key available: True
+2025-03-31 00:45:25,240 - app - INFO - Gemini API key available: True
+2025-03-31 00:45:25,241 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:45:25,241 - app - INFO - Twilio account SID available: True
+2025-03-31 00:45:25,241 - app - INFO - Twilio auth token available: True
+2025-03-31 00:45:25,242 - app - INFO - Google Maps API key available: True
+2025-03-31 00:45:25,242 - app - INFO - Gemini API initialized
+2025-03-31 00:45:25,242 - app - INFO - OpenAI API initialized
+2025-03-31 00:45:25,243 - app - INFO - Twilio client initialized
+2025-03-31 00:45:25,262 - app - INFO - MongoDB connection successful
+2025-03-31 00:45:28,126 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:45:28,496 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:45:31,857 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:45:31,858 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:45:34,125 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:45:34,129 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:45:34,723 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:45:34,751 - app - INFO - OpenAI successfully imported
+2025-03-31 00:45:34,760 - app - INFO - Twilio successfully imported
+2025-03-31 00:45:34,760 - app - INFO - OpenAI API key available: True
+2025-03-31 00:45:34,760 - app - INFO - Gemini API key available: True
+2025-03-31 00:45:34,760 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:45:34,762 - app - INFO - Twilio account SID available: True
+2025-03-31 00:45:34,762 - app - INFO - Twilio auth token available: True
+2025-03-31 00:45:34,762 - app - INFO - Google Maps API key available: True
+2025-03-31 00:45:34,763 - app - INFO - Gemini API initialized
+2025-03-31 00:45:34,763 - app - INFO - OpenAI API initialized
+2025-03-31 00:45:34,763 - app - INFO - Twilio client initialized
+2025-03-31 00:45:34,782 - app - INFO - MongoDB connection successful
+2025-03-31 00:45:56,787 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:45:57,014 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:45:58,089 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:45:58,089 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:46:00,554 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:46:00,559 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:46:01,278 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:46:01,318 - app - INFO - OpenAI successfully imported
+2025-03-31 00:46:01,327 - app - INFO - Twilio successfully imported
+2025-03-31 00:46:01,330 - app - INFO - OpenAI API key available: True
+2025-03-31 00:46:01,331 - app - INFO - Gemini API key available: True
+2025-03-31 00:46:01,332 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:46:01,333 - app - INFO - Twilio account SID available: True
+2025-03-31 00:46:01,333 - app - INFO - Twilio auth token available: True
+2025-03-31 00:46:01,334 - app - INFO - Google Maps API key available: True
+2025-03-31 00:46:01,334 - app - INFO - Gemini API initialized
+2025-03-31 00:46:01,335 - app - INFO - OpenAI API initialized
+2025-03-31 00:46:01,336 - app - INFO - Twilio client initialized
+2025-03-31 00:46:01,361 - app - INFO - MongoDB connection successful
+2025-03-31 00:46:06,279 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:46:06,625 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:46:07,478 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:46:07,479 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:46:09,524 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:46:09,529 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:46:10,064 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:46:10,093 - app - INFO - OpenAI successfully imported
+2025-03-31 00:46:10,103 - app - INFO - Twilio successfully imported
+2025-03-31 00:46:10,103 - app - INFO - OpenAI API key available: True
+2025-03-31 00:46:10,103 - app - INFO - Gemini API key available: True
+2025-03-31 00:46:10,104 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:46:10,104 - app - INFO - Twilio account SID available: True
+2025-03-31 00:46:10,105 - app - INFO - Twilio auth token available: True
+2025-03-31 00:46:10,105 - app - INFO - Google Maps API key available: True
+2025-03-31 00:46:10,105 - app - INFO - Gemini API initialized
+2025-03-31 00:46:10,105 - app - INFO - OpenAI API initialized
+2025-03-31 00:46:10,106 - app - INFO - Twilio client initialized
+2025-03-31 00:46:10,125 - app - INFO - MongoDB connection successful
+2025-03-31 00:47:06,794 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 00:47:07,445 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 00:47:08,366 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:47:08,367 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 00:47:10,478 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 00:47:10,481 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 00:47:11,038 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 00:47:11,066 - app - INFO - OpenAI successfully imported
+2025-03-31 00:47:11,077 - app - INFO - Twilio successfully imported
+2025-03-31 00:47:11,077 - app - INFO - OpenAI API key available: True
+2025-03-31 00:47:11,077 - app - INFO - Gemini API key available: True
+2025-03-31 00:47:11,077 - app - INFO - OpenWeather API key available: True
+2025-03-31 00:47:11,078 - app - INFO - Twilio account SID available: True
+2025-03-31 00:47:11,079 - app - INFO - Twilio auth token available: True
+2025-03-31 00:47:11,079 - app - INFO - Google Maps API key available: True
+2025-03-31 00:47:11,080 - app - INFO - Gemini API initialized
+2025-03-31 00:47:11,080 - app - INFO - OpenAI API initialized
+2025-03-31 00:47:11,080 - app - INFO - Twilio client initialized
+2025-03-31 00:47:11,100 - app - INFO - MongoDB connection successful
+2025-03-31 00:47:59,200 - app - DEBUG - Preprocessing image
+2025-03-31 00:47:59,202 - app - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-03-31 00:47:59,202 - app - WARNING - All prediction methods failed, using basic fallback approach
+2025-03-31 00:47:59,205 - app - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-03-31 00:47:59,206 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:47:59] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:48:05,195 - app - DEBUG - Preprocessing image
+2025-03-31 00:48:05,213 - app - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-03-31 00:48:05,213 - app - WARNING - All prediction methods failed, using basic fallback approach
+2025-03-31 00:48:05,244 - app - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-03-31 00:48:05,246 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:48:05] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:48:16,321 - PIL.Image - DEBUG - Importing BlpImagePlugin
+2025-03-31 00:48:16,324 - PIL.Image - DEBUG - Importing BmpImagePlugin
+2025-03-31 00:48:16,324 - PIL.Image - DEBUG - Importing BufrStubImagePlugin
+2025-03-31 00:48:16,326 - PIL.Image - DEBUG - Importing CurImagePlugin
+2025-03-31 00:48:16,328 - PIL.Image - DEBUG - Importing DcxImagePlugin
+2025-03-31 00:48:16,331 - PIL.Image - DEBUG - Importing DdsImagePlugin
+2025-03-31 00:48:16,333 - PIL.Image - DEBUG - Importing EpsImagePlugin
+2025-03-31 00:48:16,401 - PIL.Image - DEBUG - Importing FitsStubImagePlugin
+2025-03-31 00:48:16,403 - PIL.Image - DEBUG - Importing FliImagePlugin
+2025-03-31 00:48:16,405 - PIL.Image - DEBUG - Importing FpxImagePlugin
+2025-03-31 00:48:16,407 - PIL.Image - DEBUG - Image: failed to import FpxImagePlugin: No module named 'olefile'
+2025-03-31 00:48:16,408 - PIL.Image - DEBUG - Importing FtexImagePlugin
+2025-03-31 00:48:16,410 - PIL.Image - DEBUG - Importing GbrImagePlugin
+2025-03-31 00:48:16,411 - PIL.Image - DEBUG - Importing GifImagePlugin
+2025-03-31 00:48:16,411 - PIL.Image - DEBUG - Importing GribStubImagePlugin
+2025-03-31 00:48:16,413 - PIL.Image - DEBUG - Importing Hdf5StubImagePlugin
+2025-03-31 00:48:16,416 - PIL.Image - DEBUG - Importing IcnsImagePlugin
+2025-03-31 00:48:16,421 - PIL.Image - DEBUG - Importing IcoImagePlugin
+2025-03-31 00:48:16,423 - PIL.Image - DEBUG - Importing ImImagePlugin
+2025-03-31 00:48:16,425 - PIL.Image - DEBUG - Importing ImtImagePlugin
+2025-03-31 00:48:16,427 - PIL.Image - DEBUG - Importing IptcImagePlugin
+2025-03-31 00:48:16,429 - PIL.Image - DEBUG - Importing JpegImagePlugin
+2025-03-31 00:48:16,430 - PIL.Image - DEBUG - Importing Jpeg2KImagePlugin
+2025-03-31 00:48:16,430 - PIL.Image - DEBUG - Importing McIdasImagePlugin
+2025-03-31 00:48:16,432 - PIL.Image - DEBUG - Importing MicImagePlugin
+2025-03-31 00:48:16,436 - PIL.Image - DEBUG - Image: failed to import MicImagePlugin: No module named 'olefile'
+2025-03-31 00:48:16,436 - PIL.Image - DEBUG - Importing MpegImagePlugin
+2025-03-31 00:48:16,438 - PIL.Image - DEBUG - Importing MpoImagePlugin
+2025-03-31 00:48:16,440 - PIL.Image - DEBUG - Importing MspImagePlugin
+2025-03-31 00:48:16,441 - PIL.Image - DEBUG - Importing PalmImagePlugin
+2025-03-31 00:48:16,445 - PIL.Image - DEBUG - Importing PcdImagePlugin
+2025-03-31 00:48:16,446 - PIL.Image - DEBUG - Importing PcxImagePlugin
+2025-03-31 00:48:16,448 - PIL.Image - DEBUG - Importing PdfImagePlugin
+2025-03-31 00:48:16,456 - PIL.Image - DEBUG - Importing PixarImagePlugin
+2025-03-31 00:48:16,458 - PIL.Image - DEBUG - Importing PngImagePlugin
+2025-03-31 00:48:16,459 - PIL.Image - DEBUG - Importing PpmImagePlugin
+2025-03-31 00:48:16,459 - PIL.Image - DEBUG - Importing PsdImagePlugin
+2025-03-31 00:48:16,461 - PIL.Image - DEBUG - Importing SgiImagePlugin
+2025-03-31 00:48:16,463 - PIL.Image - DEBUG - Importing SpiderImagePlugin
+2025-03-31 00:48:16,465 - PIL.Image - DEBUG - Importing SunImagePlugin
+2025-03-31 00:48:16,467 - PIL.Image - DEBUG - Importing TgaImagePlugin
+2025-03-31 00:48:16,469 - PIL.Image - DEBUG - Importing TiffImagePlugin
+2025-03-31 00:48:16,470 - PIL.Image - DEBUG - Importing WebPImagePlugin
+2025-03-31 00:48:16,474 - PIL.Image - DEBUG - Importing WmfImagePlugin
+2025-03-31 00:48:16,476 - PIL.Image - DEBUG - Importing XbmImagePlugin
+2025-03-31 00:48:16,479 - PIL.Image - DEBUG - Importing XpmImagePlugin
+2025-03-31 00:48:16,481 - PIL.Image - DEBUG - Importing XVThumbImagePlugin
+2025-03-31 00:48:16,485 - app - DEBUG - Preprocessing image
+2025-03-31 00:48:16,489 - app - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-03-31 00:48:16,491 - app - WARNING - All prediction methods failed, using basic fallback approach
+2025-03-31 00:48:16,493 - app - INFO - Fallback prediction: Corn_(maize)___Northern_Leaf_Blight (confidence: 0.7)
+2025-03-31 00:48:16,494 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:48:16] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 00:48:23,346 - app - DEBUG - Preprocessing image
+2025-03-31 00:48:23,350 - app - DEBUG - Image preprocessing complete, shape: (1, 224, 224, 3)
+2025-03-31 00:48:23,350 - app - WARNING - All prediction methods failed, using basic fallback approach
+2025-03-31 00:48:23,353 - app - INFO - Fallback prediction: Tomato___Early_blight (confidence: 0.7)
+2025-03-31 00:48:23,354 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 00:48:23] "POST /api/detect-disease HTTP/1.1" 200 -
+2025-03-31 01:02:53,816 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:02:54,546 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 39970
+2025-03-31 01:02:54,761 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:02:55,333 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35758
+2025-03-31 01:02:55,461 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:02:56,176 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46123
+2025-03-31 01:02:56,425 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:02:57,016 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 33176
+2025-03-31 01:02:57,121 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:02:57,617 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46119
+2025-03-31 01:02:57,759 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 01:02:57] "GET /api/transporters?lat=12.8326196&lon=80.0423042 HTTP/1.1" 200 -
+2025-03-31 01:02:57,766 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:02:58,284 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 39970
+2025-03-31 01:02:58,391 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:02:58,917 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35758
+2025-03-31 01:02:59,103 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:02:59,618 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46123
+2025-03-31 01:02:59,759 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:03:00,534 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 33176
+2025-03-31 01:03:00,684 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:03:01,051 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8326196,80.0423042&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46119
+2025-03-31 01:03:01,198 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 01:03:01] "GET /api/transporters?lat=12.8326196&lon=80.0423042 HTTP/1.1" 200 -
+2025-03-31 01:08:45,919 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:08:46,581 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8217718,80.044124&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35207
+2025-03-31 01:08:46,699 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:08:47,148 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8217718,80.044124&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34625
+2025-03-31 01:08:47,369 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:08:48,250 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8217718,80.044124&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46954
+2025-03-31 01:08:48,341 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:08:48,978 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8217718,80.044124&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35317
+2025-03-31 01:08:49,193 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 01:08:49,827 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8217718,80.044124&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46950
+2025-03-31 01:08:50,037 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 01:08:50] "GET /api/transporters?lat=12.8217718&lon=80.044124&radius=15 HTTP/1.1" 200 -
+2025-03-31 11:08:15,030 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 11:08:15,034 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 11:08:20,156 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 11:08:20,167 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 11:08:22,207 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 11:08:22,302 - app - INFO - OpenAI successfully imported
+2025-03-31 11:08:22,331 - app - INFO - Twilio successfully imported
+2025-03-31 11:08:22,332 - app - INFO - OpenAI API key available: True
+2025-03-31 11:08:22,333 - app - INFO - Gemini API key available: True
+2025-03-31 11:08:22,335 - app - INFO - OpenWeather API key available: True
+2025-03-31 11:08:22,336 - app - INFO - Twilio account SID available: True
+2025-03-31 11:08:22,337 - app - INFO - Twilio auth token available: True
+2025-03-31 11:08:22,338 - app - INFO - Google Maps API key available: True
+2025-03-31 11:08:22,339 - app - INFO - Gemini API initialized
+2025-03-31 11:08:22,342 - app - INFO - OpenAI API initialized
+2025-03-31 11:08:22,343 - app - INFO - Twilio client initialized
+2025-03-31 11:08:22,414 - app - INFO - MongoDB connection successful
+2025-03-31 11:08:22,451 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 11:08:24,542 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 11:08:24,543 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 11:08:29,071 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 11:08:29,081 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 11:08:30,115 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 11:08:30,178 - app - INFO - OpenAI successfully imported
+2025-03-31 11:08:30,199 - app - INFO - Twilio successfully imported
+2025-03-31 11:08:30,200 - app - INFO - OpenAI API key available: True
+2025-03-31 11:08:30,201 - app - INFO - Gemini API key available: True
+2025-03-31 11:08:30,203 - app - INFO - OpenWeather API key available: True
+2025-03-31 11:08:30,204 - app - INFO - Twilio account SID available: True
+2025-03-31 11:08:30,205 - app - INFO - Twilio auth token available: True
+2025-03-31 11:08:30,206 - app - INFO - Google Maps API key available: True
+2025-03-31 11:08:30,208 - app - INFO - Gemini API initialized
+2025-03-31 11:08:30,209 - app - INFO - OpenAI API initialized
+2025-03-31 11:08:30,211 - app - INFO - Twilio client initialized
+2025-03-31 11:08:30,294 - app - INFO - MongoDB connection successful
+2025-03-31 11:09:55,435 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:55,816 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35194
+2025-03-31 11:09:55,859 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:56,205 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34548
+2025-03-31 11:09:56,265 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:56,786 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 47217
+2025-03-31 11:09:56,833 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:57,094 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34201
+2025-03-31 11:09:57,154 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:57,531 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 47213
+2025-03-31 11:09:57,582 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 11:09:57] "GET /api/transporters?lat=12.8137989&lon=80.0423042 HTTP/1.1" 200 -
+2025-03-31 11:09:57,596 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:57,791 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35194
+2025-03-31 11:09:57,830 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:58,291 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34548
+2025-03-31 11:09:58,333 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:58,655 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 47217
+2025-03-31 11:09:58,715 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:58,953 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34201
+2025-03-31 11:09:59,034 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:09:59,282 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8137989,80.0423042&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 47213
+2025-03-31 11:09:59,433 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 11:09:59] "GET /api/transporters?lat=12.8137989&lon=80.0423042 HTTP/1.1" 200 -
+2025-03-31 11:14:01,167 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:14:01,461 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35194
+2025-03-31 11:14:01,495 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:14:01,798 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34617
+2025-03-31 11:14:01,848 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:14:02,309 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46945
+2025-03-31 11:14:02,338 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:14:02,825 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35317
+2025-03-31 11:14:02,848 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:14:03,038 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46941
+2025-03-31 11:14:03,107 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 11:14:03] "GET /api/transporters?lat=12.8218068&lon=80.0441242 HTTP/1.1" 200 -
+2025-03-31 11:15:32,534 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:15:33,028 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35194
+2025-03-31 11:15:33,067 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:15:33,677 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34617
+2025-03-31 11:15:33,762 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:15:34,362 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46945
+2025-03-31 11:15:34,401 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:15:34,773 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35317
+2025-03-31 11:15:34,827 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:15:35,329 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.8218068,80.0441242&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46941
+2025-03-31 11:15:35,605 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 11:15:35] "GET /api/transporters?lat=12.8218068&lon=80.0441242 HTTP/1.1" 200 -
+2025-03-31 11:19:25,154 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:25,690 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35194
+2025-03-31 11:19:25,705 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:25,960 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34617
+2025-03-31 11:19:25,994 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:26,445 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46945
+2025-03-31 11:19:26,481 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:26,914 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35317
+2025-03-31 11:19:26,961 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:27,431 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46941
+2025-03-31 11:19:27,488 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 11:19:27] "GET /api/transporters?lat=12.821766&lon=80.0441328 HTTP/1.1" 200 -
+2025-03-31 11:19:46,988 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:47,398 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=moving_company&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35194
+2025-03-31 11:19:47,408 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:47,590 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=storage&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 34617
+2025-03-31 11:19:47,628 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:47,935 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=truck_rental&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46945
+2025-03-31 11:19:48,026 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:48,222 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=transit_station&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 35317
+2025-03-31 11:19:48,290 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): maps.googleapis.com:443
+2025-03-31 11:19:48,505 - urllib3.connectionpool - DEBUG - https://maps.googleapis.com:443 "GET /maps/api/place/nearbysearch/json?location=12.821766,80.0441328&radius=10000&type=warehouse&key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo HTTP/1.1" 200 46941
+2025-03-31 11:19:48,550 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 11:19:48] "GET /api/transporters?lat=12.821766&lon=80.0441328 HTTP/1.1" 200 -
+2025-03-31 11:53:10,808 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 11:53:10] "[31m[1mGET /api/transporters?lat=12.8217731&lng=80.0441283 HTTP/1.1[0m" 400 -
+2025-03-31 11:53:11,073 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 11:53:11] "[31m[1mGET /api/transporters?lat=12.8217731&lng=80.0441283 HTTP/1.1[0m" 400 -
+2025-03-31 12:07:07,078 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:07:07] "[31m[1mGET /api/transporters?lat=12.8137989&lng=80.0423042 HTTP/1.1[0m" 400 -
+2025-03-31 12:07:07,325 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:07:07] "[31m[1mGET /api/transporters?lat=12.8137989&lng=80.0423042 HTTP/1.1[0m" 400 -
+2025-03-31 12:14:25,024 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:14:25] "[31m[1mGET /api/transporters?lat=12.8217699&lng=80.0441223 HTTP/1.1[0m" 400 -
+2025-03-31 12:14:25,290 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:14:25] "[31m[1mGET /api/transporters?lat=12.8217699&lng=80.0441223 HTTP/1.1[0m" 400 -
+2025-03-31 12:15:23,854 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:15:23] "[31m[1mGET /api/transporters?lat=12.8217699&lng=80.0441223 HTTP/1.1[0m" 400 -
+2025-03-31 12:15:33,588 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:15:33] "[31m[1mGET /api/transporters?lat=12.8217699&lng=80.0441223 HTTP/1.1[0m" 400 -
+2025-03-31 12:18:11,274 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 12:18:11,943 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:18:15,287 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:18:17,756 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:18:17,757 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:18:22,904 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:18:22,909 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:18:22,909 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:18:22,957 - app - INFO - OpenAI successfully imported
+2025-03-31 12:18:22,963 - app - INFO - Twilio successfully imported
+2025-03-31 12:18:22,964 - app - INFO - Gemini API configured successfully
+2025-03-31 12:18:22,965 - app - INFO - OpenAI API key available: True
+2025-03-31 12:18:22,965 - app - INFO - Gemini API key available: True
+2025-03-31 12:18:22,966 - app - INFO - OpenWeather API key available: True
+2025-03-31 12:18:22,966 - app - INFO - Twilio account SID available: True
+2025-03-31 12:18:22,966 - app - INFO - Twilio auth token available: True
+2025-03-31 12:18:22,967 - app - INFO - Google Maps API key available: True
+2025-03-31 12:18:22,968 - app - INFO - Twilio client initialized
+2025-03-31 12:18:23,049 - app - INFO - MongoDB connection successful
+2025-03-31 12:18:23,736 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:18:25,403 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:18:25,404 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:18:29,342 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:18:29,348 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:18:29,348 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:18:29,397 - app - INFO - OpenAI successfully imported
+2025-03-31 12:18:29,407 - app - INFO - Twilio successfully imported
+2025-03-31 12:18:29,408 - app - INFO - Gemini API configured successfully
+2025-03-31 12:18:29,409 - app - INFO - OpenAI API key available: True
+2025-03-31 12:18:29,409 - app - INFO - Gemini API key available: True
+2025-03-31 12:18:29,410 - app - INFO - OpenWeather API key available: True
+2025-03-31 12:18:29,410 - app - INFO - Twilio account SID available: True
+2025-03-31 12:18:29,411 - app - INFO - Twilio auth token available: True
+2025-03-31 12:18:29,411 - app - INFO - Google Maps API key available: True
+2025-03-31 12:18:29,412 - app - INFO - Twilio client initialized
+2025-03-31 12:18:29,442 - app - INFO - MongoDB connection successful
+2025-03-31 12:18:43,402 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 12:18:43,948 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:18:45,802 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:18:45,803 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:18:50,421 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:18:50,427 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:18:50,429 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:18:50,505 - app - INFO - OpenAI successfully imported
+2025-03-31 12:18:50,515 - app - INFO - Twilio successfully imported
+2025-03-31 12:18:50,516 - app - INFO - Gemini API configured successfully
+2025-03-31 12:18:50,517 - app - INFO - OpenAI API key available: True
+2025-03-31 12:18:50,518 - app - INFO - Gemini API key available: True
+2025-03-31 12:18:50,519 - app - INFO - OpenWeather API key available: True
+2025-03-31 12:18:50,519 - app - INFO - Twilio account SID available: True
+2025-03-31 12:18:50,521 - app - INFO - Twilio auth token available: True
+2025-03-31 12:18:50,521 - app - INFO - Google Maps API key available: True
+2025-03-31 12:18:50,523 - app - INFO - Twilio client initialized
+2025-03-31 12:18:50,557 - app - INFO - MongoDB connection successful
+2025-03-31 12:18:58,397 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 12:18:58,991 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:19:00,344 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:19:00,345 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:19:07,398 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:19:07,407 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:19:07,408 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:19:07,469 - app - INFO - OpenAI successfully imported
+2025-03-31 12:19:07,480 - app - INFO - Twilio successfully imported
+2025-03-31 12:19:07,481 - app - INFO - Gemini API configured successfully
+2025-03-31 12:19:07,485 - app - INFO - OpenAI API key available: True
+2025-03-31 12:19:07,486 - app - INFO - Gemini API key available: True
+2025-03-31 12:19:07,487 - app - INFO - OpenWeather API key available: True
+2025-03-31 12:19:07,488 - app - INFO - Twilio account SID available: True
+2025-03-31 12:19:07,491 - app - INFO - Twilio auth token available: True
+2025-03-31 12:19:07,492 - app - INFO - Google Maps API key available: True
+2025-03-31 12:19:07,495 - app - INFO - Twilio client initialized
+2025-03-31 12:19:07,536 - app - INFO - MongoDB connection successful
+2025-03-31 12:47:08,135 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:47:08] "OPTIONS /api/chat HTTP/1.1" 200 -
+2025-03-31 12:47:10,439 - app - ERROR - Error with Gemini AI: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-03-31 12:47:11,082 - werkzeug - INFO - 127.0.0.1 - - [31/Mar/2025 12:47:11] "POST /api/chat HTTP/1.1" 200 -
+2025-03-31 12:49:17,226 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 12:49:20,590 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:49:21,989 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:49:21,991 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:49:26,746 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:49:26,752 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:49:26,753 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:49:26,791 - app - INFO - OpenAI successfully imported
+2025-03-31 12:49:26,799 - app - INFO - Twilio successfully imported
+2025-03-31 12:49:26,800 - app - INFO - Gemini API configured successfully
+2025-03-31 12:49:26,801 - app - INFO - OpenAI API key available: True
+2025-03-31 12:49:26,801 - app - INFO - Gemini API key available: True
+2025-03-31 12:49:26,802 - app - INFO - OpenWeather API key available: True
+2025-03-31 12:49:26,803 - app - INFO - Twilio account SID available: True
+2025-03-31 12:49:26,803 - app - INFO - Twilio auth token available: True
+2025-03-31 12:49:26,805 - app - INFO - Google Maps API key available: True
+2025-03-31 12:49:26,807 - app - INFO - Twilio client initialized
+2025-03-31 12:49:26,830 - app - INFO - MongoDB connection successful
+2025-03-31 12:49:48,657 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 12:49:49,136 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:49:53,796 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:49:53,796 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:49:56,440 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:49:56,446 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:49:56,447 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:49:56,487 - app - INFO - OpenAI successfully imported
+2025-03-31 12:49:56,499 - app - INFO - Twilio successfully imported
+2025-03-31 12:49:56,500 - app - INFO - Gemini API configured successfully
+2025-03-31 12:49:56,501 - app - INFO - OpenAI API key available: True
+2025-03-31 12:49:56,502 - app - INFO - Gemini API key available: True
+2025-03-31 12:49:56,503 - app - INFO - OpenWeather API key available: True
+2025-03-31 12:49:56,503 - app - INFO - Twilio account SID available: True
+2025-03-31 12:49:56,504 - app - INFO - Twilio auth token available: True
+2025-03-31 12:49:56,504 - app - INFO - Google Maps API key available: True
+2025-03-31 12:49:56,505 - app - INFO - Twilio client initialized
+2025-03-31 12:49:56,538 - app - INFO - MongoDB connection successful
+2025-03-31 12:50:01,782 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ritik\\Krishimitra\\backend\\app.py', reloading
+2025-03-31 12:50:02,827 - werkzeug - INFO -  * Restarting with stat
+2025-03-31 12:50:07,995 - app - ERROR - Error using alt_model to load TensorFlow: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:50:07,995 - app - INFO - Added CUDA DLL directory: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin
+2025-03-31 12:50:10,268 - app - WARNING - TensorFlow could not be imported - disease detection will be unavailable
+2025-03-31 12:50:10,273 - app - ERROR - Error initializing alternative model predictor: name 'tf' is used prior to global declaration (alt_model.py, line 127)
+2025-03-31 12:50:10,274 - app - INFO - Google GenerativeAI successfully imported
+2025-03-31 12:50:10,305 - app - INFO - OpenAI successfully imported
+2025-03-31 12:50:10,314 - app - INFO - Twilio successfully imported
+2025-03-31 12:50:10,315 - app - INFO - Gemini API configured successfully
+2025-03-31 12:50:10,316 - app - INFO - OpenAI API key available: True
+2025-03-31 12:50:10,316 - app - INFO - Gemini API key available: True
+2025-03-31 12:50:10,317 - app - INFO - OpenWeather API key available: True
+2025-03-31 12:50:10,317 - app - INFO - Twilio account SID available: True
+2025-03-31 12:50:10,317 - app - INFO - Twilio auth token available: True
+2025-03-31 12:50:10,318 - app - INFO - Google Maps API key available: True
+2025-03-31 12:50:10,319 - app - INFO - Twilio client initialized
+2025-03-31 12:50:10,340 - app - INFO - MongoDB connection successful
