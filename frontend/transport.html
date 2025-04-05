@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google Maps API with Places library -->
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo&libraries=places&callback=initMap">
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={api-key}&libraries=places,geometry&callback=initMap">
     </script>
     <style>
         body{
@@ -139,6 +139,20 @@
 
         .service-card.cold_storage .service-icon i {
             color: #3498db;
+        }
+
+        .service-card.public_transport .service-icon {
+            background-color: #e8e6ff;
+        }
+
+        .service-card.public_transport .service-icon i {
+            color: #6c5ce7;
+        }
+
+        .service-type-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
         }
 
         .service-info {
@@ -543,6 +557,36 @@
                 width: 95%;
             }
         }
+
+        /* Add the following CSS to the style section */
+        .map-clickable-hint {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(44, 95, 45, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: pulsate 2s infinite;
+            pointer-events: none;
+        }
+
+        .map-clickable-hint i {
+            font-size: 16px;
+        }
+
+        @keyframes pulsate {
+            0% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+            100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -588,6 +632,7 @@
                     <button class="filter-btn" data-type="truck">Trucks</button>
                     <button class="filter-btn" data-type="warehouse">Warehouses</button>
                     <button class="filter-btn" data-type="cold_storage">Cold Storage</button>
+                    <button class="filter-btn" data-type="public_transport">Public Transport</button>
                 </div>
             </div>
 
@@ -604,231 +649,247 @@
     </main>
 
     <script>
+        // Global variables for transport functionality
         let map;
-        let markers = [];
-        let currentPosition;
+        let currentPosition = { lat: 21.1458, lng: 79.0882 }; // Default to central India (Nagpur)
+        let transportServices = []; // Array to store all transport services
+        let serviceMarkers = []; // Array to store all service markers
+        let locationMarker; // Marker for the selected location
+        
+        // Initialize the map when window loads
+        // ... existing code ...
+
         let infoWindow;
         let activeServiceCard = null;
-        let transportServices = [];
-        let serviceMarkers = [];
 
-        // Initialize map and services
+        // Improve initMap function to use geolocation
         function initMap() {
             console.log("Initializing map...");
             
-            // Default location (Central India)
-            let center = { lat: 20.5937, lng: 78.9629 };
-            
-            // Create map
+            // Create map centered on default location
             map = new google.maps.Map(document.getElementById('map'), {
-                center: center,
-                zoom: 8,
-                styles: [
-                    {
-                        "featureType": "poi",
-                        "elementType": "labels",
-                        "stylers": [
-                            { "visibility": "off" }
-                        ]
-                    }
-                ],
-                restriction: {
-                    latLngBounds: {
-                        north: 35.6745457,  // Northern limit of India
-                        south: 6.5546079,   // Southern limit of India
-                        west: 68.1113787,   // Western limit of India
-                        east: 97.395561    // Eastern limit of India
-                    },
-                    strictBounds: false
+                center: currentPosition,
+                zoom: 12,
+                mapTypeControl: true,
+                fullscreenControl: true,
+                streetViewControl: false,
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
                 }
             });
             
-            console.log("Map created successfully");
+            // Create info window instance
+            infoWindow = new google.maps.InfoWindow();
             
-            // Create marker for selected location and store it globally for access in click handlers
+            // Create initial marker for current location
             window.locationMarker = new google.maps.Marker({
-                position: center,
+                position: currentPosition,
                 map: map,
                 icon: {
                     path: google.maps.SymbolPath.CIRCLE,
-                    scale: 12,
-                    fillColor: "#2c5f2d",
-                    fillOpacity: 0.8,
-                    strokeWeight: 3,
-                    strokeColor: "#FFF"
+                    scale: 10,
+                    fillColor: "#4285F4",
+                    fillOpacity: 1,
+                    strokeColor: "white",
+                    strokeWeight: 2
                 },
-                zIndex: 999
+                zIndex: 999 // Ensure it's on top of other markers
             });
             
-            // Create info window
-            infoWindow = new google.maps.InfoWindow();
+            // Initialize geocoder
+            window.geocoder = new google.maps.Geocoder();
             
-            // Store initial position
-            currentPosition = center;
+            // Add click hint to map
+            const mapClickableHint = document.createElement('div');
+            mapClickableHint.className = 'map-clickable-hint';
+            mapClickableHint.innerHTML = `
+                <i class="fas fa-hand-pointer"></i>
+                <span>Click anywhere on the map to see transport services</span>
+            `;
+            document.getElementById('map').appendChild(mapClickableHint);
             
-            // Set temporary location display until we get actual location
-            document.getElementById('selected-location').textContent = "Detecting your location...";
-            document.getElementById('location-coords').textContent = "";
+            // Add click handler to map
+            map.addListener('click', function(event) {
+                handleMapClick(event);
+            });
             
-            // Try to get user's location with improved geolocation handling
+            // Get user's location if possible
             if (navigator.geolocation) {
-                // Show loading indicator while getting location
-                const servicesLoading = document.getElementById('services-loading');
-                servicesLoading.style.display = 'flex';
-                
-                const locationTimeout = setTimeout(() => {
-                    console.log("Geolocation timeout - using default location");
-                    // Use default location if geolocation times out
-                    document.getElementById('selected-location').textContent = "Central India (Default)";
-                    document.getElementById('location-coords').textContent = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
-                    showEmptyInitialState();
-                }, 5000); // 5 second timeout
+                document.getElementById('selected-location').innerHTML = `
+                    <span style="display:flex; align-items:center; gap:8px;">
+                        <i class="fas fa-spinner fa-spin"></i> Detecting your location...
+                    </span>
+                `;
                 
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        clearTimeout(locationTimeout);
-                        center = {
+                    // Success
+                    function(position) {
+                        const userLocation = {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude
                         };
                         
-                        console.log("Got user location:", center);
+                        console.log("Got user location:", userLocation);
                         
-                        // Check if location is in India (rough boundaries)
-                        const inIndia = (
-                            center.lat >= 6.5546079 && center.lat <= 35.6745457 &&
-                            center.lng >= 68.1113787 && center.lng <= 97.395561
-                        );
+                        // Update map and marker
+                        map.setCenter(userLocation);
+                        window.locationMarker.setPosition(userLocation);
                         
-                        if (!inIndia) {
-                            console.log("Location outside India - using default Indian location");
-                            center = { lat: 20.5937, lng: 78.9629 }; // Use central India
-                            document.getElementById('selected-location').textContent = "Central India (Default)";
-                            document.getElementById('location-coords').textContent = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
-                            showEmptyInitialState();
-                        } else {
-                            // Update marker and map center for user location
-                            window.locationMarker.setPosition(center);
-                            map.setCenter(center);
-                            map.setZoom(11); // Zoom in more on user's actual location
-                            
-                            // Store current position
-                            currentPosition = center;
-                            
-                            // Use our new function that ensures proper order
-                            console.log("Using user's location in India, geocoding and loading services");
-                            geocodeAndLoadServices(center);
-                        }
+                        // Store current position
+                        currentPosition = userLocation;
+                        
+                        // Load services for this location
+                        loadServicesForLocation(userLocation);
                     },
-                    (error) => {
-                        clearTimeout(locationTimeout);
-                        console.log("Error getting location:", error);
-                        // Show empty state with instructions to click on map
-                        document.getElementById('selected-location').textContent = "Location access denied";
-                        document.getElementById('location-coords').textContent = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
-                        showEmptyInitialState();
+                    // Error
+                    function(error) {
+                        console.warn("Geolocation error:", error);
+                        
+                        // Use default location
+                        document.getElementById('selected-location').textContent = "Default Location";
+                        document.getElementById('location-coords').textContent = 
+                            `${currentPosition.lat.toFixed(5)}, ${currentPosition.lng.toFixed(5)}`;
+                        
+                        // Load services for default location
+                        loadServicesForLocation(currentPosition);
                     },
-                    { 
+                    {
+                        enableHighAccuracy: true,
                         timeout: 5000,
-                        maximumAge: 60000,
-                        enableHighAccuracy: true 
+                        maximumAge: 0
                     }
                 );
             } else {
                 // No geolocation support
-                document.getElementById('selected-location').textContent = "Location detection not supported";
-                document.getElementById('location-coords').textContent = `${center.lat.toFixed(5)}, ${center.lng.toFixed(5)}`;
-                showEmptyInitialState();
+                loadServicesForLocation(currentPosition);
             }
             
-            // Improve the map click handler
-            map.addListener('click', function(event) {
-                console.log("Map clicked at:", event.latLng.toJSON());
-                
-                // Get exact coordinates from the click event
-                const newLocation = {
-                    lat: event.latLng.lat(),
-                    lng: event.latLng.lng()
-                };
-                
-                // Update marker position to clicked location
-                if (window.locationMarker) {
-                    window.locationMarker.setPosition(event.latLng);
-                }
-                
-                // Update location display with loading state
-                document.getElementById('selected-location').textContent = "Loading location...";
-                document.getElementById('location-coords').textContent = `${newLocation.lat.toFixed(5)}, ${newLocation.lng.toFixed(5)}`;
-                
-                // Store current position for distance calculations
-                currentPosition = newLocation;
-                
-                // Clear existing services and markers first
-                const servicesList = document.getElementById('servicesList');
-                servicesList.innerHTML = '';
-                
-                // Show loading indicator
-                const servicesLoading = document.getElementById('services-loading');
+            console.log("Map initialization complete");
+        }
+
+        // Separate function to handle map clicks
+        function handleMapClick(event) {
+            console.log("Map clicked at:", event.latLng.toJSON());
+            
+            // Get coordinates
+            const clickedLocation = {
+                lat: event.latLng.lat(),
+                lng: event.latLng.lng()
+            };
+            
+            // Update marker
+            window.locationMarker.setPosition(event.latLng);
+            
+            // Update current position
+            currentPosition = clickedLocation;
+            
+            // Load services for this location
+            loadServicesForLocation(clickedLocation);
+        }
+
+        // Function to load services for a location
+        function loadServicesForLocation(location) {
+            console.log("Loading services for location:", location);
+            
+            // Update coordinates display
+            document.getElementById('location-coords').textContent = 
+                `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
+            
+            // Show loading state
+            document.getElementById('selected-location').innerHTML = `
+                <span style="display:flex; align-items:center; gap:8px;">
+                    <i class="fas fa-spinner fa-spin"></i> Loading location...
+                </span>
+            `;
+            
+            // Clear existing services
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+            
+            // Show loading indicator
+            const servicesLoading = document.getElementById('services-loading');
+            if (servicesLoading) {
                 servicesLoading.style.display = 'flex';
-                
-                // Reset active filters
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    if (btn.dataset.type === 'all') {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                });
-                
-                // Clear search input
-                document.getElementById('searchInput').value = '';
-                
-                // Clear existing markers before adding new ones
-                clearServiceMarkers();
-                
-                // Reverse geocode to get location name before getting services
-                geocodeAndLoadServices(newLocation);
+            }
+            
+            // Reset active filters
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.type === 'all') {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
             });
             
-            console.log("Initial map setup complete");
+            // Clear existing markers and services
+            clearServiceMarkers();
+            transportServices = [];
+            
+            // Geocode location
+            geocodeLocation(location, function(locationName) {
+                // Update location display
+                document.getElementById('selected-location').textContent = locationName || "Unknown Location";
+                
+                // Get transport services
+                fetchTransportServices(location);
+            });
         }
-        
-        // Get address from coordinates using reverse geocoding
-        function getAddressFromCoords(location) {
-            const geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ location: location }, (results, status) => {
-                if (status === 'OK' && results[0]) {
-                    let address = results[0].formatted_address;
-                    let locationName = "";
-                    let pincode = "";
+
+        // Function to geocode a location
+        function geocodeLocation(location, callback) {
+            window.geocoder.geocode({ 'location': location }, function(results, status) {
+                console.log("Geocoding result:", status);
+                
+                let locationName = "Unknown Location";
+                
+                if (status === 'OK' && results && results.length > 0) {
+                    const address = results[0].formatted_address;
+                    locationName = address;
                     
-                    // Find components with locality, administrative_area, and postal_code
+                    // Try to get more specific address components
+                    let specificLocation = "";
+                    
                     for (const component of results[0].address_components) {
                         if (component.types.includes('locality') || 
                             component.types.includes('administrative_area_level_2') ||
                             component.types.includes('administrative_area_level_1')) {
-                            locationName += locationName ? `, ${component.long_name}` : component.long_name;
-                        }
-                        
-                        if (component.types.includes('postal_code')) {
-                            pincode = component.long_name;
+                            specificLocation += specificLocation ? `, ${component.long_name}` : component.long_name;
                         }
                     }
                     
-                    // Update display
-                    document.getElementById('selected-location').innerHTML = locationName || address;
-                    if (pincode) {
-                        document.getElementById('selected-location').innerHTML += ` <span class="pincode">(${pincode})</span>`;
+                    if (specificLocation) {
+                        locationName = specificLocation;
                     }
-                    document.getElementById('location-coords').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
-                } else {
-                    console.log('Geocoder failed:', status);
-                    document.getElementById('selected-location').textContent = "Unknown Location";
-                    document.getElementById('location-coords').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
                 }
+                
+                callback(locationName);
             });
         }
-        
+
+        // Function to fetch transport services
+        function fetchTransportServices(location) {
+            console.log("Fetching transport services for:", location);
+            
+            // Get agricultural transport services
+            const agriServices = generateMockServices(location, 'transport');
+            console.log(`Generated ${agriServices.length} agricultural transport services`);
+            
+            // Get public transport services
+            const publicServices = generateMockServices(location, 'public_transit');
+            console.log(`Generated ${publicServices.length} public transport services`);
+            
+            // Add to global array
+            transportServices = [...agriServices, ...publicServices];
+            
+            // Create markers
+            transportServices.forEach(service => {
+                createServiceMarker(service);
+            });
+            
+            // Display all services
+            displayTransportServices(transportServices);
+        }
+
         // Function to load services near a location
         function loadServicesNearLocation(location) {
             console.log("Loading services near location:", location);
@@ -873,9 +934,15 @@
                     generateLocationSpecificMockServices(location);
                 })
                 .finally(() => {
-                    // Hide loading indicator
-                    servicesLoading.style.display = 'none';
+                    // Hide loading indicator only if no services were found
+                    // Don't hide it here as public transport search will hide it after completion
+                    if (transportServices.length === 0) {
+                        servicesLoading.style.display = 'none';
+                    }
                 });
+
+            // Also search for public transport options at this location
+            searchPublicTransport(location);
         }
 
         // Add a function to process API data 
@@ -1292,84 +1359,253 @@
             }
         }
 
-        // Function to render transport services in the list
-        function renderTransportServices(services) {
+        // Function to display transport services
+        function displayTransportServices(services) {
+            console.log(`displayTransportServices called with ${services ? services.length : 0} services`);
+            
             const servicesList = document.getElementById('servicesList');
+            if (!servicesList) {
+                console.error("Could not find servicesList element!");
+                return;
+            }
+            
+            // Debug the DOM structure
+            console.log("Services list container:", servicesList);
+            
+            // Clear existing services
             servicesList.innerHTML = '';
             
+            // Hide loading indicator
+            const servicesLoading = document.getElementById('services-loading');
+            if (servicesLoading) {
+                servicesLoading.style.display = 'none';
+            }
+            
+            // Hide the clickable hint after services are loaded
+            const mapClickableHint = document.querySelector('.map-clickable-hint');
+            if (mapClickableHint) {
+                mapClickableHint.style.opacity = '0';
+                setTimeout(() => {
+                    mapClickableHint.style.display = 'none';
+                }, 500);
+            }
+            
+            // Handle empty result
             if (!services || services.length === 0) {
+                console.log("No services to display - showing empty state");
                 servicesList.innerHTML = `
                     <div class="empty-results">
                         <i class="fas fa-search"></i>
                         <p>No transport services found</p>
-                        <span>Try changing your location or search criteria</span>
+                        <span>Try clicking on a different location on the map</span>
                     </div>
                 `;
                 return;
             }
             
-            services.forEach(service => {
-                const serviceElement = document.createElement('div');
-                serviceElement.className = `service-card ${service.type}`;
-                serviceElement.dataset.id = service.id;
-                
-                let iconClass = 'fa-truck';
-                if (service.type === 'warehouse') {
-                    iconClass = 'fa-warehouse';
-                } else if (service.type === 'cold_storage') {
-                    iconClass = 'fa-snowflake';
+            console.log(`Displaying ${services.length} transport services in the right panel`);
+            
+            // Sort services by distance
+            services.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+            
+            // Create a document fragment to improve performance
+            const fragment = document.createDocumentFragment();
+            
+            // Create service cards
+            services.forEach((service, index) => {
+                // Add some logging for the first few services to debug
+                if (index < 3) {
+                    console.log(`Creating card for service: ${service.name}, type: ${service.type}, price info:`, 
+                        service.price_display || service.price_per_km || service.price_per_month || service.price_per_hour);
                 }
                 
-                serviceElement.innerHTML = `
+                // Select icon based on service type
+                let iconClass;
+                let typeClass = service.type || 'generic';
+                let typeDisplay;
+                
+                switch(service.type) {
+                    case 'truck':
+                        iconClass = 'fa-truck';
+                        typeDisplay = 'Truck Service';
+                        break;
+                    case 'warehouse':
+                        iconClass = 'fa-warehouse';
+                        typeDisplay = 'Warehouse';
+                        break;
+                    case 'cold_storage':
+                        iconClass = 'fa-snowflake';
+                        typeDisplay = 'Cold Storage';
+                        break;
+                    case 'bus':
+                        iconClass = 'fa-bus';
+                        typeDisplay = 'Bus Station';
+                        break;
+                    case 'train':
+                        iconClass = 'fa-train';
+                        typeDisplay = 'Train Station';
+                        break;  
+                    case 'subway':
+                        iconClass = 'fa-subway';
+                        typeDisplay = 'Subway Station';
+                        break;
+                    case 'transit':
+                        iconClass = 'fa-exchange-alt';
+                        typeDisplay = 'Transit Station';
+                        break;
+                    case 'tractor':
+                        iconClass = 'fa-tractor';
+                        typeDisplay = 'Tractor Service';
+                        break;
+                    case 'harvester':
+                        iconClass = 'fa-seedling';
+                        typeDisplay = 'Harvester Service';
+                        break;
+                    case 'storage':
+                        iconClass = 'fa-warehouse';
+                        typeDisplay = 'Storage Service';
+                        break;
+                    default:
+                        iconClass = 'fa-truck';
+                        typeDisplay = 'Transport Service';
+                }
+                
+                // Create service card
+                const serviceCard = document.createElement('div');
+                serviceCard.className = `service-card ${typeClass}`;
+                serviceCard.setAttribute('data-id', service.id);
+                serviceCard.setAttribute('data-type', service.type);
+                
+                // Format pricing display based on service type
+                let pricingDisplay = '';
+                
+                if (service.price_display) {
+                    // For services with formatted price display
+                    pricingDisplay = `
+                        <div class="pricing">
+                            <i class="fas fa-rupee-sign"></i> ${service.price_display}
+                        </div>
+                    `;
+                } else if (service.price_per_km) {
+                    // For services with per-km pricing
+                    pricingDisplay = `
+                        <div class="pricing">
+                            <i class="fas fa-rupee-sign"></i> ₹${service.price_per_km}/km
+                        </div>
+                    `;
+                } else if (service.price_per_month) {
+                    // For services with monthly pricing
+                    pricingDisplay = `
+                        <div class="pricing">
+                            <i class="fas fa-rupee-sign"></i> ₹${service.price_per_month}/month
+                        </div>
+                    `;
+                } else if (service.price_per_hour) {
+                    // For services with hourly pricing
+                    pricingDisplay = `
+                        <div class="pricing">
+                            <i class="fas fa-rupee-sign"></i> ₹${service.price_per_hour}/hour
+                        </div>
+                    `;
+                } else if (service.isAvailable !== undefined) {
+                    // For services with availability
+                    pricingDisplay = `
+                        <div class="service-availability">
+                            <span class="${service.isAvailable ? 'available' : 'limited'}">${service.isAvailable ? 'Available' : 'Limited Availability'}</span>
+                        </div>
+                    `;
+                }
+                
+                // Set card content with proper information for each service type
+                serviceCard.innerHTML = `
                     <div class="service-icon">
                         <i class="fas ${iconClass}"></i>
                     </div>
                     <div class="service-info">
                         <h4>${service.name}</h4>
+                        <div class="service-type-label">${typeDisplay}</div>
                         <div class="service-vicinity">
                             <i class="fas fa-map-marker-alt"></i>
-                            ${service.vicinity}
-                            <span class="distance">${service.distance.toFixed(1)} km</span>
-                        </div>
-                        <div class="service-availability">
-                            <span class="${service.availability.includes('Available') ? 'available' : 'limited'}">
-                                ${service.availability}
-                            </span>
+                            ${service.vicinity || 'Near selected location'}
                         </div>
                         <div class="service-rating">
                             <i class="fas fa-star"></i>
-                            ${service.rating} (${service.reviews} reviews)
+                            ${service.rating} ${service.reviews ? `(${service.reviews} reviews)` : ''}
                         </div>
                         <div class="service-distance">
                             <i class="fas fa-route"></i>
-                            ${service.distance.toFixed(1)} km away
+                            ${service.distance} km from selected point
                         </div>
+                        ${pricingDisplay}
                     </div>
                 `;
                 
-                serviceElement.addEventListener('click', () => {
-                    showServiceDetails(service.id);
+                // Add click handler to view service details
+                serviceCard.addEventListener('click', function() {
+                    console.log(`Service card clicked: ${service.id}`);
+                    
+                    // Remove active class from any previously active card
+                    document.querySelectorAll('.service-card.active').forEach(card => {
+                        card.classList.remove('active');
+                    });
+                    
+                    // Add active class to this card
+                    this.classList.add('active');
+                    
+                    // Find the marker for this service
+                    const marker = serviceMarkers.find(m => m.serviceId === service.id);
+                    
+                    // If marker found, center map and open info window
+                    if (marker) {
+                        console.log("Found marker for service", marker);
+                        map.panTo(marker.getPosition());
+                        
+                        // Create info window content
+                        const infoContent = `
+                            <div style="width: 200px; padding: 10px;">
+                                <h3 style="margin: 0 0 5px 0;">${service.name}</h3>
+                                <div style="font-size: 13px; margin-bottom: 5px;">${typeDisplay}</div>
+                                <div style="font-size: 13px;">${service.vicinity || 'Near selected location'}</div>
+                                <div style="font-size: 13px; margin-top: 5px;">${service.distance} km away</div>
+                            </div>
+                        `;
+                        
+                        // Open info window for this marker
+                        if (infoWindow) infoWindow.close();
+                        infoWindow = new google.maps.InfoWindow({
+                            content: infoContent
+                        });
+                        infoWindow.open(map, marker);
+                    } else {
+                        console.warn("Could not find marker for service:", service.id);
+                    }
                 });
                 
-                servicesList.appendChild(serviceElement);
+                // Add the service card to the fragment
+                fragment.appendChild(serviceCard);
             });
             
-            // Save current services
-            transportServices = services;
-        }
-        
-        // Function to display transport services with filtering
-        function displayTransportServices(services) {
-            renderTransportServices(services);
+            // Add all cards to the DOM at once
+            servicesList.appendChild(fragment);
             
-            // Update markers on map
-            if (window.serviceMarkers) {
-                window.serviceMarkers.forEach(marker => {
-                    // Fix ID comparison by handling both string and number IDs
-                    const markerID = marker.get('id');
-                    const isVisible = services.some(s => s.id.toString() === markerID.toString());
-                    marker.setVisible(isVisible);
-                });
+            // Add services-loaded class to map
+            document.getElementById('map').classList.add('services-loaded');
+            
+            // Add a test service if the list is empty but we had services to display
+            if (servicesList.childNodes.length === 0 && services && services.length > 0) {
+                console.error("Services were not displayed properly!");
+                
+                // Add a test card for debugging
+                const testCard = document.createElement('div');
+                testCard.className = 'service-card test-card';
+                testCard.innerHTML = `
+                    <div style="padding: 20px; background-color: #f8d7da; color: #721c24; border-radius: 5px;">
+                        <h3>Display Test Card</h3>
+                        <p>There were ${services.length} services that should be displayed.</p>
+                        <p>Check the console for more information.</p>
+                    </div>
+                `;
+                servicesList.appendChild(testCard);
             }
         }
 
@@ -1607,7 +1843,27 @@
         });
 
         // Initialize map when the page loads
-        window.onload = initMap;
+        window.onload = function() {
+            console.log("Window loaded - initializing map...");
+            initMap();
+            
+            // Add a timeout to check if the map was properly initialized
+            setTimeout(function() {
+                if (map) {
+                    console.log("Map successfully initialized");
+                } else {
+                    console.error("Map failed to initialize properly!");
+                }
+                
+                // Check services display functionality
+                const servicesList = document.getElementById('servicesList');
+                if (servicesList) {
+                    console.log("Services list container ready:", servicesList);
+                } else {
+                    console.error("Services list container not found!");
+                }
+            }, 1000);
+        };
 
         // Improve the generateLocationSpecificMockServices function
         function generateLocationSpecificMockServices(location) {
@@ -1709,8 +1965,9 @@
             
             console.log(`Generated ${mockServices.length} mock services for ${locationName}`);
             
-            // Display the services
-            displayTransportServicesForLocation(mockServices, location);
+            // Make sure we're using the correct display function - this was previously calling displayTransportServicesForLocation
+            // Use the correct display function
+            displayTransportServices(mockServices);
             
             // Add markers to map
             addMarkersToMap(mockServices);
@@ -1727,51 +1984,9 @@
 
         // Add a function to display transport services with location context
         function displayTransportServicesForLocation(services, location) {
-            // Make sure location is valid
-            if (!location || typeof location.lat !== 'number' || typeof location.lng !== 'number') {
-                console.error("Invalid location in displayTransportServicesForLocation:", location);
-                return;
-            }
-            
-            console.log(`Displaying ${services.length} transport services for location:`, location);
-            
-            // Get location name (or use coordinates if name not available)
-            const locationDisplayText = document.getElementById('selected-location').textContent;
-            const locationName = (locationDisplayText && locationDisplayText !== "Loading location...") ? 
-                     locationDisplayText : `Location (${location.lat.toFixed(5)}, ${location.lng.toFixed(5)})`;
-            
-            // Render services with location context
-            renderTransportServices(services);
-            
-            // Update the header to include location info
-            const headerElement = document.querySelector('.transport-header p');
-            if (headerElement) {
-                headerElement.textContent = `Transport services near ${locationName.split('(')[0].trim()}`;
-                headerElement.style.fontWeight = 'bold';
-            }
-            
-            // Update markers on map with visibility
-            updateServiceMarkersVisibility(services);
-            
-            // Make sure the map shows the selected location
-            if (currentPosition && currentPosition.lat === location.lat && currentPosition.lng === location.lng) {
-                // We're already centered on this location
-                console.log("Already centered on selected location");
-            } else {
-                // Update current position and recenter map
-                currentPosition = location;
-                
-                // Ensure the location marker is visible at this position
-                if (window.locationMarker) {
-                    window.locationMarker.setPosition(location);
-                }
-                
-                // Center the map on this location if not already centered
-                map.panTo(location);
-            }
-            
-            // Update the UI state to show results
-            map.classList.add('services-loaded');
+            // This function appears to be obsolete - just call displayTransportServices directly
+            console.log("displayTransportServicesForLocation called - redirecting to displayTransportServices");
+            displayTransportServices(services);
         }
 
         // Function to update service markers visibility
@@ -1915,12 +2130,14 @@
                     return 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
                 case 'cold_storage':
                     return 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+                case 'public_transport':
+                    return 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png';
                 default:
                     return 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
             }
         }
 
-        // Add this function to coordinate geocoding and services loading
+        // Fix geocodeAndLoadServices function
         function geocodeAndLoadServices(location) {
             console.log("Geocoding and loading services for location:", location);
             
@@ -1928,23 +2145,38 @@
             const servicesLoading = document.getElementById('services-loading');
             servicesLoading.style.display = 'flex';
             
+            // Clear any existing services
+            document.getElementById('servicesList').innerHTML = '';
+            
             // Center map on clicked location with animation
             map.panTo(location);
             
-            // First, geocode the location to get the address
-            const geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ location: location }, (results, status) => {
+            // Create geocoder if it doesn't exist
+            if (!window.geocoder) {
+                window.geocoder = new google.maps.Geocoder();
+            }
+            
+            // Perform the geocoding
+            window.geocoder.geocode({ 'location': location }, function(results, status) {
+                console.log("Geocoding result:", status, results && results.length ? results[0].formatted_address : 'No results');
+                
+                let locationName = "Unknown Location";
+                
                 if (status === 'OK' && results[0]) {
-                    let address = results[0].formatted_address;
-                    let locationName = "";
+                    // Get full address
+                    const address = results[0].formatted_address;
+                    locationName = address;
+                    
+                    // Find components for more specific location display
+                    let specificLocation = "";
                     let pincode = "";
                     
-                    // Find components with locality, administrative_area, and postal_code
+                    // Extract useful components from the address
                     for (const component of results[0].address_components) {
                         if (component.types.includes('locality') || 
                             component.types.includes('administrative_area_level_2') ||
                             component.types.includes('administrative_area_level_1')) {
-                            locationName += locationName ? `, ${component.long_name}` : component.long_name;
+                            specificLocation += specificLocation ? `, ${component.long_name}` : component.long_name;
                         }
                         
                         if (component.types.includes('postal_code')) {
@@ -1952,26 +2184,451 @@
                         }
                     }
                     
-                    // Update display
-                    document.getElementById('selected-location').innerHTML = locationName || address;
-                    if (pincode) {
-                        document.getElementById('selected-location').innerHTML += ` <span class="pincode">(${pincode})</span>`;
+                    // Update the location display with the geocoded address
+                    const locationElem = document.getElementById('selected-location');
+                    if (specificLocation) {
+                        locationElem.innerHTML = specificLocation;
+                        if (pincode) {
+                            locationElem.innerHTML += ` <span class="pincode">(${pincode})</span>`;
+                        }
+                    } else {
+                        locationElem.textContent = address;
                     }
-                    document.getElementById('location-coords').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
-                    
-                    // Now that geocoding is done, load the services
-                    console.log("Geocoding done, now loading services for this location");
-                    loadServicesNearLocation(location);
                 } else {
-                    console.log('Geocoder failed:', status);
-                    document.getElementById('selected-location').textContent = "Unknown Location";
-                    document.getElementById('location-coords').textContent = `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
+                    // If geocoding fails, still show something
+                    document.getElementById('selected-location').textContent = 'Location Lookup Failed';
+                    console.error('Geocoder failed due to: ' + status);
+                }
+                
+                // Always update coordinates display
+                document.getElementById('location-coords').textContent = 
+                    `${location.lat.toFixed(5)}, ${location.lng.toFixed(5)}`;
                     
-                    // Even if geocoding fails, still load services
-                    console.log("Geocoding failed, but still loading services for this location");
-                    loadServicesNearLocation(location);
+                console.log("Now getting transport services for location:", location);
+                
+                // Clear any existing services first
+                transportServices = [];
+                
+                // Get both regular and public transport services for this location
+                getTransportServices(location, 'transport');
+                getTransportServices(location, 'public_transit');
+            });
+        }
+
+        // Update getTransportServices to properly handle service display
+        function getTransportServices(location, serviceType) {
+            console.log(`Fetching ${serviceType} services for location:`, location);
+            
+            // For testing - create mock data
+            const mockServices = generateMockServices(location, serviceType);
+            console.log(`Generated ${mockServices.length} ${serviceType} services`);
+            
+            // Add new services to the global array
+            transportServices = [...transportServices, ...mockServices];
+            console.log(`Total services now: ${transportServices.length}`);
+            
+            // Create markers for each service - do this before displaying to ensure markers exist
+            mockServices.forEach(service => {
+                createServiceMarker(service);
+            });
+            
+            // Hide loading indicator
+            const servicesLoading = document.getElementById('services-loading');
+            if (servicesLoading) {
+                servicesLoading.style.display = 'none';
+            }
+            
+            // Now display ALL services
+            displayTransportServices(transportServices);
+        }
+
+        // Function to search for public transport options
+        function searchPublicTransport(location) {
+            console.log("Searching for public transport near:", location);
+            
+            // Create Places service if it doesn't exist
+            if (!window.placesService) {
+                window.placesService = new google.maps.places.PlacesService(map);
+            }
+            
+            // Transport types to search for
+            const transportTypes = ['bus_station', 'train_station', 'subway_station', 'transit_station'];
+            
+            // Perform the search using Places API
+            window.placesService.nearbySearch({
+                location: location,
+                radius: 2000, // 2km radius
+                type: transportTypes
+            }, (results, status) => {
+                console.log("Public transport search results:", status, results ? results.length : 0);
+                
+                if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
+                    // Process the results
+                    const publicTransportServices = results.map(place => {
+                        // Determine transport type
+                        let transportType = 'bus_station'; // Default
+                        if (place.types) {
+                            for (const type of transportTypes) {
+                                if (place.types.includes(type)) {
+                                    transportType = type;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // Calculate distance
+                        const distance = calculateDistance(
+                            location.lat, location.lng,
+                            place.geometry.location.lat(), place.geometry.location.lng()
+                        );
+                        
+                        // Create service object
+                        return {
+                            id: place.place_id,
+                            name: place.name,
+                            type: 'public_transport',
+                            subtype: transportType.replace('_station', '').replace('_', ' '),
+                            vicinity: place.vicinity || place.formatted_address || `Near ${distance.toFixed(1)} km from center`,
+                            location: {
+                                lat: place.geometry.location.lat(),
+                                lng: place.geometry.location.lng()
+                            },
+                            distance: distance,
+                            rating: place.rating || (3.5 + Math.random() * 1.5).toFixed(1),
+                            reviews: place.user_ratings_total || Math.floor(5 + Math.random() * 30),
+                            availability: place.opening_hours && place.opening_hours.isOpen() ? 
+                                "Open Now" : "Schedule Varies",
+                            description: getPublicTransportDescription(transportType, distance)
+                        };
+                    });
+                    
+                    console.log("Processed public transport services:", publicTransportServices.length);
+                    
+                    // Add to existing services
+                    transportServices = [...transportServices, ...publicTransportServices];
+                    
+                    // Add more detailed logging to debug display issues
+                    console.log("Total services after adding public transport:", transportServices.length);
+                    console.log("First few services:", transportServices.slice(0, 3));
+                    
+                    // Make sure we're calling the right display function
+                    displayTransportServices(transportServices);
+                    
+                    // Add markers for public transport
+                    addMarkersToMap(publicTransportServices);
                 }
             });
+        }
+        
+        // Function to get description for public transport services
+        function getPublicTransportDescription(type, distance) {
+            const typeDisplay = type.replace('_station', '').replace('_', ' ');
+            const descriptions = {
+                'bus': [
+                    `Bus station with regular services to nearby towns and villages.`,
+                    `Bus stop with connections to agricultural markets and urban centers.`,
+                    `Local and regional bus services available from this station.`
+                ],
+                'train': [
+                    `Railway station with cargo and passenger services.`,
+                    `Train station with regular services for agricultural goods transport.`,
+                    `Major railway hub with connections to various agricultural markets.`
+                ],
+                'subway': [
+                    `Metro station with quick access to urban markets.`,
+                    `Subway station connecting rural and urban centers.`,
+                    `Rapid transit station for quick movement of goods and people.`
+                ],
+                'transit': [
+                    `Transit hub with multiple transport options available.`,
+                    `Public transport interchange with various connection options.`,
+                    `Transport center with services to key agricultural areas.`
+                ]
+            };
+            
+            // Get the right category of descriptions
+            const typeKey = type.replace('_station', '');
+            const typeDescriptions = descriptions[typeKey] || descriptions['bus'];
+            
+            // Add distance information
+            const description = typeDescriptions[Math.floor(Math.random() * typeDescriptions.length)];
+            return `${description} Located ${distance.toFixed(1)} km from your selected point.`;
+        }
+        
+        // Modify createMarker function to handle public transport markers
+        function createMarker(place) {
+            let icon;
+            if (place.type === 'public_transport') {
+                // Use specific icons for public transport types
+                const iconType = {
+                    'bus_station': 'https://maps.google.com/mapfiles/ms/icons/bus.png',
+                    'train_station': 'https://maps.google.com/mapfiles/ms/icons/rail.png',
+                    'subway_station': 'https://maps.google.com/mapfiles/ms/icons/subway.png',
+                    'transit_station': 'https://maps.google.com/mapfiles/ms/icons/transit.png'
+                };
+                
+                // Default to a generic transport icon if specific one not found
+                icon = iconType[place.subtype + '_station'] || 'https://maps.google.com/mapfiles/ms/icons/bus.png';
+            } else {
+                // Use existing icons for other service types
+                icon = getServiceTypeIcon(place.type);
+            }
+            
+            const marker = new google.maps.Marker({
+                map: map,
+                position: place.location,
+                icon: icon
+            });
+            
+            // Add to marker array for later management
+            serviceMarkers.push(marker);
+            
+            // Create info window with place name
+            const infowindow = new google.maps.InfoWindow({
+                content: `<strong>${place.name}</strong><br>${place.vicinity}`
+            });
+            
+            // Add click listener to open info window
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+                // Highlight corresponding service in list if exists
+                highlightServiceInList(place.id);
+            });
+            
+            return marker;
+        }
+        
+        // Add function to highlight service in list when marker is clicked
+        function highlightServiceInList(serviceId) {
+            // Remove highlight from any previously active card
+            const activeCards = document.querySelectorAll('.service-card.active');
+            activeCards.forEach(card => card.classList.remove('active'));
+            
+            // Find the card for this service and highlight it
+            const serviceCard = document.querySelector(`.service-card[data-id="${serviceId}"]`);
+            if (serviceCard) {
+                serviceCard.classList.add('active');
+                // Scroll to the card
+                serviceCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Also check for any renderTransportServices references and update them
+        function renderTransportServices(services) {
+            // This function is obsolete - use displayTransportServices instead
+            console.log("renderTransportServices called - redirecting to displayTransportServices");
+            displayTransportServices(services);
+        }
+
+        // Add generateMockServices function for creating test data
+        function generateMockServices(location, serviceType) {
+            console.log(`Generating mock ${serviceType} services near:`, location);
+            const result = [];
+            const count = serviceType === 'transport' ? 5 : 8; // Generate more public transit options
+            
+            // Service types based on the category
+            const serviceTypes = serviceType === 'transport' 
+                ? ['tractor', 'harvester', 'truck', 'storage'] 
+                : ['bus', 'train', 'subway', 'transit'];
+            
+            // Random names for services
+            const transportNames = [
+                'Village Transport Co.', 'AgriRide Service', 'FarmHaulers Ltd', 
+                'Rural Transit', 'Harvest Express', 'Farmer\'s Commute', 'AgriMobility',
+                'GrainTransit', 'FarmDirect Logistics', 'CropCarry Solutions'
+            ];
+            
+            const publicTransitNames = [
+                'Metro Station', 'City Bus Terminal', 'Central Railway', 'Transit Hub',
+                'Express Line', 'Local Station', 'Urban Connect', 'Regional Transit',
+                'Rapid Transport', 'Community Transit', 'Main Line Station'
+            ];
+            
+            // Random vicinity names to make locations more realistic
+            const vicinityNames = [
+                'Main Road', 'Station Road', 'Market Area', 'Industrial Zone',
+                'City Center', 'Old Town', 'New Development', 'Business District',
+                'Eastern Suburb', 'Western District', 'Northern Heights', 'Southern Valley'
+            ];
+            
+            // Generate random services
+            for (let i = 0; i < count; i++) {
+                // Random offset from the center location (within 10km)
+                const latOffset = (Math.random() - 0.5) * 0.18; // ~10km
+                const lngOffset = (Math.random() - 0.5) * 0.18;
+                
+                // Random type based on category
+                const type = serviceTypes[Math.floor(Math.random() * serviceTypes.length)];
+                
+                // Set appropriate price format based on type
+                let priceInfo = {};
+                
+                if (serviceType === 'transport') {
+                    if (type === 'truck' || type === 'tractor') {
+                        const basePricePerKm = 20 + Math.floor(Math.random() * 15);
+                        priceInfo.price_per_km = basePricePerKm;
+                        priceInfo.price_display = `₹${basePricePerKm}/km`;
+                    } else if (type === 'storage') {
+                        const basePricePerMonth = 5000 + Math.floor(Math.random() * 10000);
+                        priceInfo.price_per_month = basePricePerMonth;
+                        priceInfo.price_display = `₹${basePricePerMonth}/month`;
+                    } else if (type === 'harvester') {
+                        const basePricePerHour = 500 + Math.floor(Math.random() * 300);
+                        priceInfo.price_per_hour = basePricePerHour;
+                        priceInfo.price_display = `₹${basePricePerHour}/hour`;
+                    }
+                }
+                
+                // Random rating between 3.5 and 5.0
+                const rating = (3.5 + Math.random() * 1.5).toFixed(1);
+                
+                // Random distance between 0.5 and 10km
+                const distance = (0.5 + Math.random() * 9.5).toFixed(1);
+                
+                // Names based on category
+                const names = serviceType === 'transport' ? transportNames : publicTransitNames;
+                const name = names[Math.floor(Math.random() * names.length)];
+                
+                // Generate a vicinity for this service
+                const vicinity = vicinityNames[Math.floor(Math.random() * vicinityNames.length)];
+                
+                // Service availability (80% chance of being available)
+                const isAvailable = Math.random() > 0.2;
+                
+                // Create service object
+                const service = {
+                    id: `${serviceType}-${type}-${i}`,
+                    name: `${name} ${i+1}`,
+                    type: type,
+                    serviceCategory: serviceType,
+                    location: {
+                        lat: location.lat + latOffset,
+                        lng: location.lng + lngOffset
+                    },
+                    vicinity: `${vicinity}, ${distance} km from center`,
+                    rating: rating,
+                    distance: distance,
+                    isAvailable: isAvailable,
+                    description: serviceType === 'transport' 
+                        ? `Agricultural ${type} service available for rent with operator.`
+                        : `${type.charAt(0).toUpperCase() + type.slice(1)} station with routes throughout the region.`
+                };
+                
+                // Add price information to service
+                if (priceInfo.price_display) {
+                    service.price_display = priceInfo.price_display;
+                    if (priceInfo.price_per_km) service.price_per_km = priceInfo.price_per_km;
+                    if (priceInfo.price_per_month) service.price_per_month = priceInfo.price_per_month;
+                    if (priceInfo.price_per_hour) service.price_per_hour = priceInfo.price_per_hour;
+                }
+                
+                result.push(service);
+            }
+            
+            // Sort by distance
+            result.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+            
+            return result;
+        }
+
+        // Add createServiceMarker function to create map markers for services
+        function createServiceMarker(service) {
+            console.log(`Creating marker for service: ${service.name} (${service.type})`);
+            
+            // Get the appropriate icon based on service type
+            let icon;
+            if (service.serviceCategory === 'public_transit') {
+                // Use specific icons for public transport types
+                const iconMap = {
+                    'bus': 'https://maps.google.com/mapfiles/ms/icons/bus.png',
+                    'train': 'https://maps.google.com/mapfiles/ms/icons/rail.png',
+                    'subway': 'https://maps.google.com/mapfiles/ms/icons/subway.png',
+                    'transit': 'https://maps.google.com/mapfiles/ms/icons/transit.png'
+                };
+                icon = iconMap[service.type] || 'https://maps.google.com/mapfiles/ms/icons/purple-dot.png';
+            } else {
+                // Use icons for farm transport services
+                const iconMap = {
+                    'tractor': 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    'harvester': 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+                    'truck': 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                    'storage': 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                };
+                icon = iconMap[service.type] || 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
+            }
+            
+            // Create a marker for this service
+            const marker = new google.maps.Marker({
+                position: service.location,
+                map: map,
+                title: service.name,
+                icon: icon
+            });
+            
+            // Store the service's ID with the marker
+            marker.serviceId = service.id;
+            
+            // Add click listener to show info window
+            marker.addListener('click', function() {
+                // Highlight the corresponding list item
+                highlightServiceItem(service.id);
+                
+                // Scroll the service into view
+                scrollToService(service.id);
+                
+                // Create and open info window
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                        <div class="info-window">
+                            <h3>${service.name}</h3>
+                            <p><strong>Type:</strong> ${service.type.charAt(0).toUpperCase() + service.type.slice(1)}</p>
+                            <p><strong>Distance:</strong> ${service.distance} km</p>
+                            ${service.price ? `<p><strong>Price:</strong> ${service.price}</p>` : ''}
+                            <p><strong>Rating:</strong> ${service.rating} ⭐</p>
+                            <p>${service.description}</p>
+                        </div>
+                    `
+                });
+                infoWindow.open(map, marker);
+            });
+            
+            // Add the marker to our global array
+            serviceMarkers.push(marker);
+            
+            return marker;
+        }
+
+        // Function to highlight a service item in the list
+        function highlightServiceItem(serviceId) {
+            // First remove highlight from all items
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('highlighted');
+            });
+            
+            // Add highlight to the selected item
+            const selectedCard = document.querySelector(`.service-card[data-id="${serviceId}"]`);
+            if (selectedCard) {
+                selectedCard.classList.add('highlighted');
+            }
+        }
+
+        // Function to scroll a service into view
+        function scrollToService(serviceId) {
+            const selectedCard = document.querySelector(`.service-card[data-id="${serviceId}"]`);
+            if (selectedCard) {
+                selectedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Function to clear all service markers from the map
+        function clearServiceMarkers() {
+            // Remove all markers from the map
+            serviceMarkers.forEach(marker => {
+                marker.setMap(null);
+            });
+            
+            // Clear the array
+            serviceMarkers = [];
         }
     </script>
 </body>

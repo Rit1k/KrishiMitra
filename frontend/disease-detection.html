@@ -208,7 +208,7 @@
       let stream = null;
       let originalDiseaseName = ""; // Store the original disease name
       let formattedDiseaseName = ""; // Store the formatted disease name
-      let showingOriginal = false; // Track which format is currently displayed
+      let showingOriginal = true; // Track which format is currently displayed
 
       // Toggle between original and formatted disease names
       toggleFormat.addEventListener("click", () => {
@@ -279,29 +279,37 @@
         }, "image/jpeg");
       });
 
-      function formatDiseaseName(rawName) {
-        if (!rawName || typeof rawName !== 'string') {
-          return 'Unknown Disease';
-        }
+      function formatDiseaseName(name) {
+        if (!name) return "Unknown";
         
-        // Split by the triple underscore separator
-        const parts = rawName.split('___');
+        // Replace underscores with spaces
+        let formatted = name.replace(/_/g, " ");
         
-        // Format each part
-        let plantType = parts[0].replace(/_/g, ' ');
-        const condition = parts.length > 1 ? parts[1].replace(/_/g, ' ') : '';
+        // Replace triple underscores with " - "
+        formatted = formatted.replace(/___/g, " - ");
         
-        // Capitalize first letter of each word
-        plantType = plantType.split(' ')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        // Capitalize each word
+        formatted = formatted.split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
           .join(' ');
+          
+        // Replace common abbreviations
+        const replacements = {
+          "Yolo": "Yellow Leaf Curl Virus",
+          "Corynespora": "Corynespora Leaf Spot",
+          "Powdery": "Powdery Mildew",
+          "Cercospora": "Cercospora Leaf Spot"
+        };
         
-        // Return formatted name
-        if (condition.toLowerCase() === 'healthy') {
-          return `${plantType}: Healthy`;
-        } else {
-          return `${plantType}: ${condition}`;
-        }
+        // Apply replacements
+        Object.keys(replacements).forEach(abbr => {
+          const regex = new RegExp(`\\b${abbr}\\b`, 'i');
+          if (regex.test(formatted)) {
+            formatted = formatted.replace(regex, replacements[abbr]);
+          }
+        });
+        
+        return formatted;
       }
 
       async function detectDisease(file) {
@@ -331,7 +339,7 @@
           resultContainer.style.display = "block";
 
           // Check if we're running in fallback mode
-          if (result.fallback_mode) {
+          if (result.warning) {
             // Add a warning message if we're in fallback mode
             const warningElem = document.createElement("div");
             warningElem.style.backgroundColor = "#fff3cd";
@@ -339,19 +347,12 @@
             warningElem.style.padding = "10px";
             warningElem.style.borderRadius = "4px";
             warningElem.style.marginBottom = "10px";
-            warningElem.textContent =
-              "Note: Running in limited diagnostic mode. For best results, try again when server model is available.";
+            warningElem.textContent = result.warning;
 
             // Insert at the top of the result container
             resultContainer.insertBefore(
               warningElem,
               resultContainer.firstChild
-            );
-          }
-
-          if (result.disease === "Sample Disease") {
-            console.error(
-              "Received sample disease instead of actual prediction"
             );
           }
 
@@ -375,11 +376,75 @@
             formattedDiseaseName = "Unknown Disease";
           }
 
+          // Display confidence percentage
           confidence.textContent = result.confidence
             ? `${(result.confidence * 100).toFixed(2)}%`
             : "N/A";
+          
+          // Display treatment
           treatmentText.textContent =
             result.treatment || "No specific treatment information available.";
+          
+          // Display top predictions if available
+          if (result.top_predictions && result.top_predictions.length > 0) {
+            // Create or get the top predictions container
+            let topPredictionsContainer = document.getElementById("topPredictionsContainer");
+            if (!topPredictionsContainer) {
+              topPredictionsContainer = document.createElement("div");
+              topPredictionsContainer.id = "topPredictionsContainer";
+              topPredictionsContainer.className = "top-predictions";
+              topPredictionsContainer.style.marginTop = "1rem";
+              topPredictionsContainer.style.padding = "1rem";
+              topPredictionsContainer.style.backgroundColor = "#f5f5f5";
+              topPredictionsContainer.style.borderRadius = "8px";
+              
+              const heading = document.createElement("h4");
+              heading.textContent = "Top Predictions:";
+              topPredictionsContainer.appendChild(heading);
+              
+              // Add it to the result container
+              resultContainer.appendChild(topPredictionsContainer);
+            } else {
+              // Clear existing content except the heading
+              while (topPredictionsContainer.childNodes.length > 1) {
+                topPredictionsContainer.removeChild(topPredictionsContainer.lastChild);
+              }
+            }
+            
+            // Create a list of predictions
+            const predList = document.createElement("ul");
+            predList.style.paddingLeft = "1.5rem";
+            predList.style.marginTop = "0.5rem";
+            
+            // Add each prediction to the list
+            result.top_predictions.forEach(pred => {
+              const item = document.createElement("li");
+              item.innerHTML = `
+                <span style="font-weight: ${pred.disease === result.disease ? 'bold' : 'normal'}">
+                  ${formatDiseaseName(pred.disease)}
+                </span> 
+                <span style="color: #388e3c; margin-left: 0.5rem;">
+                  ${(pred.confidence * 100).toFixed(2)}%
+                </span>
+              `;
+              predList.appendChild(item);
+            });
+            
+            topPredictionsContainer.appendChild(predList);
+          }
+          
+          // Display method used for prediction if provided
+          if (result.method) {
+            const methodInfo = document.createElement("p");
+            methodInfo.style.fontSize = "0.8rem";
+            methodInfo.style.color = "#666";
+            methodInfo.style.marginTop = "1rem";
+            methodInfo.textContent = `Prediction method: ${result.method}`;
+            
+            // Add to result container
+            resultContainer.appendChild(methodInfo);
+          }
+          
         } catch (error) {
           console.error("Error detecting disease:", error);
           alert(

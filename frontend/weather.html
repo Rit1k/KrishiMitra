@@ -384,7 +384,7 @@
 
             <div class="tabs">
                 <div class="tab active" data-tab="current">Current Weather</div>
-                <div class="tab" data-tab="forecast">5-Day Forecast</div>
+                <div class="tab" data-tab="forecast">6-Day Forecast</div>
                 <div class="tab" data-tab="soil">Soil Data</div>
                 <div class="tab" data-tab="map">Weather Map</div>
             </div>
@@ -506,7 +506,7 @@
         <ul class="debug-log" id="debugLog"></ul>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAxNoT4PUyowSiqxxu70iPNNLp2OvVHTo&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={api-key}&callback=initMap" async defer></script>
     <script>
         // Debug functionality
         const DEBUG = {
@@ -773,7 +773,7 @@
         
         // OpenWeather API key - You need to replace this with a valid API key
         // Visit https://openweathermap.org/appid to sign up for a free API key
-        const apiKey = 'bee375b554d991283c9f4c6b235ee40f'; // Your API key
+        const apiKey = 'api-key'; // Your API key
         
         // Check if API key is set
         function isApiKeyConfigured() {
