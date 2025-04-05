@@ -3,7 +3,7 @@ Here is the trained model
 To run the project u have to add the plant_disease_model.h5 file from the drive folder to yout backend directory\
 Now create .env and copy paste these as it is and your own api key
 # MongoDB Configuration
-MONGODB_URI=mongodb://localhost:27017/krishimitra
+MONGODB_URI=
 
 # API Keys
 OPENAI_API_KEY=
