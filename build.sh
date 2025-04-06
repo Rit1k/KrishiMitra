@@ -10,8 +10,8 @@ apt-get install -y build-essential python3.11-dev python3.11-venv
 python3.11 -m venv .venv
 source .venv/bin/activate
 
-# Upgrade pip
-pip install --upgrade pip
+# Upgrade pip and setuptools
+pip install --upgrade pip setuptools wheel
 
 # Install Python packages
-pip install -r requirements.txt 
+pip install --no-cache-dir -r requirements.txt 
