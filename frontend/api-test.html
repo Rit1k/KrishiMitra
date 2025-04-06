@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - KrishiMitra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .test-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .status {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .status.success {
+            color: #4CAF50;
+        }
+        .status.error {
+            color: #f44336;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">← Back to Home</a>
+        <a href="sms-admin.html">Go to SMS Admin →</a>
+    </div>
+
+    <h1>API Test Tool</h1>
+    <p>Use this tool to test API endpoints and diagnose server issues.</p>
+
+    <div class="test-card">
+        <h2>API Status Check</h2>
+        <p>Check if the API server is online and which services are available.</p>
+        <button onclick="checkApiStatus()">Check API Status</button>
+        <div id="statusResponse" class="response">Results will appear here...</div>
+    </div>
+
+    <div class="test-card">
+        <h2>Phone Validation Test</h2>
+        <div class="input-group">
+            <label for="phoneInput">Phone Number (10 digits):</label>
+            <input type="text" id="phoneInput" placeholder="Enter 10-digit phone number" maxlength="10">
+        </div>
+        <button onclick="testPhoneValidation()">Test Validation</button>
+        <div id="validationResponse" class="response">Results will appear here...</div>
+        <div id="validationStatus" class="status"></div>
+    </div>
+
+    <div class="test-card">
+        <h2>Custom API Request</h2>
+        <div class="input-group">
+            <label for="endpointSelect">Endpoint:</label>
+            <select id="endpointSelect">
+                <option value="/api/status">GET /api/status</option>
+                <option value="/api/subscribers/sms">GET /api/subscribers/sms</option>
+                <option value="/api/test-phone-validation">POST /api/test-phone-validation</option>
+                <option value="/api/subscribe">POST /api/subscribe</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="requestBody">Request Body (JSON):</label>
+            <textarea id="requestBody" rows="5" style="width: 100%;">{
+  "phone": "1234567890"
+}</textarea>
+        </div>
+        <button onclick="sendCustomRequest()">Send Request</button>
+        <div id="customResponse" class="response">Results will appear here...</div>
+        <div id="customStatus" class="status"></div>
+    </div>
+
+    <script>
+        // Check basic API status
+        async function checkApiStatus() {
+            const statusElement = document.getElementById('statusResponse');
+            statusElement.textContent = 'Checking API status...';
+            
+            try {
+                const response = await fetch('/api/status');
+                
+                // Format status output
+                const statusText = `Response Status: ${response.status} ${response.statusText}\n`;
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    statusElement.textContent = statusText + JSON.stringify(data, null, 2);
+                } else {
+                    statusElement.textContent = statusText + 'API status check failed';
+                }
+            } catch (error) {
+                console.error('Error checking API status:', error);
+                statusElement.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        // Test phone validation
+        async function testPhoneValidation() {
+            const phone = document.getElementById('phoneInput').value;
+            const responseElement = document.getElementById('validationResponse');
+            const statusElement = document.getElementById('validationStatus');
+            
+            responseElement.textContent = 'Testing phone validation...';
+            statusElement.textContent = '';
+            statusElement.className = 'status';
+            
+            if (!phone) {
+                responseElement.textContent = 'Please enter a phone number';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/test-phone-validation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone: phone })
+                });
+                
+                // Format response output
+                const statusText = `Response Status: ${response.status} ${response.statusText}\n`;
+                
+                try {
+                    const data = await response.json();
+                    responseElement.textContent = statusText + JSON.stringify(data, null, 2);
+                    
+                    if (response.ok) {
+                        if (data.is_valid) {
+                            statusElement.textContent = '✓ Valid phone number';
+                            statusElement.className = 'status success';
+                        } else {
+                            statusElement.textContent = '✗ Invalid phone number';
+                            statusElement.className = 'status error';
+                        }
+                    } else {
+                        statusElement.textContent = `✗ Error: ${data.error || 'Unknown error'}`;
+                        statusElement.className = 'status error';
+                    }
+                } catch (parseError) {
+                    responseElement.textContent = statusText + 'Failed to parse response as JSON';
+                    statusElement.textContent = '✗ Invalid JSON response';
+                    statusElement.className = 'status error';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                responseElement.textContent = `Error: ${error.message}`;
+                statusElement.textContent = '✗ Network error';
+                statusElement.className = 'status error';
+            }
+        }
+        
+        // Update the custom API request section with improved options
+        async function sendCustomRequest() {
+            const endpoint = document.getElementById('endpointSelect').value;
+            const requestBodyText = document.getElementById('requestBody').value;
+            const responseElement = document.getElementById('customResponse');
+            const statusElement = document.getElementById('customStatus');
+            
+            responseElement.textContent = `Sending request to ${endpoint}...`;
+            statusElement.textContent = '';
+            statusElement.className = 'status';
+            
+            try {
+                // Parse request body
+                let requestBody;
+                try {
+                    requestBody = requestBodyText ? JSON.parse(requestBodyText) : null;
+                } catch (parseError) {
+                    responseElement.textContent = `Error parsing request body: ${parseError.message}`;
+                    statusElement.textContent = '✗ Invalid JSON in request body';
+                    statusElement.className = 'status error';
+                    return;
+                }
+                
+                // Determine method based on endpoint
+                const method = endpoint.includes('GET') ? 'GET' : 'POST';
+                
+                // Show request details
+                responseElement.textContent = `Request URL: ${endpoint}\nMethod: ${method}\n`;
+                if (method === 'POST' && requestBody) {
+                    responseElement.textContent += `Body: ${JSON.stringify(requestBody, null, 2)}\n\n`;
+                }
+                responseElement.textContent += `Sending request...\n`;
+                
+                // Record start time
+                const startTime = new Date();
+                
+                // Build request options
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                
+                // Add body for POST requests
+                if (method === 'POST' && requestBody) {
+                    options.body = JSON.stringify(requestBody);
+                }
+                
+                // Clean up endpoint string (remove method prefix)
+                const cleanEndpoint = endpoint.replace('GET ', '').replace('POST ', '');
+                
+                // Send request
+                const response = await fetch(cleanEndpoint, options);
+                
+                // Calculate response time
+                const endTime = new Date();
+                const requestTimeMs = endTime - startTime;
+                
+                // Format response output
+                const statusText = `Response Status: ${response.status} ${response.statusText}\n`;
+                const timeText = `Response Time: ${requestTimeMs}ms\n`;
+                const headersText = `Response Headers:\n${formatHeaders(response.headers)}\n`;
+                
+                responseElement.textContent += statusText + timeText + headersText + '\n';
+                
+                try {
+                    // Get response as text first
+                    const responseText = await response.text();
+                    responseElement.textContent += `Response Body (raw):\n${responseText}\n\n`;
+                    
+                    // Try to parse as JSON if possible
+                    try {
+                        if (responseText) {
+                            const data = JSON.parse(responseText);
+                            responseElement.textContent += `Response Body (JSON):\n${JSON.stringify(data, null, 2)}`;
+                            
+                            if (response.ok) {
+                                statusElement.textContent = '✓ Request successful';
+                                statusElement.className = 'status success';
+                            } else {
+                                statusElement.textContent = `✗ Error: ${data.error || data.message || 'Unknown error'}`;
+                                statusElement.className = 'status error';
+                            }
+                        } else {
+                            responseElement.textContent += 'Empty response body';
+                            if (response.ok) {
+                                statusElement.textContent = '✓ Request successful (empty response)';
+                                statusElement.className = 'status success';
+                            } else {
+                                statusElement.textContent = `✗ Error: Status ${response.status}`;
+                                statusElement.className = 'status error';
+                            }
+                        }
+                    } catch (jsonError) {
+                        responseElement.textContent += `Failed to parse response as JSON: ${jsonError.message}`;
+                        statusElement.textContent = '✗ Invalid JSON response';
+                        statusElement.className = 'status error';
+                    }
+                } catch (textError) {
+                    responseElement.textContent += `Failed to get response text: ${textError.message}`;
+                    statusElement.textContent = '✗ Error reading response';
+                    statusElement.className = 'status error';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                responseElement.textContent = `Network Error: ${error.message}`;
+                statusElement.textContent = '✗ Network error';
+                statusElement.className = 'status error';
+            }
+        }
+
+        // Helper function to format headers
+        function formatHeaders(headers) {
+            let result = '';
+            for (const [key, value] of headers.entries()) {
+                result += `  ${key}: ${value}\n`;
+            }
+            return result;
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot - Farmer's Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{
+         background-image: url('./assets/ai.jpg');   
+         background-size: cover;
+         background-position: center;
+        }
+        .chat-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-box {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-header i {
+            font-size: 1.5rem;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .user-message {
+            background: #e3f2fd;
+            align-self: flex-end;
+            margin-left: 20%;
+        }
+
+        .bot-message {
+            background: #f5f5f5;
+            align-self: flex-start;
+            margin-right: 20%;
+        }
+
+        .message-time {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .message-input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            resize: none;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
+        .send-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .send-btn:hover {
+            background: #45a049;
+        }
+
+        .send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            color: #666;
+            align-items: center;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typing 1s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .subscription-banner {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .subscription-info {
+            flex-grow: 1;
+        }
+
+        .subscribe-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .subscribe-btn:hover {
+            background: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                padding: 0.5rem;
+                height: calc(100vh - 60px);
+            }
+
+            .message {
+                max-width: 90%;
+            }
+
+            .subscription-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .subscribe-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-header {
+                padding: 0.75rem;
+            }
+
+            .chat-messages {
+                padding: 0.75rem;
+            }
+
+            .message {
+                max-width: 95%;
+                padding: 0.75rem;
+            }
+
+            .chat-input {
+                padding: 0.75rem;
+            }
+
+            .message-input {
+                padding: 0.5rem;
+            }
+
+            .send-btn {
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.svg" alt="Krishimitra Logo" class="logo-img">
+                <h1>KrishiMitra</h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disease-detection.html">Disease Detection</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="sms-admin.html">SMS Admin</a></li>
+                <li><a href="email-admin.html">Email Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="chat-container">
+            <div id="subscriptionBanner" class="subscription-banner">
+                <div class="subscription-info">
+                    <h3>Get Unlimited Access</h3>
+                    <p>Subscribe to unlock unlimited chat messages and get daily farming tips via SMS!</p>
+                </div>
+                <button class="subscribe-btn" onclick="showSubscribeModal()">
+                    <i class="fas fa-star"></i> Subscribe Now
+                </button>
+            </div>
+
+            <div class="chat-box">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i>
+                    <h2>AI Farming Assistant</h2>
+                </div>
+
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message bot-message">
+                        Hello! I'm your AI farming assistant. How can I help you today?
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+
+                <div id="typingIndicator" class="typing-indicator" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    AI is typing...
+                </div>
+
+                <div class="chat-input">
+                    <textarea
+                        id="messageInput"
+                        class="message-input"
+                        placeholder="Type your message here..."
+                        rows="1"
+                        onkeydown="if(event.keyCode === 13 && !event.shiftKey) { event.preventDefault(); sendMessage(); }">
+                    </textarea>
+                    <button onclick="sendMessage()" class="send-btn" id="sendButton">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let messageCount = 0;
+        const MAX_FREE_MESSAGES = 5;
+        let isSubscribed = false;
+
+        function formatTime(date) {
+            return new Intl.DateTimeFormat('en-US', {
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            }).format(date);
+        }
+
+        // Function to check if the user is subscribed
+        async function checkSubscriptionStatus() {
+            const userId = getUserId();
+            try {
+                // Add loading message for subscription check
+                console.log('Checking subscription status...');
+                
+                const response = await fetch(`http://localhost:5000/api/check-subscription-status?user_id=${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    console.error('Error checking subscription status:', response.status);
+                    return false;
+                }
+                
+                const data = await response.json();
+                console.log('Subscription status check result:', data);
+                
+                if (data.subscribed) {
+                    isSubscribed = true;
+                    // Hide the subscription banner when user is subscribed
+                    const banner = document.getElementById('subscriptionBanner');
+                    if (banner) banner.style.display = 'none';
+                    return true;
+                }
+                
+                return false;
+            } catch (error) {
+                console.error('Error checking subscription status:', error);
+                return false;
+            }
+        }
+
+        // Function to check if a phone or email is already subscribed
+        async function isAlreadySubscribed(phone, email) {
+            try {
+                const query = new URLSearchParams();
+                if (phone) query.append('phone', phone);
+                if (email) query.append('email', email);
+                
+                const response = await fetch(`http://localhost:5000/api/check-subscription?${query.toString()}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    console.error('Error checking if already subscribed:', response.status);
+                    return false;
+                }
+                
+                const data = await response.json();
+                console.log('Subscription check result:', data);
+                
+                return data.subscribed;
+            } catch (error) {
+                console.error('Error checking if already subscribed:', error);
+                return false;
+            }
+        }
+
+        // Update the sendMessage function to check subscription first
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (!message) return;
+            
+            // If we've reached message limit but haven't checked subscription yet, check it now
+            if (messageCount >= MAX_FREE_MESSAGES && !isSubscribed) {
+                isSubscribed = await checkSubscriptionStatus();
+            }
+            
+            // Add user message
+            addMessage(message, 'user');
+            messageInput.value = '';
+            messageInput.style.height = 'auto'; // Reset height
+            
+            // Show typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.style.display = 'flex';
+            
+            // Disable send button while processing
+            document.getElementById('sendButton').disabled = true;
+
+            try {
+                // Use absolute URL for API call
+                const response = await fetch('http://localhost:5000/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        user_id: getUserId(), // Get or create user ID
+                        is_subscribed: isSubscribed // Send current subscription status
+                    })
+                });
+
+                console.log('Chat response status:', response.status, response.statusText);
+
+                // Check if the request was successful
+                if (!response.ok) {
+                    // For 403 status (message limit reached), try to get the response message
+                    if (response.status === 403) {
+                        // Check again if the user is actually subscribed - they might have subscribed on another device/browser
+                        const isActuallySubscribed = await checkSubscriptionStatus();
+                        
+                        if (isActuallySubscribed) {
+                            // If they are subscribed, try sending the message again
+                            typingIndicator.style.display = 'none';
+                            document.getElementById('sendButton').disabled = false;
+                            // Retry sending message with confirmed subscription status
+                            isSubscribed = true;
+                            sendMessage();
+                            return;
+                        }
+                        
+                        const errorData = await response.json().catch(() => ({}));
+                        const limitMsg = errorData.response || "You've reached the limit of 10 free messages. To continue chatting, please subscribe to our service.";
+                        
+                        // Show subscription prompt
+                        showSubscriptionPrompt();
+                        
+                        // Add the response message
+                        addMessage(limitMsg, 'bot');
+                    } else {
+                        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    // Hide typing indicator and re-enable send button
+                    typingIndicator.style.display = 'none';
+                    document.getElementById('sendButton').disabled = false;
+                    return;
+                }
+
+                const data = await response.json();
+                
+                // Hide typing indicator
+                typingIndicator.style.display = 'none';
+                
+                // Re-enable send button
+                document.getElementById('sendButton').disabled = false;
+
+                if (data.error) {
+                    if (data.error === 'Message limit reached') {
+                        // Double-check subscription status one more time
+                        const reallySubscribed = await checkSubscriptionStatus();
+                        if (reallySubscribed) {
+                            // If they're actually subscribed, try again
+                            isSubscribed = true;
+                            addMessage("Your subscription is now verified. Let me process your query...", 'bot');
+                            setTimeout(() => sendMessage(), 500);
+                            return;
+                        }
+                        
+                        // Show subscription prompt if message limit reached
+                        showSubscriptionPrompt();
+                        
+                        // Still show the response if provided
+                        if (data.response) {
+                            addMessage(data.response, 'bot');
+                        }
+                    } else {
+                        // Show error message for other errors
+                        addMessage(`Sorry, I encountered an error: ${data.error}. Please try again later.`, 'bot');
+                        console.error('API Error:', data.error);
+                    }
+                    return;
+                }
+
+                if (data.warning) {
+                    console.warn("AI Warning:", data.warning);
+                    // Add a note that we're using fallback responses
+                    addMessage(data.response + "\n\n(Note: I'm currently using my backup knowledge system. My answers may be more general than usual.)", 'bot');
+                } else {
+                    // Add bot response
+                    addMessage(data.response, 'bot');
+                }
+                
+                // Increment message count for free tier tracking
+                if (!isSubscribed) {
+                    messageCount++;
+                    updateMessageCounter();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                typingIndicator.style.display = 'none';
+                document.getElementById('sendButton').disabled = false;
+                
+                // Add more detailed error message
+                addMessage("I'm having trouble connecting to the server. Please check your internet connection and try again in a moment.", 'bot');
+            }
+        }
+
+        function addMessage(text, type) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+            
+            // Format links in messages
+            const formattedText = formatText(text);
+            
+            messageDiv.innerHTML = `
+                ${formattedText}
+                <div class="message-time">${formatTime(new Date())}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Format message text to make links clickable and improve presentation
+        function formatText(text) {
+            // Convert URLs to clickable links
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            text = text.replace(urlRegex, url => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`);
+            
+            // Convert line breaks to HTML line breaks
+            text = text.replace(/\n/g, '<br>');
+            
+            return text;
+        }
+
+        function showSubscriptionPrompt() {
+            // Update subscription banner to be more prominent
+            const banner = document.getElementById('subscriptionBanner');
+            banner.style.backgroundColor = '#ffeb3b';
+            banner.style.padding = '1.5rem';
+            banner.style.animation = 'pulse 2s infinite';
+            
+            // Add style for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse {
+                    0% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.4); }
+                    70% { box-shadow: 0 0 0 10px rgba(255, 235, 59, 0); }
+                    100% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Update subscription text
+            banner.querySelector('.subscription-info').innerHTML = `
+                <h3>Message Limit Reached</h3>
+                <p>You've used ${messageCount}/${MAX_FREE_MESSAGES} free messages. Subscribe now to continue chatting with KrishiMitra AI!</p>
+            `;
+            
+            // Scroll to top to ensure banner visibility
+            window.scrollTo(0, 0);
+        }
+        
+        function getUserId() {
+            // Get user ID from local storage or create a new one
+            let userId = localStorage.getItem('krishimitra_user_id');
+            if (!userId) {
+                userId = 'user_' + Math.random().toString(36).substring(2, 15);
+                localStorage.setItem('krishimitra_user_id', userId);
+            }
+            return userId;
+        }
+        
+        function updateMessageCounter() {
+            // Update the subscription banner with message count
+            if (messageCount > 0 && !isSubscribed) {
+                const banner = document.getElementById('subscriptionBanner');
+                banner.querySelector('.subscription-info').innerHTML = `
+                    <h3>Free Trial: ${messageCount}/${MAX_FREE_MESSAGES} Messages Used</h3>
+                    <p>Subscribe to unlock unlimited chat messages and get daily farming tips via SMS!</p>
+                `;
+            }
+        }
+
+        function showSubscribeModal() {
+            // Show a more sophisticated subscription modal
+            const modal = document.createElement('div');
+            modal.className = 'subscription-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Subscribe to KrishiMitra</h2>
+                    <p>Get unlimited access to AI farming assistance and daily tips!</p>
+                    <form id="subscription-form">
+                        <div class="input-group">
+                            <label for="phone-input">Phone Number (10 digits)</label>
+                            <input type="tel" id="phone-input" placeholder="9876543210" 
+                                   pattern="[0-9]{10}" maxlength="10"
+                                   title="Please enter exactly 10 digits for your phone number without any prefix">
+                            <small class="form-hint">Enter a 10-digit Indian phone number without +91 prefix</small>
+                            <div id="phone-error" class="error-message"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="email-input">Email Address (optional if phone provided)</label>
+                            <input type="email" id="email-input" placeholder="yourname@example.com">
+                            <small class="form-hint">Provide either phone or email or both</small>
+                            <div id="email-error" class="error-message"></div>
+                        </div>
+                        <button type="submit" class="subscribe-btn">
+                            <i class="fas fa-check-circle"></i> Subscribe Now
+                        </button>
+                        <div class="subscription-note">
+                            By subscribing, you'll receive agricultural tips and updates. You can unsubscribe anytime.
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            // Add styles for the modal
+            const style = document.createElement('style');
+            style.textContent = `
+                .subscription-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                    animation: fadeIn 0.3s;
+                }
+                
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                
+                .modal-content {
+                    background-color: white;
+                    padding: 2rem;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                    width: 90%;
+                    max-width: 500px;
+                    position: relative;
+                    animation: slideUp 0.3s;
+                }
+                
+                @keyframes slideUp {
+                    from { transform: translateY(30px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                
+                .close-modal {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    font-size: 24px;
+                    cursor: pointer;
+                    color: #666;
+                    transition: color 0.2s;
+                }
+                
+                .close-modal:hover {
+                    color: #333;
+                }
+                
+                .modal-content h2 {
+                    color: var(--primary-color, #4CAF50);
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                }
+                
+                .modal-content p {
+                    margin-top: 0;
+                    margin-bottom: 20px;
+                    color: #666;
+                }
+                
+                .input-group {
+                    margin-bottom: 20px;
+                }
+                
+                .input-group label {
+                    display: block;
+                    margin-bottom: 8px;
+                    font-weight: 500;
+                    color: #444;
+                }
+                
+                .input-group input {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 16px;
+                    transition: border-color 0.2s, box-shadow 0.2s;
+                }
+                
+                .input-group input:focus {
+                    outline: none;
+                    border-color: var(--primary-color, #4CAF50);
+                    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+                }
+                
+                .form-hint {
+                    display: block;
+                    color: #666;
+                    font-size: 0.8rem;
+                    margin-top: 5px;
+                }
+                
+                .error-message {
+                    color: #d32f2f;
+                    font-size: 0.85rem;
+                    margin-top: 5px;
+                    min-height: 1rem;
+                }
+                
+                .subscribe-btn {
+                    width: 100%;
+                    padding: 12px;
+                    background-color: var(--primary-color, #4CAF50);
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background-color 0.2s;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 8px;
+                }
+                
+                .subscribe-btn:hover {
+                    background-color: #43a047;
+                }
+                
+                .subscription-note {
+                    font-size: 0.8rem;
+                    color: #666;
+                    text-align: center;
+                    margin-top: 15px;
+                }
+                
+                @media (max-width: 480px) {
+                    .modal-content {
+                        padding: 1.5rem;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Add to body
+            document.body.appendChild(modal);
+            
+            // Handle phone input validation
+            const phoneInput = modal.querySelector('#phone-input');
+            const phoneError = modal.querySelector('#phone-error');
+            const emailInput = modal.querySelector('#email-input');
+            const emailError = modal.querySelector('#email-error');
+            
+            phoneInput.addEventListener('input', function() {
+                // Remove any non-digit characters
+                this.value = this.value.replace(/\D/g, '');
+                
+                // Clear error message as the user is typing
+                phoneError.textContent = '';
+                
+                // Validate as they type
+                if (this.value.length > 0 && this.value.length !== 10) {
+                    phoneError.textContent = 'Phone number must be exactly 10 digits';
+                }
+            });
+            
+            // Validate email input
+            emailInput.addEventListener('input', function() {
+                emailError.textContent = '';
+                
+                if (this.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+                    emailError.textContent = 'Please enter a valid email address';
+                }
+            });
+            
+            // Handle form submission
+            const form = modal.querySelector('#subscription-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const phone = document.getElementById('phone-input').value.trim();
+                const email = document.getElementById('email-input').value.trim();
+                
+                // Reset error messages
+                phoneError.textContent = '';
+                emailError.textContent = '';
+                
+                // Validate inputs
+                let hasErrors = false;
+                
+                // Validate phone if provided
+                if (phone) {
+                    if (phone.length !== 10 || !/^\d{10}$/.test(phone)) {
+                        phoneError.textContent = 'Phone number must be exactly 10 digits';
+                        hasErrors = true;
+                    }
+                }
+                
+                // Validate email if provided
+                if (email) {
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        emailError.textContent = 'Please enter a valid email address';
+                        hasErrors = true;
+                    }
+                }
+                
+                // Check that at least one of phone or email is provided
+                if (!phone && !email) {
+                    phoneError.textContent = 'Please provide at least a phone number or email';
+                    hasErrors = true;
+                }
+                
+                if (hasErrors) {
+                    return;
+                }
+                
+                // If all validation passes, close modal and submit
+                document.body.removeChild(modal);
+                subscribe(phone, email);
+            });
+            
+            // Close modal when X is clicked
+            const closeButton = modal.querySelector('.close-modal');
+            closeButton.addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+
+        async function subscribe(phone, email) {
+            try {
+                const subscriptionData = {};
+                if (phone) subscriptionData.phone = phone;
+                if (email) subscriptionData.email = email;
+                subscriptionData.source = 'chatbot'; // Add source information
+                subscriptionData.user_id = getUserId(); // Link subscription to user ID
+                
+                // First check if the user is already subscribed
+                if (phone || email) {
+                    const alreadySubscribed = await isAlreadySubscribed(phone, email);
+                    if (alreadySubscribed) {
+                        // If already subscribed, update UI and continue
+                        isSubscribed = true;
+                        addMessage("You're already subscribed! You have unlimited access to KrishiMitra AI.", 'bot');
+                        document.getElementById('subscriptionBanner').style.display = 'none';
+                        return;
+                    }
+                }
+                
+                // Add message informing user of subscription process
+                addMessage("Processing your subscription request...", 'bot');
+                
+                // Use absolute URL for API call
+                const response = await fetch('http://localhost:5000/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(subscriptionData)
+                });
+
+                console.log('Subscription response:', response.status, response.statusText);
+                
+                // Check if response is ok before processing JSON
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    
+                    if (response.status === 400) {
+                        addMessage("Invalid input format. Please ensure your phone number is a 10-digit Indian number without the +91 prefix.", 'bot');
+                    } else if (response.status === 409) {
+                        addMessage("This phone number or email is already subscribed to our service. You can continue chatting without limits now.", 'bot');
+                        // Even though it's already subscribed, we should enable unlimited chatting
+                        isSubscribed = true;
+                        document.getElementById('subscriptionBanner').style.display = 'none';
+                    } else {
+                        addMessage(`Subscription failed (Error ${response.status}): ${errorData.message || response.statusText}. Please try again later.`, 'bot');
+                    }
+                    
+                    console.error('Subscription error:', errorData);
+                    return;
+                }
+
+                const data = await response.json();
+                console.log('Subscription data:', data);
+                
+                if (data.error) {
+                    addMessage(`Subscription failed: ${data.message || data.error}`, 'bot');
+                    return;
+                }
+
+                isSubscribed = true;
+                document.getElementById('subscriptionBanner').style.display = 'none';
+                
+                // Add a confirmation message to the chat
+                addMessage("🎉 You've successfully subscribed! You now have unlimited access to KrishiMitra AI.", 'bot');
+                
+                // Show detailed status if available
+                if (data.sms_status === 'sent') {
+                    addMessage("We've sent a confirmation SMS to your phone number.", 'bot');
+                } else if (data.email_status === 'sent') {
+                    addMessage("We've sent a confirmation email to your email address.", 'bot');
+                }
+            } catch (error) {
+                console.error('Subscription error:', error);
+                addMessage("Error connecting to the server. Please try again later or use the subscription form on our homepage.", 'bot');
+            }
+        }
+
+        // Auto-resize textarea
+        const messageInput = document.getElementById('messageInput');
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+        
+        // Check subscription status on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check if user is already subscribed
+            isSubscribed = await checkSubscriptionStatus();
+            
+            if (isSubscribed) {
+                console.log('User is already subscribed');
+                document.getElementById('subscriptionBanner').style.display = 'none';
+            } else {
+                console.log('User is not subscribed');
+                updateMessageCounter();
+            }
+            
+            // Clear any whitespace from the textarea on load
+            messageInput.value = messageInput.value.trim();
+            
+            // Show some suggestion buttons
+            const chatMessages = document.getElementById('chatMessages');
+            const suggestionsDiv = document.createElement('div');
+            suggestionsDiv.className = 'suggestions';
+            suggestionsDiv.innerHTML = `
+                <p>Try asking about:</p>
+                <div class="suggestion-buttons">
+                    <button onclick="useSuggestion('What crops are best for clay soil?')">Crops for clay soil</button>
+                    <button onclick="useSuggestion('How to prevent fungal diseases in tomatoes?')">Tomato diseases</button>
+                    <button onclick="useSuggestion('Best time to sow wheat in North India?')">Wheat sowing time</button>
+                    <button onclick="useSuggestion('Organic pest control methods')">Organic pest control</button>
+                </div>
+            `;
+            chatMessages.appendChild(suggestionsDiv);
+            
+            // Add styles for suggestions
+            const style = document.createElement('style');
+            style.textContent = `
+                .suggestions {
+                    margin-top: 1rem;
+                    text-align: center;
+                }
+                .suggestion-buttons {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    justify-content: center;
+                    margin-top: 0.5rem;
+                }
+                .suggestion-buttons button {
+                    background: #e3f2fd;
+                    border: 1px solid #2196f3;
+                    border-radius: 16px;
+                    padding: 0.5rem 1rem;
+                    font-size: 0.9rem;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+                .suggestion-buttons button:hover {
+                    background: #bbdefb;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+        
+        function useSuggestion(text) {
+            document.getElementById('messageInput').value = text;
+            sendMessage();
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Admin - KrishiMitra</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<style>
+    body{
+         background-image: url('./assets/sms2.jpg');   
+         background-size: cover;
+         background-position: center;
+        }
+        
+    .admin-box {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        margin: 30px auto;
+        max-width: 800px;
+    }
+    
+    .subscriber-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+    }
+    
+    .subscriber-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 6px;
+        transition: all 0.2s;
+    }
+    
+    .subscriber-list li:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .subscriber-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .subscriber-info i {
+        color: #4CAF50;
+        font-size: 1.2rem;
+        margin-top: 3px;
+    }
+    
+    .subscriber-details {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .phone-number {
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    
+    .subscription-date, .subscription-source {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 2px;
+    }
+    
+    .subscriber-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    
+    .btn:hover {
+        background-color: #45a049;
+    }
+    
+    .btn-danger {
+        background-color: #f44336;
+    }
+    
+    .btn-danger:hover {
+        background-color: #d32f2f;
+    }
+    
+    .subscriber-count {
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #e7f3ff;
+        border-radius: 6px;
+        text-align: center;
+        color: #0066cc;
+    }
+    
+    .last-refresh {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 5px;
+    }
+    
+    .no-data, .error, .loading {
+        padding: 15px;
+        text-align: center;
+        background-color: #f5f5f5;
+        border-radius: 6px;
+    }
+    
+    .error {
+        color: #f44336;
+        background-color: #ffebee;
+    }
+    
+    .admin-controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    /* Added styles for the new functionality */
+    .search-box {
+        margin-bottom: 15px;
+    }
+    
+    .search-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    .status-message {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        text-align: center;
+    }
+    
+    .status-message.success {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+    
+    .status-message.error {
+        background-color: #ffebee;
+        color: #c62828;
+    }
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.svg" alt="Krishimitra Logo" class="logo-img">
+                <h1>KrishiMitra</h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disease-detection.html">Disease Detection</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="sms-admin.html" class="active">SMS Admin</a></li>
+                <li><a href="email-admin.html">Email Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="admin-box">
+                <h2><i class="fas fa-mobile-alt"></i> SMS Subscribers</h2>
+                <div class="admin-controls">
+                    <button class="btn" onclick="sendBulkMessage()">
+                        <i class="fas fa-paper-plane"></i> Send Bulk Message
+                    </button>
+                    <button class="btn" onclick="exportSubscribers()">
+                        <i class="fas fa-download"></i> Export List
+                    </button>
+                    <button class="btn" onclick="showAddSubscriberForm()">
+                        <i class="fas fa-user-plus"></i> Add Subscriber
+                    </button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search subscribers..." oninput="filterSubscribers()">
+                </div>
+                <div id="statusMessage" class="status-message" style="display: none;"></div>
+                <ul id="subscribersList" class="subscriber-list">
+                    <li class="loading">
+                        <i class="fas fa-spinner fa-spin"></i> Loading subscribers...
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function loadSubscribers() {
+            try {
+                // Show loading state
+                const subscribersList = document.getElementById('subscribersList');
+                subscribersList.innerHTML = '<li class="loading"><i class="fas fa-spinner fa-spin"></i> Loading subscribers...</li>';
+                
+                const response = await fetch('http://localhost:5000/api/subscribers/sms');
+                
+                if (!response.ok) {
+                    throw new Error(`Server error (${response.status}): ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                subscribersList.innerHTML = '';
+                
+                if (data && data.length > 0) {
+                    // Display subscriber count
+                    const countElement = document.createElement('div');
+                    countElement.className = 'subscriber-count';
+                    countElement.innerHTML = `
+                        <strong>Total Subscribers: ${data.length}</strong>
+                        <div class="last-refresh">Last updated: ${new Date().toLocaleString()}</div>
+                    `;
+                    subscribersList.appendChild(countElement);
+                    
+                    // Sort subscribers by most recent first (if timestamp is available)
+                    const sortedSubscribers = [...data].sort((a, b) => {
+                        if (a.subscription_date && b.subscription_date) {
+                            return new Date(b.subscription_date) - new Date(a.subscription_date);
+                        }
+                        return 0; // Keep original order if timestamps not available
+                    });
+                    
+                    sortedSubscribers.forEach(subscriber => {
+                        const li = document.createElement('li');
+                        // Use formatted_phone if available, otherwise use the regular phone number
+                        const displayPhone = subscriber.formatted_phone || subscriber.phone;
+                        
+                        // Format subscription date if available
+                        let subscriptionDate = '';
+                        if (subscriber.subscription_date) {
+                            const date = new Date(subscriber.subscription_date);
+                            subscriptionDate = `<span class="subscription-date">Subscribed on: ${date.toLocaleDateString()}</span>`;
+                        }
+                        
+                        // Show subscription source if available
+                        let source = '';
+                        if (subscriber.source) {
+                            source = `<span class="subscription-source">Source: ${subscriber.source}</span>`;
+                        }
+                        
+                        li.innerHTML = `
+                            <div class="subscriber-info">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div class="subscriber-details">
+                                    <span class="phone-number" title="${subscriber.phone}">${displayPhone}</span>
+                                    ${subscriptionDate}
+                                    ${source}
+                                </div>
+                            </div>
+                            <div class="subscriber-actions">
+                                <button class="btn" onclick="sendMessage('${subscriber.phone}')" title="Send message">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                                <button class="btn btn-danger" onclick="unsubscribePhone('${subscriber.phone}')" title="Unsubscribe">
+                                    <i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                        `;
+                        subscribersList.appendChild(li);
+                    });
+                } else {
+                    subscribersList.innerHTML = '<li class="no-data">No subscribers found</li>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('subscribersList').innerHTML = 
+                    `<li class="error">Error loading subscribers: ${error.message}. Please try again.</li>`;
+            }
+        }
+
+        async function sendMessage(phone) {
+            const message = prompt('Enter message to send:');
+            if (!message) return;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/send-sms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone, message })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    alert('Message sent successfully!');
+                } else {
+                    throw new Error(data.error || 'Failed to send message');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`Failed to send message: ${error.message}`);
+            }
+        }
+
+        async function sendBulkMessage() {
+            const message = prompt('Enter message to send to all subscribers:');
+            if (!message) return;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/send-bulk-sms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    alert('Bulk message sent successfully!');
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to send bulk message. Please try again.');
+            }
+        }
+
+        async function unsubscribePhone(phone) {
+            if (!confirm(`Are you sure you want to unsubscribe ${phone}?`)) return;
+
+            try {
+                // First try new unsubscribe method
+                const response = await fetch('http://localhost:5000/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        phone: phone,
+                        unsubscribe: true,
+                        source: 'admin'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    alert('Subscriber has been successfully unsubscribed.');
+                    loadSubscribers(); // Refresh the list
+                } else {
+                    // Fall back to old method if new one fails
+                    await deleteSubscriber(phone);
+                }
+            } catch (error) {
+                console.error('Error with new unsubscribe method, trying legacy method:', error);
+                await deleteSubscriber(phone);
+            }
+        }
+
+        async function deleteSubscriber(phone) {
+            try {
+                const response = await fetch('http://localhost:5000/api/subscribers/sms', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    alert('Subscriber has been successfully unsubscribed.');
+                    loadSubscribers(); // Refresh the list
+                } else {
+                    // Show specific error message from backend if available
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        alert('Failed to unsubscribe. Please try again.');
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while trying to unsubscribe. Please try again.');
+            }
+        }
+
+        function filterSubscribers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const subscriberItems = document.querySelectorAll('.subscriber-list li:not(.subscriber-count):not(.loading):not(.error):not(.no-data)');
+            
+            let visibleCount = 0;
+            
+            subscriberItems.forEach(item => {
+                const phoneNumber = item.querySelector('.phone-number').textContent.toLowerCase();
+                const matchesSearch = phoneNumber.includes(searchTerm);
+                
+                item.style.display = matchesSearch ? 'flex' : 'none';
+                
+                if (matchesSearch) {
+                    visibleCount++;
+                }
+            });
+            
+            // Update the count to show filtered results
+            const countElement = document.querySelector('.subscriber-count strong');
+            if (countElement) {
+                const totalSubscribers = subscriberItems.length;
+                if (searchTerm && visibleCount < totalSubscribers) {
+                    countElement.textContent = `Showing ${visibleCount} of ${totalSubscribers} Subscribers`;
+                } else {
+                    countElement.textContent = `Total Subscribers: ${totalSubscribers}`;
+                }
+            }
+        }
+        
+        function showAddSubscriberForm() {
+            const phone = prompt('Enter a 10-digit phone number to add:');
+            if (!phone) return;
+            
+            // Basic validation
+            if (!/^\d{10}$/.test(phone)) {
+                alert('Please enter a valid 10-digit phone number without any prefix');
+                return;
+            }
+            
+            addSubscriber(phone);
+        }
+        
+        async function addSubscriber(phone) {
+            try {
+                const statusMessage = document.getElementById('statusMessage');
+                statusMessage.textContent = 'Adding subscriber...';
+                statusMessage.className = 'status-message';
+                statusMessage.style.display = 'block';
+                
+                const response = await fetch('http://localhost:5000/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        phone: phone,
+                        source: 'admin_manual'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    statusMessage.textContent = 'Subscriber added successfully!';
+                    statusMessage.className = 'status-message success';
+                    
+                    // Reload subscriber list
+                    loadSubscribers();
+                    
+                    // Clear status message after 3 seconds
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                    }, 3000);
+                } else {
+                    statusMessage.textContent = data.message || data.error || 'Failed to add subscriber';
+                    statusMessage.className = 'status-message error';
+                }
+            } catch (error) {
+                console.error('Error adding subscriber:', error);
+                const statusMessage = document.getElementById('statusMessage');
+                statusMessage.textContent = `Error: ${error.message}`;
+                statusMessage.className = 'status-message error';
+                statusMessage.style.display = 'block';
+            }
+        }
+
+        function exportSubscribers() {
+            // Get all visible subscribers (respecting search filter)
+            const subscribers = Array.from(document.querySelectorAll('.subscriber-list li:not(.subscriber-count):not(.loading):not(.error):not(.no-data)'))
+                .filter(li => li.style.display !== 'none')
+                .map(li => {
+                    const phone = li.querySelector('.phone-number').textContent;
+                    const dateElement = li.querySelector('.subscription-date');
+                    const date = dateElement ? dateElement.textContent.replace('Subscribed on: ', '') : 'Unknown';
+                    const sourceElement = li.querySelector('.subscription-source');
+                    const source = sourceElement ? sourceElement.textContent.replace('Source: ', '') : 'website';
+                    
+                    return { phone, date, source };
+                });
+            
+            // Convert to CSV
+            let csv = 'Phone Number,Subscription Date,Source\n';
+            subscribers.forEach(sub => {
+                csv += `"${sub.phone}","${sub.date}","${sub.source}"\n`;
+            });
+            
+            // Create download link
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'sms_subscribers.csv');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Load subscribers when page loads
+        window.onload = loadSubscribers;
+    </script>
+</body>
+</html> 

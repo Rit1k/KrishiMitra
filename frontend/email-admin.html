@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Admin - KrishiMitra</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<style>
+    body{
+         background-image: url('./assets/sms1.jpg');   
+         background-size: cover;
+         background-position: center;
+        }
+        
+    .admin-box {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        margin: 30px auto;
+        max-width: 800px;
+    }
+    
+    .subscriber-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+    }
+    
+    .subscriber-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 6px;
+        transition: all 0.2s;
+    }
+    
+    .subscriber-list li:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .subscriber-info {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    
+    .subscriber-details {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .subscriber-email {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .subscriber-email i {
+        color: #4285f4;
+        margin-right: 8px;
+    }
+    
+    .subscriber-metadata {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 0.8rem;
+        color: #666;
+    }
+    
+    .subscriber-date {
+        margin-right: 15px;
+    }
+    
+    .subscriber-actions {
+        display: flex;
+        gap: 8px;
+    }
+    
+    .btn {
+        background-color: #4285f4;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    
+    .btn:hover {
+        background-color: #3367d6;
+    }
+    
+    .btn-danger {
+        background-color: #ea4335;
+    }
+    
+    .btn-danger:hover {
+        background-color: #d73125;
+    }
+    
+    .admin-controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .subscriber-count {
+        display: block;
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #e7f3ff;
+        border-radius: 6px;
+        text-align: center;
+        color: #1a73e8;
+    }
+    
+    .count-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .refresh-time {
+        font-size: 0.8rem;
+        color: #666;
+    }
+    
+    .no-data, .error, .loading {
+        padding: 15px;
+        text-align: center;
+        background-color: #f5f5f5;
+        border-radius: 6px;
+    }
+    
+    .error {
+        color: #ea4335;
+        background-color: #ffebee;
+    }
+    
+    .loading {
+        color: #1a73e8;
+        background-color: #e8f0fe;
+    }
+    
+    /* Search box styles */
+    .search-box {
+        margin-bottom: 15px;
+    }
+    
+    .search-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.svg" alt="Krishimitra Logo" class="logo-img">
+                <h1>KrishiMitra</h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disease-detection.html">Disease Detection</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="sms-admin.html">SMS Admin</a></li>
+                <li><a href="email-admin.html" class="active">Email Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="admin-box">
+                <h2><i class="fas fa-envelope"></i> Email Subscribers</h2>
+                <div class="admin-controls">
+                    <button class="btn" onclick="sendBulkEmail()">
+                        <i class="fas fa-paper-plane"></i> Send Bulk Email
+                    </button>
+                    <button class="btn" onclick="exportSubscribers()">
+                        <i class="fas fa-download"></i> Export List
+                    </button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search subscribers..." oninput="filterSubscribers()">
+                </div>
+                <ul id="subscribersList" class="subscriber-list">
+                    <li class="loading">
+                        <i class="fas fa-spinner fa-spin"></i> Loading subscribers...
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function loadSubscribers() {
+            try {
+                // Show loading state
+                const subscribersList = document.getElementById('subscribersList');
+                subscribersList.innerHTML = '<li class="loading"><i class="fas fa-spinner fa-spin"></i> Loading subscribers...</li>';
+                
+                const response = await fetch('http://localhost:5000/api/subscribers/email');
+                
+                if (!response.ok) {
+                    throw new Error(`Server error (${response.status}): ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                subscribersList.innerHTML = '';
+                
+                // Add subscriber count and timestamp
+                const countInfo = document.createElement('li');
+                countInfo.className = 'subscriber-count';
+                countInfo.innerHTML = `
+                    <div class="count-info">
+                        <span>Total subscribers: ${data.length || 0}</span>
+                        <span class="refresh-time">Last refreshed: ${new Date().toLocaleTimeString()}</span>
+                    </div>
+                `;
+                subscribersList.appendChild(countInfo);
+                
+                if (data && data.length > 0) {
+                    // Sort subscribers by timestamp if available (newest first)
+                    const sortedSubscribers = [...data].sort((a, b) => {
+                        if (a.subscription_date && b.subscription_date) {
+                            return new Date(b.subscription_date) - new Date(a.subscription_date);
+                        }
+                        return 0;
+                    });
+                    
+                    sortedSubscribers.forEach(subscriber => {
+                        const li = document.createElement('li');
+                        
+                        // Format the timestamp if available
+                        let subscribeDate = 'Unknown date';
+                        if (subscriber.subscription_date) {
+                            try {
+                                const date = new Date(subscriber.subscription_date);
+                                subscribeDate = date.toLocaleString();
+                            } catch (e) {
+                                console.error('Error parsing date:', e);
+                            }
+                        }
+                        
+                        li.innerHTML = `
+                            <div class="subscriber-info">
+                                <div class="subscriber-details">
+                                    <div class="subscriber-email">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>${subscriber.email}</span>
+                                    </div>
+                                    <div class="subscriber-metadata">
+                                        <span class="subscriber-date">Subscribed: ${subscribeDate}</span>
+                                        <span class="subscriber-source">Source: ${subscriber.source || 'unknown'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="subscriber-actions">
+                                <button class="btn" onclick="sendEmail('${subscriber.email}')" title="Send Email">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                                <button class="btn btn-danger" onclick="deleteSubscriber('${subscriber.email}')" title="Unsubscribe">
+                                    <i class="fas fa-user-minus"></i>
+                                </button>
+                            </div>
+                        `;
+                        subscribersList.appendChild(li);
+                    });
+                } else {
+                    subscribersList.innerHTML = '<li class="no-data">No subscribers found</li>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('subscribersList').innerHTML = 
+                    `<li class="error">Error loading subscribers: ${error.message}. Please try again.</li>`;
+            }
+        }
+
+        async function sendEmail(email) {
+            const subject = prompt('Enter email subject:');
+            if (!subject) return;
+            
+            const message = prompt('Enter email message:');
+            if (!message) return;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, subject, message })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    alert('Email sent successfully!');
+                } else {
+                    throw new Error(data.error || data.message || 'Failed to send email');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`Failed to send email: ${error.message}`);
+            }
+        }
+
+        async function sendBulkEmail() {
+            const subject = prompt('Enter email subject:');
+            if (!subject) return;
+            
+            const message = prompt('Enter email message:');
+            if (!message) return;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/send-bulk-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ subject, message })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    alert(`Bulk email sent successfully! Sent to ${data.sent} subscribers with ${data.errors} errors.`);
+                } else {
+                    throw new Error(data.error || data.message || 'Failed to send bulk email');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to send bulk email. Please try again.');
+            }
+        }
+
+        async function deleteSubscriber(email) {
+            if (!confirm(`Are you sure you want to unsubscribe ${email}?`)) return;
+
+            try {
+                // First try the new unsubscribe method
+                const response = await fetch('http://localhost:5000/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        email: email,
+                        unsubscribe: true 
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    alert('Subscriber has been successfully unsubscribed.');
+                    loadSubscribers(); // Refresh the list
+                    return;
+                }
+                
+                // If new method fails, try the legacy method
+                const legacyResponse = await fetch('http://localhost:5000/api/subscribers/email', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                const legacyData = await legacyResponse.json();
+                
+                if (legacyResponse.ok) {
+                    alert('Subscriber has been successfully unsubscribed.');
+                    loadSubscribers(); // Refresh the list
+                } else {
+                    alert(legacyData.error || 'Failed to unsubscribe. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while trying to unsubscribe. Please try again.');
+            }
+        }
+
+        function filterSubscribers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const subscriberItems = document.querySelectorAll('.subscriber-list li:not(.subscriber-count):not(.loading):not(.error):not(.no-data)');
+            
+            subscriberItems.forEach(item => {
+                const emailElement = item.querySelector('.subscriber-email span');
+                const email = emailElement ? emailElement.textContent.toLowerCase() : '';
+                
+                const matches = email.includes(searchTerm);
+                item.style.display = matches ? 'flex' : 'none';
+            });
+        }
+        
+        function exportSubscribers() {
+            // Get all visible subscribers (respecting search filter)
+            const subscribers = Array.from(document.querySelectorAll('.subscriber-list li:not(.subscriber-count):not(.loading):not(.error):not(.no-data)'))
+                .filter(li => li.style.display !== 'none')
+                .map(li => {
+                    const email = li.querySelector('.subscriber-email span').textContent;
+                    const dateElement = li.querySelector('.subscriber-date');
+                    const date = dateElement ? dateElement.textContent.replace('Subscribed: ', '') : 'Unknown';
+                    const sourceElement = li.querySelector('.subscriber-source');
+                    const source = sourceElement ? sourceElement.textContent.replace('Source: ', '') : 'website';
+                    
+                    return { email, date, source };
+                });
+                
+            // Convert to CSV
+            let csv = 'Email,Subscription Date,Source\n';
+            subscribers.forEach(sub => {
+                csv += `"${sub.email}","${sub.date}","${sub.source}"\n`;
+            });
+            
+            // Create download link
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'email_subscribers.csv');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Load subscribers when page loads
+        window.onload = loadSubscribers;
+    </script>
+</body>
+</html> 

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishimitra - Your Farming Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./assets/mainlogo.svg" type="image/svg+xml" style="filter: invert(32%) sepia(29%) saturate(1096%) hue-rotate(89deg) brightness(92%) contrast(86%);">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{
+            background-image: url('./assets/background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* These styles are now defined in the stylesheet, but keeping them here for backward compatibility */
+        .error-message {
+            color: #f44336;
+            font-size: 14px;
+            margin-top: 5px;
+            min-height: 20px;
+        }
+        
+        .success-message {
+            color: #4CAF50;
+            font-size: 14px;
+            margin-top: 5px;
+            min-height: 20px;
+        }
+        
+        /* Button hover styles */
+        .subscribe-btn:hover, .unsubscribe-btn:hover {
+            background-color: var(--secondary-color) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.svg" alt="Krishimitra Logo" class="logo-img">
+                <h1>KrishiMitra</h1>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disease-detection.html">Disease Detection</a></li>
+                <li><a href="weather.html">Weather</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="chatbot.html">AI Chat</a></li>
+                <li><a href="sms-admin.html">SMS Admin</a></li>
+                <li><a href="email-admin.html">Email Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="subscription-section" style="padding: 30px 20px; background-color: #f5f5f5;">
+            <div class="subscription-container" style="display: flex; justify-content: center; align-items: flex-start; gap: 40px; max-width: 1000px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <!-- SMS Subscription Form -->
+                <div class="subscription-form" style="flex: 1; max-width: 400px; text-align: center;">
+                    <h2>Subscribe for SMS Updates</h2>
+                    <div class="input-container">
+                        <input type="text" id="phone" placeholder="Enter your 10-digit phone number" maxlength="10" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div class="button-group" style="display: flex; justify-content: center; gap: 10px;">
+                        <button onclick="subscribePhone(false)" class="subscribe-btn" style="background-color: var(--primary-color); color: white; border: none; padding: 10px 20px; margin-top:14px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Subscribe</button>
+                        <button onclick="subscribePhone(true)" class="unsubscribe-btn" style="background-color: var(--primary-color); color: white; border: none; padding: 10px 20px; margin-top:14px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Unsubscribe</button>
+                    </div>
+                    <div id="phone-error" class="error-message"></div>
+                    <div id="phone-success" class="success-message"></div>
+                </div>
+
+                <!-- Email Subscription Form -->
+                <div class="subscription-form" style="flex: 1; max-width: 400px; text-align: center;">
+                    <h2>Subscribe for Email Updates</h2>
+                    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
+                        <div class="input-container">
+                            <input type="email" id="email" placeholder="Enter your email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                        </div>
+                        <div class="button-group" style="display: flex; justify-content: center; gap: 10px;">
+                            <button type="submit" class="subscribe-btn" style="background-color: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Subscribe</button>
+                            <button type="button" class="unsubscribe-btn" onclick="handleEmailUnsubscribe()" style="background-color: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Unsubscribe</button>
+                        </div>
+                        <div id="email-error" class="error-message"></div>
+                        <div id="email-success" class="success-message"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Disease Detection</h3>
+                </div>
+                <p>Upload plant images to detect diseases and get treatment recommendations.</p>
+                <a href="disease-detection.html" class="feature-link" style="margin-left: 20px;">Try Now</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-cloud-sun"></i>
+                    <h3>Weather Monitoring</h3>
+                </div>
+                <p>Get real-time weather updates and forecasts for your location.</p>
+                <a href="weather.html" class="feature-link" style="margin-left: 20px;">Check Weather</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-truck"></i>
+                    <h3>Transport Services</h3>
+                </div>
+                <p>Find and book transport services for your agricultural needs.</p>
+                <a href="transport.html" class="feature-link" style="margin-left: 20px;">Find Transport</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-header">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Chatbot</h3>
+                </div>
+                <p>Get instant answers to your farming queries from our AI assistant.</p>
+                <a href="chatbot.html" class="feature-link" style="margin-left: 20px;">Chat Now</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function subscribePhone(isUnsubscribe = false) {
+            // Get the phone number
+            let phone = document.getElementById('phone').value;
+            let errorElement = document.getElementById('phone-error');
+            let successElement = document.getElementById('phone-success');
+            
+            // Clear any previous messages
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            
+            // Basic validation
+            if (!phone || phone.length !== 10 || !/^\d{10}$/.test(phone)) {
+                errorElement.textContent = 'Please enter a valid 10-digit phone number';
+                return false;
+            }
+            
+            // Show loading message
+            errorElement.textContent = isUnsubscribe ? 'Processing unsubscribe request...' : 'Processing...';
+            
+            // Print debug info to console
+            console.log('Subscription request:', {
+                phone: phone,
+                unsubscribe: isUnsubscribe,
+                source: 'homepage'
+            });
+            
+            // Send the subscription/unsubscription request
+            fetch('http://localhost:5000/api/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    phone: phone,
+                    unsubscribe: isUnsubscribe,
+                    source: 'homepage'
+                })
+            })
+            .then(response => {
+                console.log('Response status:', response.status, response.statusText);
+                
+                // Store the status for error handling
+                const status = response.status;
+                const statusText = response.statusText;
+                
+                // Try to parse JSON even if status is not OK
+                return response.text().then(text => {
+                    try {
+                        // Try to parse as JSON
+                        const data = text ? JSON.parse(text) : {};
+                        return { 
+                            ok: response.ok, 
+                            status, 
+                            statusText, 
+                            data,
+                            isJson: true
+                        };
+                    } catch (e) {
+                        // Not valid JSON
+                        console.error('Failed to parse JSON:', e);
+                        return { 
+                            ok: response.ok, 
+                            status, 
+                            statusText, 
+                            data: { raw: text },
+                            isJson: false
+                        };
+                    }
+                });
+            })
+            .then(result => {
+                const { ok, status, statusText, data, isJson } = result;
+                
+                console.log('Response data:', data);
+                
+                if (!ok) {
+                    // Handle error based on status code
+                    if (status === 400) {
+                        throw new Error(data.message || 'Invalid phone number format');
+                    } else if (status === 409) {
+                        throw new Error(data.message || 'This phone number is already subscribed');
+                    } else if (status === 404) {
+                        throw new Error(data.message || 'This phone number is not subscribed to our service');
+                    } else if (status === 503) {
+                        throw new Error(data.message || 'Service temporarily unavailable. Please try again later');
+                    } else if (status === 501) {
+                        throw new Error(data.message || 'Server functionality not implemented. Please try again later');
+                    } else {
+                        throw new Error(data.message || `Server error (${status}): ${statusText}`);
+                    }
+                }
+                
+                // Success path
+                errorElement.textContent = '';
+                
+                if (data.success) {
+                    if (isUnsubscribe) {
+                        successElement.textContent = 'Successfully unsubscribed from SMS updates!';
+                    } else {
+                        successElement.textContent = 'Successfully subscribed for SMS updates!';
+                    }
+                    document.getElementById('phone').value = '';
+                } else if (data.message) {
+                    errorElement.textContent = data.message;
+                } else if (data.error) {
+                    errorElement.textContent = data.error;
+                } else {
+                    errorElement.textContent = isUnsubscribe ? 
+                        'Failed to unsubscribe. Please try again.' : 
+                        'Failed to subscribe. Please try again.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorElement.textContent = error.message || 'Error connecting to server. Please try again later.';
+                successElement.textContent = '';
+            });
+        }
+        
+        function uploadImage() {
+            let input = document.getElementById('imageInput').files[0];
+            if (!input) {
+                alert("Please select an image first.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("file", input);
+
+            fetch("http://127.0.0.1:5000/predict", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = "Prediction: " + data.prediction;
+            })
+            .catch(error => console.error("Error:", error));
+        }
+        async function handleEmailSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const errorElement = document.getElementById('email-error');
+            const successElement = document.getElementById('email-success');
+            
+            // Clear previous messages
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            
+            // Basic validation
+            if (!email || !isValidEmail(email)) {
+                errorElement.textContent = 'Please enter a valid email address';
+                return;
+            }
+            
+            // Show loading message
+            errorElement.textContent = 'Processing...';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        email: email,
+                        source: 'homepage'
+                    })
+                });
+
+                const data = await response.json();
+                
+                // Clear loading message
+                errorElement.textContent = '';
+                
+                if (response.ok && data.success) {
+                    successElement.textContent = 'Successfully subscribed for email updates!';
+                    document.getElementById('emailForm').reset();
+                } else if (response.status === 409) {
+                    errorElement.textContent = 'This email is already subscribed to our service';
+                } else {
+                    errorElement.textContent = data.message || data.error || 'Failed to subscribe. Please try again.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorElement.textContent = 'Error connecting to server. Please try again later.';
+                successElement.textContent = '';
+            }
+        }
+
+        async function handleEmailUnsubscribe() {
+            const email = document.getElementById('email').value;
+            const errorElement = document.getElementById('email-error');
+            const successElement = document.getElementById('email-success');
+            
+            // Clear previous messages
+            errorElement.textContent = '';
+            successElement.textContent = '';
+            
+            // Basic validation
+            if (!email || !isValidEmail(email)) {
+                errorElement.textContent = 'Please enter a valid email address';
+                return;
+            }
+            
+            // Show loading message
+            errorElement.textContent = 'Processing unsubscribe request...';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/subscribers/email', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await response.json();
+                
+                // Clear loading message
+                errorElement.textContent = '';
+                
+                if (response.ok && data.success) {
+                    successElement.textContent = 'Successfully unsubscribed from email updates!';
+                    document.getElementById('emailForm').reset();
+                } else if (response.status === 404) {
+                    errorElement.textContent = 'This email is not subscribed to our service';
+                } else {
+                    errorElement.textContent = data.message || data.error || 'Failed to unsubscribe. Please try again.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorElement.textContent = 'Error connecting to server. Please try again later.';
+                successElement.textContent = '';
+            }
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html> 

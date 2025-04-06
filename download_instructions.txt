@@ -1,0 +1,35 @@
+https://drive.google.com/drive/folders/1AEYzRdiZtje-tnB2N6UjXwSMPgGqNSbc?usp=sharing
+Here is the trained model 
+To run the project u have to add the plant_disease_model.h5 file from the drive folder to yout backend directory\
+Now create .env and copy paste these as it is and your own api key
+# MongoDB Configuration
+MONGODB_URI=
+
+# API Keys
+OPENAI_API_KEY=
+GEMINI_API_KEY=
+OPENWEATHER_API_KEY=
+GOOGLE_MAPS_API_KEY=
+
+# Twilio Configuration
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_PHONE=
+
+# Email Configuration
+EMAIL_FROM=noreply@krishimitra.com
+EMAIL_USERNAME=your_email@gmail.com
+EMAIL_PASSWORD=your_app_password
+SMTP_SERVER=smtp.gmail.com
+SMTP_PORT=587
+
+# Application Configuration
+FLASK_ENV=development
+FLASK_APP=backend/app.py
+PORT=5000
+
+# Security
+JWT_SECRET_KEY=
+
+# CORS Configuration
+CORS_ORIGINS=http://localhost:3000,http://localhost:5000
